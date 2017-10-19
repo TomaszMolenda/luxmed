@@ -1,0 +1,156 @@
+<html>
+ <head>
+  <script type="text/javascript">
+    var tempId = 235206299;
+        
+        var selectable = false;
+        var variant = 1;
+        var canClickOk = true;
+        
+
+    var clicked = false;
+
+    function OnHasRefferalChanged() {
+        if (!selectable)
+            return;
+
+        var selectedOption = $('input[name=hasRefferal]:checked', '#hasReferralForm')
+        if (selectedOption == null)
+        {
+            canClickOk = false;
+            $('#okButton').addClass('disabled');
+            $('#termInfo').hide();
+            $('#paymentInfo').hide();
+            $('#warningInfo').hide();
+
+            return;
+        }
+
+        var val = selectedOption.val();
+        var info = selectedOption.attr("term-info");
+        var payment = selectedOption.attr("term-payment");
+        var warning = selectedOption.attr("term-warning");
+        var referralRequired = selectedOption.attr("term-referral") == 'yes';
+
+        if (val >= 0){
+            canClickOk = true;
+            $('#okButton').removeClass('disabled');
+            variant = val;
+        }
+        else{
+            canClickOk = false;
+            $('#okButton').addClass('disabled');
+            variant = -1;
+        }
+
+        if(info == null || info == ''){
+            $('#termInfo').hide();
+        }
+        else{
+            $('#termInfo').text(info);
+            $('#termInfo').show();
+        }
+
+        if(payment == null || payment == ''){
+            $('#paymentInfo').hide();
+        }
+        else{
+            $('#paymentInfo .message').text(payment);
+            if(referralRequired){
+                $('#visitPriceInfo').hide();
+                $('#requiredReferralInfo').show();
+            }
+            else{
+                $('#requiredReferralInfo').hide();
+                $('#visitPriceInfo').show();
+            }
+            $('#paymentInfo').show();
+        }
+
+        if(warning == null || warning == ''){
+            $('#warningInfo').hide();
+        }
+        else{
+            $('#warningInfo .message').text(warning);
+            $('#warningInfo').show();
+        }
+    }
+
+    canRedirect = function () {
+        if(clicked){
+            return false;
+        }
+
+        var res = canClickOk && variant >= 0;
+
+        if (res) {
+            clicked = true;
+        }
+
+        return res;
+    };
+
+    tryReserve = function () {
+        if (canRedirect()) {
+            var url = '/PatientPortal/Reservations/Reservation/ReserveTerm?key=55248453-5675-4cb4-81ce-4218eac0f318';
+            url = url + '&variant=' + variant;
+            $.post(url, function (html) {
+                $("#dynamicReservationDivCntainer").html(html);
+            });
+        }
+    };
+
+    goBack = function(){
+        var url = '/PatientPortal/Reservations/Reservation/ReleaseTerm';
+        $.post(url,
+            { tempId: tempId },
+            function (html){});
+
+        closePopup();
+    };
+
+    var onClickOKFailedReservationPopUp = function (event) {
+        event.preventDefault();
+        closePopup();
+        return false;
+    };
+
+    var closePopup = function () {
+        popupModule().hide();
+        $("#dynamicReservationDivCntainer").empty();
+    }
+
+    $(function () {
+        OnHasRefferalChanged();
+    });
+</script> 
+ </head>
+ <body>
+  <div id="dynamicReservationDivCntainer"> 
+   <div class="header">
+     Wizyta 
+   </div> 
+   <div class="visitDetails"> 
+    <div class="date">
+      20-10-2017 
+     <br> 08:15 
+    </div> 
+    <div class="about"> 
+     <h4>lek. med. BIENIEK JACEK</h4> 
+     <p> MR Wrocław - Swobodna 1 <br> Konsultacja internisty </p> 
+    </div> 
+   </div> 
+   <div id="termInfo" class="info-block">
+    Usługa w abonamencie
+   </div> 
+   <div id="paymentInfo" class="info-block"> 
+    <p class="message">Cena: 0,00 zł</p> 
+    <span class="tooltip" title="Cena uwzględnia zarówno wymogi jak i zniżki określone w umowie o świadczenie usług zdrowotnych"></span> 
+   </div> 
+   <div class="navigation"> 
+    <button onclick="goBack()" id="noButton" class="button reject left">Wróć</button> 
+    <button onclick="tryReserve()" id="okButton" class="button strong right reserveConfirmButton">Zarezerwuj wizytę</button> 
+   </div> 
+  </div> 
+ </body>
+</html>

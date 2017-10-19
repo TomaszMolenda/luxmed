@@ -14,12 +14,14 @@ public class Login {
     private final AuthorizationCookieFetcher authorizationCookieFetcher;
     private final FilterDataExtractor filterDataExtractor;
     private final ReservationFetcher reservationFetcher;
+    private final ReservationExecutor reservationExecutor;
 
     @Autowired
-    Login(AuthorizationCookieFetcher authorizationCookieFetcher, FilterDataExtractor filterDataExtractor, ReservationFetcher reservationFetcher) {
+    Login(AuthorizationCookieFetcher authorizationCookieFetcher, FilterDataExtractor filterDataExtractor, ReservationFetcher reservationFetcher, ReservationExecutor reservationExecutor) {
         this.authorizationCookieFetcher = authorizationCookieFetcher;
         this.filterDataExtractor = filterDataExtractor;
         this.reservationFetcher = reservationFetcher;
+        this.reservationExecutor = reservationExecutor;
     }
 
     void login() {
@@ -48,6 +50,10 @@ public class Login {
         secondStepFilterForm.setRequestVerificationToken(secondStepFilter.getRequestVerificationToken());
 
         List<Reservation> reservations = reservationFetcher.fetch(authorizationCookies, secondStepFilterForm);
+
+        Reservation reservation = reservations.get(0);
+
+        reservationExecutor.reserve(reservation, authorizationCookies);
     }
 
 }

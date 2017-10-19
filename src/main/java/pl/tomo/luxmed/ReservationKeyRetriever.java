@@ -7,34 +7,33 @@ import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
 import pl.tomo.luxmed.connection.Cookie;
+import pl.tomo.luxmed.connection.DataEntry;
 
 import java.util.List;
 
 @Service
-class ReservationFetcher {
+class ReservationKeyRetriever {
 
     private final ConnectionService connectionService;
-    private final RequestDataCreator requestDataCreator;
-    private final ReservationExtractor reservationExtractor;
+    private final ReservationKeyExtractor reservationKeyExtractor;
 
     @Autowired
-    ReservationFetcher(ConnectionService connectionService, RequestDataCreator requestDataCreator, ReservationExtractor reservationExtractor) {
+    ReservationKeyRetriever(ConnectionService connectionService, ReservationKeyExtractor reservationKeyExtractor) {
         this.connectionService = connectionService;
-        this.requestDataCreator = requestDataCreator;
-        this.reservationExtractor = reservationExtractor;
+        this.reservationKeyExtractor = reservationKeyExtractor;
     }
 
-    List<Reservation> fetch(List<Cookie> authorizationCookies, FilterForm filterForm) {
+    String retrieve(Reservation reservation, List<Cookie> authorizationCookies) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/Find")
-                .httpMethod(HttpMethod.POST)
+                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReservationConfirmation")
                 .cookie(authorizationCookies)
-                .data(requestDataCreator.create(filterForm))
+                .data(new DataEntry("termId", reservation.getTermId()))
+                .httpMethod(HttpMethod.POST)
                 .build();
 
         Document document = connectionService.postForHtml(connectionRequest).getDocument();
 
-        return reservationExtractor.extract(document);
+        return reservationKeyExtractor.extract(document);
     }
 }

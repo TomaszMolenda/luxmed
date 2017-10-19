@@ -11,30 +11,27 @@ import pl.tomo.luxmed.connection.Cookie;
 import java.util.List;
 
 @Service
-class ReservationFetcher {
+class ReservationExecutor {
 
     private final ConnectionService connectionService;
-    private final RequestDataCreator requestDataCreator;
-    private final ReservationExtractor reservationExtractor;
+    private final ReservationKeyRetriever reservationKeyRetriever;
 
     @Autowired
-    ReservationFetcher(ConnectionService connectionService, RequestDataCreator requestDataCreator, ReservationExtractor reservationExtractor) {
+    ReservationExecutor(ConnectionService connectionService, ReservationKeyRetriever reservationKeyRetriever) {
         this.connectionService = connectionService;
-        this.requestDataCreator = requestDataCreator;
-        this.reservationExtractor = reservationExtractor;
+        this.reservationKeyRetriever = reservationKeyRetriever;
     }
 
-    List<Reservation> fetch(List<Cookie> authorizationCookies, FilterForm filterForm) {
+    public void reserve(Reservation reservation, List<Cookie> authorizationCookies) {
+
+        String key = reservationKeyRetriever.retrieve(reservation, authorizationCookies);
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/Find")
+                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReserveTerm?key=" + key + "&variant=1")
                 .httpMethod(HttpMethod.POST)
                 .cookie(authorizationCookies)
-                .data(requestDataCreator.create(filterForm))
                 .build();
 
         Document document = connectionService.postForHtml(connectionRequest).getDocument();
-
-        return reservationExtractor.extract(document);
     }
 }
