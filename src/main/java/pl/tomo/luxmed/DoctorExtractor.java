@@ -14,6 +14,6 @@ class DoctorExtractor extends Extractor<Doctor> {
     @Override
     Doctor create(String id, String name) {
 
-        return new Doctor(id, name)
+        return new Doctor(id, name);
     }
 }

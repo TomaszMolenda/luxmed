@@ -27,27 +27,27 @@ public class Login {
         List<Cookie> authorizationCookies = authorizationCookieFetcher.fetch();
         FirstStepFilter firstStepFilter = filterDataExtractor.extractFirstStep(authorizationCookies);
 
-        FirstStepFilterForm firstStepFilterForm = new FirstStepFilterForm();
-        firstStepFilterForm.setCityId("5");
-        firstStepFilterForm.setServiceId("4502");
-        firstStepFilterForm.setDateFrom(LocalDate.now());
+        FilterForm filterForm = new FilterForm();
+        filterForm.setCityId("5");
+        filterForm.setServiceId("4502");
+        filterForm.setDateFrom(LocalDate.now());
 
-        SecondStepFilter secondStepFilter = filterDataExtractor.extractSecondStep(authorizationCookies, firstStepFilterForm);
+        SecondStepFilter secondStepFilter = filterDataExtractor.extractSecondStep(authorizationCookies, filterForm);
 
-        List<Reservation> =
+        FilterForm secondStepFilterForm = new FilterForm();
 
-        :True
-        :0
-        :True
-        :JZBHEWy1E1LlzxT35nCWE6pgm0z4Ji5aU8eO055_ct5BOAsSql2ImakVhgHALmLRie-C8Sykujf0W2_gxiNMN3lFHrksMtxMwJxgZZWR98vIXWsx5gAHTAtuLQBYHvR3YJ62yFWrwJU0CGv-8vacAMphkhkapDbolpKOQtUCipQ1
-        :Any
-        CityId:5
-        ClinicId:
-        ServiceId:4502
-        FromDate:19-10-2017
-        ToDate:19-10-2018
-        PayerId:106357
+        secondStepFilterForm.setIsFromStartPage("True");
+        secondStepFilterForm.setPayersCount("0");
+        secondStepFilterForm.setSearchFirstFree("True");
+        secondStepFilterForm.setTimeOption("Any");
+        secondStepFilterForm.setCityId("5");
+        secondStepFilterForm.setServiceId("4502");
+        secondStepFilterForm.setDateFrom(LocalDate.now());
+        secondStepFilterForm.setToDate(LocalDate.now());
+        secondStepFilterForm.setPayerId("106357");
+        secondStepFilterForm.setRequestVerificationToken(secondStepFilter.getRequestVerificationToken());
 
+        List<Reservation> reservations = reservationFetcher.fetch(authorizationCookies, secondStepFilterForm);
     }
 
 }

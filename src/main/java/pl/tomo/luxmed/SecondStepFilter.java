@@ -9,4 +9,5 @@ public class SecondStepFilter {
 
     private final List<Doctor> doctors;
     private final List<Payer> payers;
+    private final String requestVerificationToken;
 }

@@ -17,29 +17,33 @@ class SecondStepExtractor {
     private final RequestDataCreator requestDataCreator;
     private final DoctorExtractor doctorExtractor;
     private final PayerExtractor payerExtractor;
+    private final RequestVerificationTokenExtractor requestVerificationTokenExtractor;
 
     @Autowired
-    SecondStepExtractor(ConnectionService connectionService, RequestDataCreator requestDataCreator, DoctorExtractor doctorExtractor, PayerExtractor payerExtractor) {
+    SecondStepExtractor(ConnectionService connectionService, RequestDataCreator requestDataCreator, DoctorExtractor doctorExtractor, PayerExtractor payerExtractor, RequestVerificationTokenExtractor requestVerificationTokenExtractor) {
         this.connectionService = connectionService;
         this.requestDataCreator = requestDataCreator;
         this.doctorExtractor = doctorExtractor;
         this.payerExtractor = payerExtractor;
+        this.requestVerificationTokenExtractor = requestVerificationTokenExtractor;
     }
 
-    public SecondStepFilter extract(List<Cookie> authorizationCookies, FirstStepFilterForm firstStepFilterForm) {
+    public SecondStepFilter extract(List<Cookie> authorizationCookies, FilterForm filterForm) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Home/GetFilter")
                 .cookie(authorizationCookies)
-                .data(requestDataCreator.create(firstStepFilterForm))
+                .data(requestDataCreator.create(filterForm))
                 .httpMethod(HttpMethod.POST)
                 .build();
 
         Document document = connectionService.postForHtml(connectionRequest).getDocument();
 
-        List<Doctor> doctors = doctorExtractor.extract(document);
-        List<Payer> payers = payerExtractor.extract(document);
+        final List<Doctor> doctors = doctorExtractor.extract(document);
+        final List<Payer> payers = payerExtractor.extract(document);
 
-        return new SecondStepFilter(doctors, payers);
+        final String requestVerificationToken = requestVerificationTokenExtractor.extract(document);
+
+        return new SecondStepFilter(doctors, payers, requestVerificationToken);
     }
 }

@@ -23,9 +23,9 @@ class FilterDataExtractor {
         return firstStepExtractor.extract(authorizationCookies);
     }
 
-    SecondStepFilter extractSecondStep(List<Cookie> authorizationCookies, FirstStepFilterForm firstStepFilterForm) {
+    SecondStepFilter extractSecondStep(List<Cookie> authorizationCookies, FilterForm filterForm) {
 
-        return secondStepExtractor.extract(authorizationCookies, firstStepFilterForm);
+        return secondStepExtractor.extract(authorizationCookies, filterForm);
     }
 
 
