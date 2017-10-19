@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.connection;
 
 import lombok.*;
 import lombok.experimental.NonFinal;

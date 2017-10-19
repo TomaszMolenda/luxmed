@@ -2,11 +2,13 @@ package pl.tomo.luxmed;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
+import pl.tomo.luxmed.connection.ConnectionRequest;
+import pl.tomo.luxmed.connection.ConnectionService;
+import pl.tomo.luxmed.connection.Cookie;
+import pl.tomo.luxmed.connection.HtmlResponse;
 
 import java.util.*;
 

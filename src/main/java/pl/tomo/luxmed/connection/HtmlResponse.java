@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.connection;
 
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpResponse;
@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
+import pl.tomo.luxmed.connection.Cookie;
 
 import java.util.Collection;
 import java.util.List;

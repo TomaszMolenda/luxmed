@@ -1,10 +1,11 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.connection;
 
 import com.google.api.client.http.apache.ApacheHttpTransport;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@org.springframework.context.annotation.Configuration
-public class Configuration {
+@Configuration
+class ConnectionConfiguration {
 
     @Bean
     ApacheHttpTransport apacheHttpTransport()

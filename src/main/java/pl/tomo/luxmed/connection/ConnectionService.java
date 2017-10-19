@@ -1,6 +1,4 @@
-package pl.tomo.luxmed;
-
-import java.util.concurrent.CompletableFuture;
+package pl.tomo.luxmed.connection;
 
 public interface ConnectionService {
 

@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.connection;
 
 import com.google.api.client.http.HttpResponse;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.connection;
 
 import com.google.api.client.http.*;
 import lombok.SneakyThrows;
@@ -11,10 +11,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ConnectionExecutor implements ConnectionService {
+class ConnectionExecutor implements ConnectionService {
 
-    static HttpMediaType URL_ENCODED_MEDIA_TYPE = new HttpMediaType("application/x-www-form-urlencoded");
-
+    private final static HttpMediaType URL_ENCODED_MEDIA_TYPE = new HttpMediaType("application/x-www-form-urlencoded");
 
     @Autowired private RequestDataBuilder requestDataBuilder;
     @Autowired private RequestFactory requestFactory;

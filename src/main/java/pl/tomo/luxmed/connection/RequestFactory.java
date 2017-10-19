@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.connection;
 
 import com.google.api.client.http.*;
 import com.google.api.client.http.apache.ApacheHttpTransport;
@@ -10,20 +10,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RequestFactory {
+class RequestFactory {
 
     static String ENCODING = "gzip, deflate, br";
 
     private HttpRequestFactory apacheBasedFactory;
 
     @Autowired
-    public RequestFactory(ApacheHttpTransport apacheHttpTransport) {
+    RequestFactory(ApacheHttpTransport apacheHttpTransport) {
 
         apacheBasedFactory = apacheHttpTransport.createRequestFactory();
     }
 
     @SneakyThrows
-    public HttpRequest buildRequest(ConnectionRequest request, HttpContent content) {
+    HttpRequest buildRequest(ConnectionRequest request, HttpContent content) {
 
         HttpRequest httpRequest = apacheBasedFactory.buildRequest(
                 request.getHttpMethod().name(), new GenericUrl(request.getUrl()), null);
@@ -53,7 +53,7 @@ public class RequestFactory {
     }
 
     @SneakyThrows
-    public HttpRequest buildRequest(ConnectionRequest request) {
+    HttpRequest buildRequest(ConnectionRequest request) {
 
         HttpRequest httpRequest = apacheBasedFactory.buildRequest(
                 request.getHttpMethod().name(), new GenericUrl(request.getUrl()), null);

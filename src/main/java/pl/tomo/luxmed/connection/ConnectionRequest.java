@@ -1,10 +1,9 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.connection;
 
 import lombok.*;
 import org.springframework.http.HttpMethod;
 
 import java.util.List;
-import java.util.Map;
 
 @Builder
 @Data
