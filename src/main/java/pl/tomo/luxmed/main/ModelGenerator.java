@@ -2,18 +2,20 @@ package pl.tomo.luxmed.main;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 class ModelGenerator {
 
-    public Object cities() {
+    public List<City> cities() {
         return null;
     }
 
-    public Object clinics() {
+    public List<Clinic> clinics() {
         return null;
     }
 
-    public Object services() {
+    public List<MediService> services() {
         return null;
     }
 }

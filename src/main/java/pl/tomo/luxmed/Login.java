@@ -27,7 +27,6 @@ public class Login {
     void login() {
 
         List<Cookie> authorizationCookies = storage.getAuthorizationCookies();
-        FirstStepFilter firstStepFilter = filterDataExtractor.extractFirstStep(authorizationCookies);
 
         FilterForm filterForm = new FilterForm();
         filterForm.setCityId("5");

@@ -1,18 +1,19 @@
 package pl.tomo.luxmed;
 
 import org.springframework.stereotype.Service;
+import pl.tomo.luxmed.extractor.Extractor;
 
 @Service
 class DoctorExtractor extends Extractor<Doctor> {
 
     @Override
-    String elementId() {
+    public String elementId() {
 
         return "DoctorId";
     }
 
     @Override
-    Doctor create(String id, String name) {
+    public Doctor create(String id, String name) {
 
         return new Doctor(id, name);
     }

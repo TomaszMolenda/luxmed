@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.extractor;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,9 +7,9 @@ import org.jsoup.nodes.Node;
 import java.util.List;
 import java.util.stream.Collectors;
 
-abstract class Extractor<T extends FilterData> {
+public abstract class Extractor<T extends FilterData> {
 
-    List<T> extract(Document document) {
+    public List<T> extract(Document document) {
 
         Element element = document.getElementById(elementId());
 
@@ -32,6 +32,6 @@ abstract class Extractor<T extends FilterData> {
         return create(id, name);
     }
 
-    abstract String elementId();
-    abstract T create(String id, String name);
+    public abstract String elementId();
+    public abstract T create(String id, String name);
 }

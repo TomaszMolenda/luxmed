@@ -9,18 +9,11 @@ import java.util.List;
 @Service
 class FilterDataExtractor {
 
-    private final FirstStepExtractor firstStepExtractor;
     private final SecondStepExtractor secondStepExtractor;
 
     @Autowired
-    FilterDataExtractor(FirstStepExtractor firstStepExtractor, SecondStepExtractor secondStepExtractor) {
-        this.firstStepExtractor = firstStepExtractor;
+    FilterDataExtractor(SecondStepExtractor secondStepExtractor) {
         this.secondStepExtractor = secondStepExtractor;
-    }
-
-    FirstStepFilter extractFirstStep(List<Cookie> authorizationCookies) {
-
-        return firstStepExtractor.extract(authorizationCookies);
     }
 
     SecondStepFilter extractSecondStep(List<Cookie> authorizationCookies, FilterForm filterForm) {
