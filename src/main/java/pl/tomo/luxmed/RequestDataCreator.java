@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 @Service
 class RequestDataCreator {
 
-    public List<DataEntry> create(FilterForm filterForm) {
+    List<DataEntry> create(FilterForm filterForm) {
 
         DataEntry city = create(filterForm.getCityId(), "cityId");
         DataEntry post = create(filterForm.getPostId(), "postId");
@@ -25,7 +25,7 @@ class RequestDataCreator {
         return Lists.newArrayList(city, post, service, dateFrom, doctor, payer, payersCount);
     }
 
-    public List<DataEntry> create2(FilterForm filterForm) {
+    List<DataEntry> create2(FilterForm filterForm) {
 
         DataEntry isFromStartPage = create(filterForm.getIsFromStartPage(), "IsFromStartPage");
         DataEntry payersCount = create(filterForm.getPayersCount(), "PayersCount");

@@ -5,7 +5,7 @@ abstract class FilterData {
     private final String id;
     private final String name;
 
-    public FilterData(String id, String name) {
+    FilterData(String id, String name) {
         this.id = id;
         this.name = name;
     }

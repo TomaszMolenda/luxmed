@@ -1,8 +1,8 @@
 package pl.tomo.luxmed;
 
-public class MediService extends FilterData {
+class MediService extends FilterData {
 
-    public MediService(String id, String name) {
+    MediService(String id, String name) {
         super(id, name);
     }
 }

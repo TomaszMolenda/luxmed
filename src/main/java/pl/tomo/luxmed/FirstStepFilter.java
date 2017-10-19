@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class FirstStepFilter {
+class FirstStepFilter {
 
     private final List<Clinic> clinics;
     private final List<City> cities;

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class FilterForm {
+class FilterForm {
 
     private String cityId;
     private String  postId;

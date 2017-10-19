@@ -1,8 +1,8 @@
 package pl.tomo.luxmed;
 
-public class Payer extends FilterData {
+class Payer extends FilterData {
 
-    public Payer(String id, String name) {
+    Payer(String id, String name) {
         super(id, name);
     }
 }

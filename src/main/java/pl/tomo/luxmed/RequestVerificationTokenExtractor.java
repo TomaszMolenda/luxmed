@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 class RequestVerificationTokenExtractor {
 
-    public String extract(Document document) {
+    String extract(Document document) {
 
         return document.select("input[name=__RequestVerificationToken]").first().attr("value");
     }

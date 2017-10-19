@@ -28,7 +28,7 @@ class SecondStepExtractor {
         this.requestVerificationTokenExtractor = requestVerificationTokenExtractor;
     }
 
-    public SecondStepFilter extract(List<Cookie> authorizationCookies, FilterForm filterForm) {
+    SecondStepFilter extract(List<Cookie> authorizationCookies, FilterForm filterForm) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Home/GetFilter")
