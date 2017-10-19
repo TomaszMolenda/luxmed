@@ -3,7 +3,7 @@ package pl.tomo.luxmed;
 import org.springframework.stereotype.Service;
 
 @Service
-class ClinicExtractor extends Extractor {
+class ClinicExtractor extends Extractor<Clinic> {
 
     @Override
     String elementId() {
@@ -12,7 +12,7 @@ class ClinicExtractor extends Extractor {
     }
 
     @Override
-    FilterData create(String id, String name) {
+    Clinic create(String id, String name) {
 
         return new Clinic(id, name);
     }

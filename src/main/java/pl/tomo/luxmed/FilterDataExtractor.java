@@ -16,11 +16,15 @@ class FilterDataExtractor {
 
     private final ConnectionService connectionService;
     private final ClinicExtractor clinicExtractor;
+    private final CityExtractor cityExtractor;
+    private final ServiceExtractor serviceExtractor;
 
     @Autowired
-    FilterDataExtractor(ConnectionService connectionService, ClinicExtractor clinicExtractor) {
+    FilterDataExtractor(ConnectionService connectionService, ClinicExtractor clinicExtractor, CityExtractor cityExtractor, ServiceExtractor serviceExtractor) {
         this.connectionService = connectionService;
         this.clinicExtractor = clinicExtractor;
+        this.cityExtractor = cityExtractor;
+        this.serviceExtractor = serviceExtractor;
     }
 
     FilterData extract(List<Cookie> authorizationCookies) {
@@ -36,6 +40,8 @@ class FilterDataExtractor {
         Document document = htmlResponse.getDocument();
 
         List<Clinic> clinics = clinicExtractor.extract(document);
+        List<City> cities = cityExtractor.extract(document);
+        List<MediService> mediServices = serviceExtractor.extract(document);
 
         return null;
     }
