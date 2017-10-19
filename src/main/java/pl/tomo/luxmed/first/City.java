@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.main;
+package pl.tomo.luxmed.first;
 
 import pl.tomo.luxmed.extractor.FilterData;
 

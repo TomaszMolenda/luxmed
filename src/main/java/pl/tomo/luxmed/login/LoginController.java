@@ -27,7 +27,7 @@ class LoginController {
 
         if (loginChecker.isLogged()) {
 
-            return "main";
+            return "first";
         }
 
         model.addAttribute("loginForm", new LoginForm());
@@ -42,7 +42,7 @@ class LoginController {
 
         if (loginChecker.isLogged()) {
 
-            return "redirect:/main";
+            return "redirect:/first";
         }
 
         redirectAttributes.addFlashAttribute("error", "login is not possible");

@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.main;
+package pl.tomo.luxmed.first;
 
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.extractor.Extractor;

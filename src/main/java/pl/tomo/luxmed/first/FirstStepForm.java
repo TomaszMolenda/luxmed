@@ -1,10 +1,10 @@
-package pl.tomo.luxmed.main;
+package pl.tomo.luxmed.first;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Data
-class MainForm {
+class FirstStepForm {
 
     @NotBlank
     private String cityId;

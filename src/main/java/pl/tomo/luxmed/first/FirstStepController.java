@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.main;
+package pl.tomo.luxmed.first;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/main")
-class MainController {
+@RequestMapping("/first")
+class FirstStepController {
 
     private final ModelGenerator modelGenerator;
 
     @Autowired
-    MainController(ModelGenerator modelGenerator) {
+    FirstStepController(ModelGenerator modelGenerator) {
         this.modelGenerator = modelGenerator;
     }
 
     @GetMapping
     private String get(Model model) {
 
-        model.addAttribute("mainForm", new MainForm());
+        model.addAttribute("firstStepForm", new FirstStepForm());
 
-        return "main";
+        return "first";
     }
 
     @PostMapping
-    private String post(@Valid @ModelAttribute MainForm mainForm, BindingResult bindingResult) {
+    private String post(@Valid @ModelAttribute FirstStepForm firstStepForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
 
-            return "main";
+            return "first";
         }
 
-        return "redirect:/main";
+        return "redirect:/first";
     }
 
     @ModelAttribute

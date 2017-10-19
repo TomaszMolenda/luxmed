@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.main;
+package pl.tomo.luxmed.first;
 
 import com.google.common.collect.Maps;
 import org.jsoup.nodes.Document;
@@ -11,14 +11,14 @@ import java.util.List;
 @Service
 class ModelGenerator {
 
-    private final MainViewModelCreator mainViewModelCreator;
+    private final FirstStepViewModelCreator firstStepViewModelCreator;
     private final ClinicExtractor clinicExtractor;
     private final CityExtractor cityExtractor;
     private final ServiceExtractor serviceExtractor;
 
     @Autowired
-    ModelGenerator(MainViewModelCreator mainViewModelCreator, ClinicExtractor clinicExtractor, CityExtractor cityExtractor, ServiceExtractor serviceExtractor) {
-        this.mainViewModelCreator = mainViewModelCreator;
+    ModelGenerator(FirstStepViewModelCreator firstStepViewModelCreator, ClinicExtractor clinicExtractor, CityExtractor cityExtractor, ServiceExtractor serviceExtractor) {
+        this.firstStepViewModelCreator = firstStepViewModelCreator;
         this.clinicExtractor = clinicExtractor;
         this.cityExtractor = cityExtractor;
         this.serviceExtractor = serviceExtractor;
@@ -26,7 +26,7 @@ class ModelGenerator {
 
     HashMap<String, ?> generate() {
 
-        Document document = mainViewModelCreator.extract();
+        Document document = firstStepViewModelCreator.extract();
 
         HashMap<String, List> model = Maps.newHashMap();
 
