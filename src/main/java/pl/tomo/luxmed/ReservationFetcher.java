@@ -28,7 +28,7 @@ class ReservationFetcher {
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/Find")
                 .httpMethod(HttpMethod.POST)
                 .cookie(authorizationCookies)
-                .data(requestDataCreator.create2(filterForm))
+                .data(requestDataCreator.create(filterForm))
                 .build();
 
         Document document = connectionService.postForHtml(connectionRequest).getDocument();
