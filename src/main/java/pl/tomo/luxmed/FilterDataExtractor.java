@@ -1,50 +1,34 @@
 package pl.tomo.luxmed;
 
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import pl.tomo.luxmed.connection.ConnectionRequest;
-import pl.tomo.luxmed.connection.ConnectionService;
 import pl.tomo.luxmed.connection.Cookie;
-import pl.tomo.luxmed.connection.HtmlResponse;
 
 import java.util.List;
 
 @Service
 class FilterDataExtractor {
 
-    private final ConnectionService connectionService;
-    private final ClinicExtractor clinicExtractor;
-    private final CityExtractor cityExtractor;
-    private final ServiceExtractor serviceExtractor;
+    private final FirstStepExtractor firstStepExtractor;
+    private final SecondStepExtractor secondStepExtractor;
 
     @Autowired
-    FilterDataExtractor(ConnectionService connectionService, ClinicExtractor clinicExtractor, CityExtractor cityExtractor, ServiceExtractor serviceExtractor) {
-        this.connectionService = connectionService;
-        this.clinicExtractor = clinicExtractor;
-        this.cityExtractor = cityExtractor;
-        this.serviceExtractor = serviceExtractor;
+    FilterDataExtractor(FirstStepExtractor firstStepExtractor, SecondStepExtractor secondStepExtractor) {
+        this.firstStepExtractor = firstStepExtractor;
+        this.secondStepExtractor = secondStepExtractor;
     }
 
-    FilterData extract(List<Cookie> authorizationCookies) {
+    FirstStepFilter extractFirstStep(List<Cookie> authorizationCookies) {
 
-        ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Home/GetFilter")
-                .httpMethod(HttpMethod.GET)
-                .cookie(authorizationCookies)
-                .build();
-
-        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest);
-
-        Document document = htmlResponse.getDocument();
-
-        List<Clinic> clinics = clinicExtractor.extract(document);
-        List<City> cities = cityExtractor.extract(document);
-        List<MediService> mediServices = serviceExtractor.extract(document);
-
-        return null;
+        return firstStepExtractor.extract(authorizationCookies);
     }
+
+    SecondStepFilter extractSecondStep(List<Cookie> authorizationCookies, FirstStepFilterForm firstStepFilterForm) {
+
+        return secondStepExtractor.extract(authorizationCookies, firstStepFilterForm);
+    }
+
+
 
 
 }
