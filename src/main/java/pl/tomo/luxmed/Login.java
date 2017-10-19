@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class Login {
 
-
     private final AuthorizationCookieFetcher authorizationCookieFetcher;
     private final FilterDataExtractor filterDataExtractor;
     private final ReservationFetcher reservationFetcher;
