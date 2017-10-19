@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.tomo.luxmed.Redirect;
 
 import javax.validation.Valid;
 
@@ -38,7 +39,12 @@ class FirstStepController {
             return "first";
         }
 
-        return "redirect:/first";
+        return Redirect.builder()
+                .path("/second")
+                .param("cityId", firstStepForm.getCityId())
+                .param("serviceId", firstStepForm.getServiceId())
+                .param("clinicId", firstStepForm.getClinicId())
+                .build();
     }
 
     @ModelAttribute
