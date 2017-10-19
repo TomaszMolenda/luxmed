@@ -3,6 +3,7 @@ package pl.tomo.luxmed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.Cookie;
+import pl.tomo.luxmed.storage.Storage;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,14 +11,14 @@ import java.util.List;
 @Service
 public class Login {
 
-    private final AuthorizationCookieFetcher authorizationCookieFetcher;
+    private final Storage storage;
     private final FilterDataExtractor filterDataExtractor;
     private final ReservationFetcher reservationFetcher;
     private final ReservationExecutor reservationExecutor;
 
     @Autowired
-    Login(AuthorizationCookieFetcher authorizationCookieFetcher, FilterDataExtractor filterDataExtractor, ReservationFetcher reservationFetcher, ReservationExecutor reservationExecutor) {
-        this.authorizationCookieFetcher = authorizationCookieFetcher;
+    Login(Storage storage, FilterDataExtractor filterDataExtractor, ReservationFetcher reservationFetcher, ReservationExecutor reservationExecutor) {
+        this.storage = storage;
         this.filterDataExtractor = filterDataExtractor;
         this.reservationFetcher = reservationFetcher;
         this.reservationExecutor = reservationExecutor;
@@ -25,7 +26,7 @@ public class Login {
 
     void login() {
 
-        List<Cookie> authorizationCookies = authorizationCookieFetcher.fetch();
+        List<Cookie> authorizationCookies = storage.getAuthorizationCookies();
         FirstStepFilter firstStepFilter = filterDataExtractor.extractFirstStep(authorizationCookies);
 
         FilterForm filterForm = new FilterForm();

@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.login;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -23,10 +23,13 @@ class AuthorizationCookieFetcher {
         this.connectionService = connectionService;
     }
 
-    List<Cookie> fetch() {
+    List<Cookie> fetch(LoginForm loginForm) {
+
+        final String url = "https://portalpacjenta.luxmed.pl/PatientPortal/Account/LogIn?Login=" +
+                loginForm.getUser() + "&Password=" + loginForm.getPassword();
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Account/LogIn?Login=tomasz.molenda&Password=w6Kv7C1bXW")
+                .url(url)
                 .httpMethod(HttpMethod.GET)
                 .build();
 
