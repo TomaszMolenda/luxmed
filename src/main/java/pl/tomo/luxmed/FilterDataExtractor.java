@@ -15,13 +15,11 @@ import java.util.List;
 class FilterDataExtractor {
 
     private final ConnectionService connectionService;
-    private final CitiesExtractor citiesExtractor;
     private final ClinicExtractor clinicExtractor;
 
     @Autowired
-    FilterDataExtractor(ConnectionService connectionService, CitiesExtractor citiesExtractor, ClinicExtractor clinicExtractor) {
+    FilterDataExtractor(ConnectionService connectionService, ClinicExtractor clinicExtractor) {
         this.connectionService = connectionService;
-        this.citiesExtractor = citiesExtractor;
         this.clinicExtractor = clinicExtractor;
     }
 
@@ -37,9 +35,8 @@ class FilterDataExtractor {
 
         Document document = htmlResponse.getDocument();
 
-        List<City> cities = citiesExtractor.extract(document);
         List<Clinic> clinics = clinicExtractor.extract(document);
-        List
+
         return null;
     }
 

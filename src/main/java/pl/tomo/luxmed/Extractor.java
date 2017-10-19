@@ -3,21 +3,19 @@ package pl.tomo.luxmed;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-class CitiesExtractor {
+abstract class Extractor<T extends FilterData> {
 
-    List<City> extract(Document document) {
+    List<T> extract(Document document) {
 
-        Element element = document.getElementById("CityId");
+        Element element = document.getElementById(elementId());
 
         return element.childNodes().stream()
                 .filter(this::hasAttribute)
-                .map(this::createCity)
+                .map(this::create)
                 .collect(Collectors.toList());
     }
 
@@ -26,11 +24,14 @@ class CitiesExtractor {
         return node.hasAttr("data-favourite");
     }
 
-    private City createCity(Node node) {
+    private T create(Node node) {
 
         String id = node.attr("value");
         String name = ((Element) node).text();
 
-        return new City(id, name);
+        return create(id, name);
     }
+
+    abstract String elementId();
+    abstract T create(String id, String name);
 }

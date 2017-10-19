@@ -1,10 +1,8 @@
 package pl.tomo.luxmed;
 
-import lombok.Data;
+class Clinic extends FilterData {
 
-@Data
-class Clinic {
-
-    private final String id;
-    private final String name;
+    public Clinic(String id, String name) {
+        super(id, name);
+    }
 }
