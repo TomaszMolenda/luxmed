@@ -20,9 +20,7 @@ class MainController {
     @GetMapping
     private String get(Model model) {
 
-        model.addAttribute("cities", modelGenerator.cities());
-        model.addAttribute("clinics", modelGenerator.clinics());
-        model.addAttribute("services", modelGenerator.services());
+        model.addAllAttributes(modelGenerator.generate());
 
         return "main";
     }
