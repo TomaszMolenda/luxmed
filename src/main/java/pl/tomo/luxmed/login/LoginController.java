@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.tomo.luxmed.storage.StorageRefresher;
 
 @Controller
 @RequestMapping("/login")
@@ -15,11 +16,13 @@ class LoginController {
 
     private final UserInformationSaver userInformationSaver;
     private final LoginChecker loginChecker;
+    private final StorageRefresher storageRefresher;
 
     @Autowired
-    LoginController(UserInformationSaver userInformationSaver, LoginChecker loginChecker) {
+    LoginController(UserInformationSaver userInformationSaver, LoginChecker loginChecker, StorageRefresher storageRefresher) {
         this.userInformationSaver = userInformationSaver;
         this.loginChecker = loginChecker;
+        this.storageRefresher = storageRefresher;
     }
 
     @GetMapping
@@ -42,6 +45,7 @@ class LoginController {
 
         if (loginChecker.isLogged()) {
 
+            storageRefresher.refresh();
             return "redirect:/first";
         }
 

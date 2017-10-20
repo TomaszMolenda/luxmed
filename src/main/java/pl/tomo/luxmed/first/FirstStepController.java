@@ -16,11 +16,11 @@ import javax.validation.Valid;
 @RequestMapping("/first")
 class FirstStepController {
 
-    private final ModelGenerator modelGenerator;
+    private final FirstModelGenerator firstModelGenerator;
 
     @Autowired
-    FirstStepController(ModelGenerator modelGenerator) {
-        this.modelGenerator = modelGenerator;
+    FirstStepController(FirstModelGenerator firstModelGenerator) {
+        this.firstModelGenerator = firstModelGenerator;
     }
 
     @GetMapping
@@ -50,6 +50,6 @@ class FirstStepController {
     @ModelAttribute
     private void modelAttribute(Model model) {
 
-        model.addAllAttributes(modelGenerator.generate());
+        model.addAllAttributes(firstModelGenerator.generate());
     }
 }

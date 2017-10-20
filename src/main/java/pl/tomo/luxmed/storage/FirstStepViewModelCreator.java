@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.first;
+package pl.tomo.luxmed.storage;
 
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
 import pl.tomo.luxmed.connection.HtmlResponse;
-import pl.tomo.luxmed.storage.Storage;
 
 @Service
 class FirstStepViewModelCreator {

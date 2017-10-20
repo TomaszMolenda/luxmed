@@ -13,4 +13,7 @@ public class Storage {
     private String user;
     private String password;
     private List<Cookie> authorizationCookies;
+    private List<City> cities;
+    private List<Clinic> clinics;
+    private List<MediService> services;
 }
