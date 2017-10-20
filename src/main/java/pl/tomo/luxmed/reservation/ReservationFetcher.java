@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.reservation;
 
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
 import pl.tomo.luxmed.connection.Cookie;
+import pl.tomo.luxmed.service.FilterForm;
+import pl.tomo.luxmed.service.RequestDataCreator;
 
 import java.util.List;
 

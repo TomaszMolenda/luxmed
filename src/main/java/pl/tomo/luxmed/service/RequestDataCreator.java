@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.service;
 
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @Service
-class RequestDataCreator {
+public class RequestDataCreator {
 
-    List<DataEntry> create(FilterForm filterForm) {
+    public List<DataEntry> create(FilterForm filterForm) {
 
         DataEntry isFromStartPage = create(filterForm.getIsFromStartPage(), "isFromStartPage");
         DataEntry post = create(filterForm.getPostId(), "postId");

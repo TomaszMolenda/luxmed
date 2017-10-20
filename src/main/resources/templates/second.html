@@ -5,8 +5,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-    <span th:text="${clinic}"></span>
-    <span th:text="${service}"></span>
-    <span th:text="${city}"></span>
+    <span th:text="${clinic.name}"></span>
+    <span th:text="${service.name}"></span>
+    <span th:text="${city.name}"></span>
+
+    <form action="#" th:action="@{/second}" th:object="${secondStepForm}" method="post">
+
+        <select th:field="*{doctorId}">
+            <option selected="selected" value="">Any</option>
+            <option th:each="doctor : ${doctors}"
+                    th:value="${doctor.id}"
+                    th:text="${doctor.name}"></option>
+        </select>
+
+        <select th:field="*{payerId}">
+            <option selected="selected" value="">Choose</option>
+            <option th:each="payer : ${payers}"
+                    th:value="${payer.id}"
+                    th:text="${payer.name}"></option>
+        </select>
+
+        <input type="hidden" th:value="${clinic.id}" th:field="*{clinicId}" />
+        <input type="hidden" th:value="${service.id}" th:field="*{serviceId}" />
+        <input type="hidden" th:value="${city.id}" th:field="*{cityId}" />
+
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
 </body>
 </html>

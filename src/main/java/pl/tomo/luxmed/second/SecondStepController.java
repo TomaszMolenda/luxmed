@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.tomo.luxmed.Redirect;
 
 import javax.validation.Valid;
 
@@ -28,19 +29,28 @@ class SecondStepController {
 
         FilterInformation filterInformation = new FilterInformation(cityId, serviceId, clinicId);
         model.addAllAttributes(secondModelGenerator.generate(filterInformation));
+        model.addAllAttributes(secondModelGenerator.generate());
 
         return "second";
     }
 
     @PostMapping
-    private String post(@Valid @ModelAttribute SecondStepForm secondStepForm, BindingResult bindingResult) {
+    private String post(@Valid @ModelAttribute SecondStepForm secondStepForm, BindingResult bindingResult,
+                        Model model) {
 
         if (bindingResult.hasErrors()) {
 
             return "second";
         }
 
-        return "redirect:/second";
+        return Redirect.builder()
+                .path("summary")
+                .param("cityId", secondStepForm.getCityId())
+                .param("serviceId", secondStepForm.getServiceId())
+                .param("clinicId", secondStepForm.getClinicId())
+                .param("doctorId", secondStepForm.getDoctorId())
+                .param("payerId", secondStepForm.getPayerId())
+                .build();
     }
 
     @ModelAttribute

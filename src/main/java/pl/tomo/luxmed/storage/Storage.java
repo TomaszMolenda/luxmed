@@ -16,4 +16,7 @@ public class Storage {
     private List<City> cities;
     private List<Clinic> clinics;
     private List<MediService> services;
+    private List<Doctor> doctors;
+    private List<Payer> payers;
+    private String requestVerificationToken;
 }

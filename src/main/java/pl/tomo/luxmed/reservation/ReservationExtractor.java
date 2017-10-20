@@ -1,4 +1,4 @@
-package pl.tomo.luxmed;
+package pl.tomo.luxmed.reservation;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
