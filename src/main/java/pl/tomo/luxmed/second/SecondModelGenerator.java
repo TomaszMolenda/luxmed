@@ -27,7 +27,6 @@ class SecondModelGenerator {
 
         HashMap<String, String> model = Maps.newHashMap();
 
-
         model.put("clinic", clinicQueries.fetch(filterInformation.getCityId()));
         model.put("service", serviceQueries.fetch(filterInformation.getServiceId()));
         model.put("city", cityQueries.fetch(filterInformation.getCityId()));

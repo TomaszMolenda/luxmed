@@ -16,7 +16,7 @@ public class ServiceQueries extends AbstractQueries<MediService> {
     }
 
     @Override
-    public List<MediService> fetchData() {
+    List<MediService> fetchData() {
 
         return storage.getServices();
     }

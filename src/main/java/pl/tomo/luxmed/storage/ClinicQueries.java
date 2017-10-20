@@ -16,7 +16,7 @@ public class ClinicQueries extends AbstractQueries<Clinic> {
     }
 
     @Override
-    public List<Clinic> fetchData() {
+    List<Clinic> fetchData() {
 
         return storage.getClinics();
     }

@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-public abstract class AbstractQueries<E extends FilterData> {
+abstract class AbstractQueries<E extends FilterData> {
 
     public String fetch(String cityId) {
 
@@ -17,5 +17,5 @@ public abstract class AbstractQueries<E extends FilterData> {
                 .orElse(EMPTY);
     }
 
-    public abstract List<E> fetchData();
+    abstract List<E> fetchData();
 }

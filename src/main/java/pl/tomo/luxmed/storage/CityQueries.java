@@ -16,7 +16,7 @@ public class CityQueries extends AbstractQueries<City> {
     }
 
     @Override
-    public List<City> fetchData() {
+    List<City> fetchData() {
 
         return storage.getCities();
     }

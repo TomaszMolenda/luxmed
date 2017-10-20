@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.tomo.luxmed.Redirect;
+import pl.tomo.luxmed.storage.StorageRefresher;
 
 import javax.validation.Valid;
 
@@ -17,10 +18,12 @@ import javax.validation.Valid;
 class FirstStepController {
 
     private final FirstModelGenerator firstModelGenerator;
+    private final StorageRefresher storageRefresher;
 
     @Autowired
-    FirstStepController(FirstModelGenerator firstModelGenerator) {
+    FirstStepController(FirstModelGenerator firstModelGenerator, StorageRefresher storageRefresher) {
         this.firstModelGenerator = firstModelGenerator;
+        this.storageRefresher = storageRefresher;
     }
 
     @GetMapping
@@ -38,6 +41,8 @@ class FirstStepController {
 
             return "first";
         }
+
+        storageRefresher.refreshAdvancedData(firstStepForm);
 
         return Redirect.builder()
                 .path("/second")

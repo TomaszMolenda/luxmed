@@ -9,25 +9,32 @@ public class StorageRefresher {
 
     private final Storage storage;
     private final SimpleDataFetcher simpleDataFetcher;
-    private final CityExtractor cityExtractor;
-    private final ClinicExtractor clinicExtractor;
-    private final ServiceExtractor serviceExtractor;
+    private final SimpleDataExtractor simpleDataExtractor;
+
 
     @Autowired
-    StorageRefresher(Storage storage, SimpleDataFetcher simpleDataFetcher, CityExtractor cityExtractor, ClinicExtractor clinicExtractor, ServiceExtractor serviceExtractor) {
+    StorageRefresher(Storage storage, SimpleDataFetcher simpleDataFetcher, SimpleDataExtractor simpleDataExtractor) {
         this.storage = storage;
         this.simpleDataFetcher = simpleDataFetcher;
-        this.cityExtractor = cityExtractor;
-        this.clinicExtractor = clinicExtractor;
-        this.serviceExtractor = serviceExtractor;
+        this.simpleDataExtractor = simpleDataExtractor;
     }
 
-    public void refresh() {
+    public void refreshSimpleData() {
 
         Document document = simpleDataFetcher.extract();
 
-        storage.setCities(cityExtractor.extract(document));
-        storage.setClinics(clinicExtractor.extract(document));
-        storage.setServices(serviceExtractor.extract(document));
+        storage.setCities(simpleDataExtractor.extractCities(document));
+        storage.setClinics(simpleDataExtractor.extractClinics(document));
+        storage.setServices(simpleDataExtractor.extractServices(document));
+    }
+
+    public void refreshAdvancedData(SimpleData simpleData) {
+
+        String cityId = simpleData.getCityId();
+        String clinicId = simpleData.getClinicId();
+        String serviceId = simpleData.getServiceId();
+
+
+
     }
 }

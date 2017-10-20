@@ -45,7 +45,7 @@ class LoginController {
 
         if (loginChecker.isLogged()) {
 
-            storageRefresher.refresh();
+            storageRefresher.refreshSimpleData();
             return "redirect:/first";
         }
 
