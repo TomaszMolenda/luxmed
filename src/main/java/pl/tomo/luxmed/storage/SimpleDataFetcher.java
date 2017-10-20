@@ -9,13 +9,13 @@ import pl.tomo.luxmed.connection.ConnectionService;
 import pl.tomo.luxmed.connection.HtmlResponse;
 
 @Service
-class FirstStepViewModelCreator {
+class SimpleDataFetcher {
 
     private final ConnectionService connectionService;
     private final Storage storage;
 
     @Autowired
-    FirstStepViewModelCreator(ConnectionService connectionService, Storage storage) {
+    SimpleDataFetcher(ConnectionService connectionService, Storage storage) {
         this.connectionService = connectionService;
         this.storage = storage;
     }
