@@ -27,6 +27,8 @@ class ConnectionExecutor implements ConnectionService {
         Document document = Jsoup.parse(httpResponse.getContent(), httpResponse.getContentCharset().toString(),
                 httpResponse.getRequest().getUrl().getHost());
 
+
+
         return new HtmlResponse(httpResponse, document);
     }
 

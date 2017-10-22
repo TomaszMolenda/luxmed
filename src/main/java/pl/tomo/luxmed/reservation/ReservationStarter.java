@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.service.FilterForm;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
@@ -32,7 +33,7 @@ public class ReservationStarter {
             String  minDate = findMinDate(reservations);
             String  maxDate = findMaxDate(reservations);
 
-            System.out.println("fetch " + reservations.size() + " visits.\n" +
+            System.out.println(LocalDateTime.now() + ": fetch " + reservations.size() + " visits.\n" +
             "min date: " + minDate + ", max date: " + maxDate);
 
             reservations.stream()
@@ -70,7 +71,7 @@ public class ReservationStarter {
 
     private void reserve(Reservation reservation) {
 
-        System.out.println("try reserve " + reservation.getDate() +
+        System.out.println(LocalDateTime.now() + ": try reserve " + reservation.getDate() +
         ", " + reservation.getHour());
 
         boolean reserve = reservationExecutor.reserve(reservation);
