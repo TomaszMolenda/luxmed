@@ -1,8 +1,10 @@
 package pl.tomo.luxmed.service;
 
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.DataEntry;
+import pl.tomo.luxmed.storage.Storage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,13 +16,20 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 @Service
 public class RequestDataCreator {
 
+    private final Storage storage;
+
+    @Autowired
+    RequestDataCreator(Storage storage) {
+        this.storage = storage;
+    }
+
     public List<DataEntry> create(FilterForm filterForm) {
 
         DataEntry isFromStartPage = create(filterForm.getIsFromStartPage(), "isFromStartPage");
         DataEntry post = create(filterForm.getPostId(), "postId");
         DataEntry payersCount = create(filterForm.getPayersCount(), "payersCount");
         DataEntry searchFirstFree = create(filterForm.getSearchFirstFree(), "searchFirstFree");
-        DataEntry requestVerificationToken = create(filterForm.getRequestVerificationToken(), "__RequestVerificationToken");
+        DataEntry requestVerificationToken = create(storage.getRequestVerificationToken(), "__RequestVerificationToken");
         DataEntry timeOption = create(filterForm.getTimeOption(), "TimeOption");
         DataEntry city = create(filterForm.getCityId(), "CityId");
         DataEntry clinic = create(filterForm.getClinicId(), "ClinicId");

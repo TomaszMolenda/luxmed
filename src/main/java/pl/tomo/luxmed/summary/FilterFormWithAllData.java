@@ -1,16 +1,26 @@
-package pl.tomo.luxmed.storage;
+package pl.tomo.luxmed.summary;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import pl.tomo.luxmed.service.FilterForm;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-class FilterFormWithSimpleData implements FilterForm {
+@Data
+class FilterFormWithAllData implements FilterForm {
 
-    private final String cityId;
-    private final String clinicId;
-    private final String serviceId;
+    private String isFromStartPage;
+    private String postId;
+    private String payersCount;
+    private String searchFirstFree;
+    private String timeOption;
+    private String cityId;
+    private String clinicId;
+    private String serviceId;
+    private String doctorId;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+    private LocalDate dateFrom;
+    private String payerId;
 
     @Override
     public String getCityId() {
@@ -19,7 +29,7 @@ class FilterFormWithSimpleData implements FilterForm {
 
     @Override
     public String getPostId() {
-        return null;
+        return postId;
     }
 
     @Override
@@ -29,42 +39,42 @@ class FilterFormWithSimpleData implements FilterForm {
 
     @Override
     public LocalDate getDateFrom() {
-        return null;
+        return dateFrom;
     }
 
     @Override
     public LocalDate getToDate() {
-        return null;
+        return toDate;
     }
 
     @Override
     public String getDoctorId() {
-        return null;
+        return doctorId;
     }
 
     @Override
     public String getPayerId() {
-        return null;
+        return payerId;
     }
 
     @Override
     public String getPayersCount() {
-        return null;
+        return payersCount;
     }
 
     @Override
     public String getIsFromStartPage() {
-        return null;
+        return isFromStartPage;
     }
 
     @Override
     public String getSearchFirstFree() {
-        return null;
+        return searchFirstFree;
     }
 
     @Override
     public String getTimeOption() {
-        return null;
+        return timeOption;
     }
 
     @Override

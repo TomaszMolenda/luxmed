@@ -14,7 +14,6 @@ public interface FilterForm {
     String getPayersCount();
     String getIsFromStartPage();
     String getSearchFirstFree();
-    String getRequestVerificationToken();
     String getTimeOption();
     String getClinicId();
 }

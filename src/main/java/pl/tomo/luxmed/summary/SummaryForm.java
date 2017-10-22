@@ -1,10 +1,10 @@
-package pl.tomo.luxmed.second;
+package pl.tomo.luxmed.summary;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Data
-class SecondStepForm {
+public class SummaryForm {
 
     private String cityId;
     private String serviceId;
