@@ -3,6 +3,7 @@ package pl.tomo.luxmed.reservation;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -46,10 +47,21 @@ class ReservationExtractor {
 
     private Reservation create(Element element, String date) {
 
-        String hour = element.attr("data-sort");
-        String termId = element.getElementsByClass("reserveButtonDiv").first().attr("term-id");
+        final String hour = element.attr("data-sort");
+        final String termId = element.getElementsByClass("reserveButtonDiv").first().attr("term-id");
 
-        return new Reservation(convertDate(date), convertHour(hour), termId);
+        final Elements otherReservationInformation = obtainElementsWithOtherReservationInformation(element);
+
+        final String doctor = otherReservationInformation.get(0).text();
+        final String service = otherReservationInformation.get(1).text();
+        final String clinic = otherReservationInformation.get(2).text();
+
+        return new Reservation(convertDate(date), convertHour(hour), termId, doctor, service, clinic);
+    }
+
+    private Elements obtainElementsWithOtherReservationInformation(Element element) {
+
+        return element.siblingElements().first().getElementsByAttribute("data-sort");
     }
 
     private LocalTime convertHour(String hour) {

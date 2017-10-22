@@ -1,45 +1,36 @@
 package pl.tomo.luxmed.reservation;
 
-import lombok.SneakyThrows;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import pl.tomo.luxmed.connection.ConnectionRequest;
-import pl.tomo.luxmed.connection.ConnectionService;
-import pl.tomo.luxmed.storage.Storage;
 
 @Service
 class ReservationExecutor {
 
-    private final ConnectionService connectionService;
-    private final ReservationKeyRetriever reservationKeyRetriever;
-    private final Storage storage;
+    private final ReservationStatusUpdater reservationStatusUpdater;
     private final ReservationChecker reservationChecker;
+    private final ReservationRemover reservationRemover;
+    private final ReservationConfirmer reservationConfirmer;
 
     @Autowired
-    ReservationExecutor(ConnectionService connectionService, ReservationKeyRetriever reservationKeyRetriever, Storage storage, ReservationChecker reservationChecker) {
-        this.connectionService = connectionService;
-        this.reservationKeyRetriever = reservationKeyRetriever;
-        this.storage = storage;
+    ReservationExecutor(ReservationStatusUpdater reservationStatusUpdater, ReservationChecker reservationChecker, ReservationRemover reservationRemover, ReservationConfirmer reservationConfirmer) {
+        this.reservationStatusUpdater = reservationStatusUpdater;
         this.reservationChecker = reservationChecker;
+        this.reservationRemover = reservationRemover;
+        this.reservationConfirmer = reservationConfirmer;
     }
 
-    @SneakyThrows
     void reserve(Reservation reservation) {
 
-        String key = reservationKeyRetriever.retrieve(reservation);
+        final ReservationStatus reservationStatus = reservationChecker.checkIfIsReservation(reservation);
 
-        ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReserveTerm?key=" + key + "&variant=1")
-                .httpMethod(HttpMethod.POST)
-                .cookie(storage.getAuthorizationCookies())
-                .build();
+        if (reservationStatus.isExist()) {
 
-        Document document = connectionService.postForHtml(connectionRequest)
-                .get()
-                .getDocument();
+            reservationRemover.remove(reservationStatus);
+        }
 
-        storage.setReserved(reservationChecker.checkSuccess(document));
+        Document document = reservationConfirmer.confirm(reservation);
+
+        reservationStatusUpdater.update(document);
     }
 }

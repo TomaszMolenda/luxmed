@@ -51,7 +51,7 @@ public class ReservationStarter {
 
         reservations.stream()
                 .filter(reservationFilterExecutor::apply)
-                .findFirst()
+                .findAny()
                 .ifPresent(this::reserve);
     }
 
