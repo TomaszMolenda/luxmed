@@ -1,5 +1,6 @@
 package pl.tomo.luxmed.reservation;
 
+import lombok.SneakyThrows;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -24,6 +25,7 @@ class ReservationExecutor {
         this.reservationChecker = reservationChecker;
     }
 
+    @SneakyThrows
     boolean reserve(Reservation reservation) {
 
         String key = reservationKeyRetriever.retrieve(reservation);
@@ -34,7 +36,9 @@ class ReservationExecutor {
                 .cookie(storage.getAuthorizationCookies())
                 .build();
 
-        Document document = connectionService.postForHtml(connectionRequest).getDocument();
+        Document document = connectionService.postForHtml(connectionRequest)
+                .get()
+                .getDocument();
 
         return reservationChecker.checkSuccess(document);
     }

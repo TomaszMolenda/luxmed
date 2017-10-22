@@ -2,6 +2,7 @@ package pl.tomo.luxmed.login;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ class AuthorizationCookieFetcher {
         this.connectionService = connectionService;
     }
 
+    @SneakyThrows
     List<Cookie> fetch(LoginForm loginForm) {
 
         final String url = "https://portalpacjenta.luxmed.pl/PatientPortal/Account/LogIn?Login=" +
@@ -33,11 +35,12 @@ class AuthorizationCookieFetcher {
                 .httpMethod(HttpMethod.GET)
                 .build();
 
-        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest);
+        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest).get();
 
         return goToLocation(htmlResponse);
     }
 
+    @SneakyThrows
     private List<Cookie> goToLocation(HtmlResponse htmlResponse) {
 
         List<Cookie> cookies = htmlResponse.fetchCookies();
@@ -50,7 +53,9 @@ class AuthorizationCookieFetcher {
                 .cookie(cookies)
                 .build();
 
-        Set<Cookie> newCookies = Sets.newHashSet(connectionService.getForHtml(connectionRequest).fetchCookies());
+        Set<Cookie> newCookies = Sets.newHashSet(connectionService.getForHtml(connectionRequest)
+                .get()
+                .fetchCookies());
 
         newCookies.addAll(cookies);
 

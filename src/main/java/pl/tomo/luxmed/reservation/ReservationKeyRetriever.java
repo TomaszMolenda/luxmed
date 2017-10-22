@@ -1,5 +1,6 @@
 package pl.tomo.luxmed.reservation;
 
+import lombok.SneakyThrows;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -23,6 +24,7 @@ class ReservationKeyRetriever {
         this.storage = storage;
     }
 
+    @SneakyThrows
     String retrieve(Reservation reservation) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
@@ -32,7 +34,9 @@ class ReservationKeyRetriever {
                 .httpMethod(HttpMethod.POST)
                 .build();
 
-        Document document = connectionService.postForHtml(connectionRequest).getDocument();
+        Document document = connectionService.postForHtml(connectionRequest)
+                .get()
+                .getDocument();
 
         return reservationKeyExtractor.extract(document);
     }

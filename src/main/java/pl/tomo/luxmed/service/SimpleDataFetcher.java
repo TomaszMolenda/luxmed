@@ -1,5 +1,6 @@
 package pl.tomo.luxmed.service;
 
+import lombok.SneakyThrows;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,7 @@ public class SimpleDataFetcher {
         this.storage = storage;
     }
 
+    @SneakyThrows
     public Document extract() {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
@@ -29,7 +31,7 @@ public class SimpleDataFetcher {
                 .cookie(storage.getAuthorizationCookies())
                 .build();
 
-        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest);
+        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest).get();
 
         return htmlResponse.getDocument();
     }

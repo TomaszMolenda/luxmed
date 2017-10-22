@@ -1,5 +1,6 @@
 package pl.tomo.luxmed.reservation;
 
+import lombok.SneakyThrows;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -28,6 +29,7 @@ class ReservationFetcher {
         this.storage = storage;
     }
 
+    @SneakyThrows
     List<Reservation> fetch(FilterForm filterForm) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
@@ -37,7 +39,9 @@ class ReservationFetcher {
                 .data(requestDataCreator.create(filterForm))
                 .build();
 
-        Document document = connectionService.postForHtml(connectionRequest).getDocument();
+        Document document = connectionService.postForHtml(connectionRequest)
+                .get()
+                .getDocument();
 
         return reservationExtractor.extract(document);
     }

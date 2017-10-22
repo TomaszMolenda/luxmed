@@ -9,6 +9,8 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
+
 @Service
 class ConnectionExecutor implements ConnectionService {
 
@@ -17,7 +19,7 @@ class ConnectionExecutor implements ConnectionService {
 
     @Override
     @SneakyThrows
-    public HtmlResponse postForHtml(ConnectionRequest request) {
+    public CompletableFuture<HtmlResponse> postForHtml(ConnectionRequest request) {
 
         HttpContent httpContent = requestDataBuilder.createContent(request);
         HttpRequest httpRequest = requestFactory.buildRequest(request, httpContent);
@@ -28,13 +30,14 @@ class ConnectionExecutor implements ConnectionService {
                 httpResponse.getRequest().getUrl().getHost());
 
 
+        HtmlResponse htmlResponse = new HtmlResponse(httpResponse, document);
 
-        return new HtmlResponse(httpResponse, document);
+        return CompletableFuture.completedFuture(htmlResponse);
     }
 
     @Override
     @SneakyThrows
-    public HtmlResponse getForHtml(ConnectionRequest request) {
+    public CompletableFuture<HtmlResponse> getForHtml(ConnectionRequest request) {
 
         HttpRequest httpRequest = requestFactory.buildRequest(request);
 
@@ -43,6 +46,8 @@ class ConnectionExecutor implements ConnectionService {
         Document document = Jsoup.parse(httpResponse.getContent(), httpResponse.getContentCharset().toString(),
                 httpResponse.getRequest().getUrl().getHost());
 
-        return new HtmlResponse(httpResponse, document);
+        HtmlResponse htmlResponse = new HtmlResponse(httpResponse, document);
+
+        return CompletableFuture.completedFuture(htmlResponse);
     }
 }

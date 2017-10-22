@@ -1,5 +1,6 @@
 package pl.tomo.luxmed.service;
 
+import lombok.SneakyThrows;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -24,6 +25,7 @@ public class AdvancedDataFetcher {
         this.storage = storage;
     }
 
+    @SneakyThrows
     public Document extract(FilterForm filterForm) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
@@ -33,13 +35,6 @@ public class AdvancedDataFetcher {
                 .httpMethod(HttpMethod.POST)
                 .build();
 
-        return connectionService.postForHtml(connectionRequest).getDocument();
-
-//        final List<Doctor> doctors = doctorExtractor.extract(document);
-//        final List<Payer> payers = payerExtractor.extract(document);
-//
-//        final String requestVerificationToken = requestVerificationTokenExtractor.extract(document);
-//
-//        return new SecondStepFilter(doctors, payers, requestVerificationToken);
+        return connectionService.postForHtml(connectionRequest).get().getDocument();
     }
 }
