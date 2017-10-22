@@ -6,32 +6,36 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
-import pl.tomo.luxmed.connection.Cookie;
-
-import java.util.List;
+import pl.tomo.luxmed.storage.Storage;
 
 @Service
 class ReservationExecutor {
 
     private final ConnectionService connectionService;
     private final ReservationKeyRetriever reservationKeyRetriever;
+    private final Storage storage;
+    private final ReservationChecker reservationChecker;
 
     @Autowired
-    ReservationExecutor(ConnectionService connectionService, ReservationKeyRetriever reservationKeyRetriever) {
+    ReservationExecutor(ConnectionService connectionService, ReservationKeyRetriever reservationKeyRetriever, Storage storage, ReservationChecker reservationChecker) {
         this.connectionService = connectionService;
         this.reservationKeyRetriever = reservationKeyRetriever;
+        this.storage = storage;
+        this.reservationChecker = reservationChecker;
     }
 
-    public void reserve(Reservation reservation, List<Cookie> authorizationCookies) {
+    boolean reserve(Reservation reservation) {
 
-        String key = reservationKeyRetriever.retrieve(reservation, authorizationCookies);
+        String key = reservationKeyRetriever.retrieve(reservation);
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReserveTerm?key=" + key + "&variant=1")
                 .httpMethod(HttpMethod.POST)
-                .cookie(authorizationCookies)
+                .cookie(storage.getAuthorizationCookies())
                 .build();
 
         Document document = connectionService.postForHtml(connectionRequest).getDocument();
+
+        return reservationChecker.checkSuccess(document);
     }
 }

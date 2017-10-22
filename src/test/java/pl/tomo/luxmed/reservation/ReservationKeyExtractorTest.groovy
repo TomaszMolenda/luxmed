@@ -1,8 +1,7 @@
-package pl.tomo.luxmed
+package pl.tomo.luxmed.reservation
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import pl.tomo.luxmed.service.ReservationKeyExtractor
 import spock.lang.Specification
 
 class ReservationKeyExtractorTest extends Specification {
