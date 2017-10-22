@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.tomo.luxmed.storage.StorageRefresher;
 
 @Controller
@@ -28,29 +27,17 @@ class LoginController {
     @GetMapping
     private String get(Model model) {
 
-        if (loginChecker.isLogged()) {
-
-            return "first";
-        }
-
         model.addAttribute("loginForm", new LoginForm());
 
         return "login";
     }
 
     @PostMapping
-    private String post(@ModelAttribute LoginForm loginForm, RedirectAttributes redirectAttributes) {
+    private String post(@ModelAttribute LoginForm loginForm) {
 
         userInformationSaver.save(loginForm);
+        storageRefresher.refreshSimpleData();
 
-        if (loginChecker.isLogged()) {
-
-            storageRefresher.refreshSimpleData();
-            return "redirect:/first";
-        }
-
-        redirectAttributes.addFlashAttribute("error", "login is not possible");
-
-        return "redirect:/login";
+        return "redirect:/first";
     }
 }

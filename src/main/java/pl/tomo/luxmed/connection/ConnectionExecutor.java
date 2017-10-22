@@ -14,8 +14,14 @@ import java.util.concurrent.CompletableFuture;
 @Service
 class ConnectionExecutor implements ConnectionService {
 
-    @Autowired private RequestDataBuilder requestDataBuilder;
-    @Autowired private RequestFactory requestFactory;
+    private final RequestDataBuilder requestDataBuilder;
+    private final RequestFactory requestFactory;
+
+    @Autowired
+    ConnectionExecutor(RequestDataBuilder requestDataBuilder, RequestFactory requestFactory) {
+        this.requestDataBuilder = requestDataBuilder;
+        this.requestFactory = requestFactory;
+    }
 
     @Override
     @SneakyThrows
@@ -28,7 +34,6 @@ class ConnectionExecutor implements ConnectionService {
 
         Document document = Jsoup.parse(httpResponse.getContent(), httpResponse.getContentCharset().toString(),
                 httpResponse.getRequest().getUrl().getHost());
-
 
         HtmlResponse htmlResponse = new HtmlResponse(httpResponse, document);
 

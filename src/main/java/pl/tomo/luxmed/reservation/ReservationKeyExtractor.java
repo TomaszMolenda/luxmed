@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 class ReservationKeyExtractor {
 
-    public String extract(Document document) {
+    String extract(Document document) {
 
         String html = document.toString();
 

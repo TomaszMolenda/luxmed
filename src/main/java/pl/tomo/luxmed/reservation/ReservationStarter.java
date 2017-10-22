@@ -1,48 +1,58 @@
 package pl.tomo.luxmed.reservation;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.service.FilterForm;
+import pl.tomo.luxmed.storage.Storage;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 
+@Slf4j
 @Service
 public class ReservationStarter {
 
-    private boolean isNotReserved = true;
-
     private final ReservationFetcher reservationFetcher;
     private final ReservationExecutor reservationExecutor;
+    private final ReservationFilterExecutor reservationFilterExecutor;
+    private final Storage storage;
 
 
     @Autowired
-    ReservationStarter(ReservationFetcher reservationFetcher, ReservationExecutor reservationExecutor) {
+    ReservationStarter(ReservationFetcher reservationFetcher, ReservationExecutor reservationExecutor, ReservationFilterExecutor reservationFilterExecutor, Storage storage) {
         this.reservationFetcher = reservationFetcher;
         this.reservationExecutor = reservationExecutor;
+        this.reservationFilterExecutor = reservationFilterExecutor;
+        this.storage = storage;
     }
 
+    @Async
     public void start(FilterForm filterForm) {
 
         do {
-            List<Reservation> reservations = reservationFetcher.fetch(filterForm);
+            reserve(filterForm);
 
-            String  minDate = findMinDate(reservations);
-            String  maxDate = findMaxDate(reservations);
+        } while (isNotReserved());
+    }
 
-            System.out.println(LocalDateTime.now() + ": fetch " + reservations.size() + " visits.\n" +
-            "min date: " + minDate + ", max date: " + maxDate);
+    private void reserve(FilterForm filterForm) {
 
-            reservations.stream()
-                    .filter(this::hasValidDateAndTime)
-                    .findFirst()
-                    .ifPresent(this::reserve);
+        List<Reservation> reservations = reservationFetcher.fetch(filterForm);
 
+        String  minDate = findMinDate(reservations);
+        String  maxDate = findMaxDate(reservations);
 
-        } while (isNotReserved);
+        log.info(LocalDateTime.now() + ": fetch " + reservations.size() + " visits. " +
+        "min date: " + minDate + ", max date: " + maxDate);
+
+        reservations.stream()
+                .filter(reservationFilterExecutor::apply)
+                .findFirst()
+                .ifPresent(this::reserve);
     }
 
     private String findMinDate(List<Reservation> reservations) {
@@ -63,19 +73,16 @@ public class ReservationStarter {
                 .orElse("Not found");
     }
 
-    private boolean hasValidDateAndTime(Reservation reservation) {
-
-        return reservation.getHour().isAfter(LocalTime.of(14,55)) &&
-                reservation.getDate().isEqual(LocalDate.now().plusDays(1));
-    }
-
     private void reserve(Reservation reservation) {
 
-        System.out.println(LocalDateTime.now() + ": try reserve " + reservation.getDate() +
+        log.info(LocalDateTime.now() + ": try reserve " + reservation.getDate() +
         ", " + reservation.getHour());
 
-        boolean reserve = reservationExecutor.reserve(reservation);
+        reservationExecutor.reserve(reservation);
+    }
 
-        isNotReserved = !reserve;
+    private boolean isNotReserved() {
+
+        return !storage.isReserved();
     }
 }

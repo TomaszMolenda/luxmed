@@ -26,7 +26,7 @@ class ReservationExecutor {
     }
 
     @SneakyThrows
-    boolean reserve(Reservation reservation) {
+    void reserve(Reservation reservation) {
 
         String key = reservationKeyRetriever.retrieve(reservation);
 
@@ -40,6 +40,6 @@ class ReservationExecutor {
                 .get()
                 .getDocument();
 
-        return reservationChecker.checkSuccess(document);
+        storage.setReserved(reservationChecker.checkSuccess(document));
     }
 }

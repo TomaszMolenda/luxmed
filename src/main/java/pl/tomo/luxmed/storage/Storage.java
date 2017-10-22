@@ -19,4 +19,5 @@ public class Storage {
     private List<Doctor> doctors;
     private List<Payer> payers;
     private String requestVerificationToken;
+    private boolean isReserved;
 }
