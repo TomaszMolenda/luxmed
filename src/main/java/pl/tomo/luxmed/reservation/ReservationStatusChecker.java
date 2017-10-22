@@ -4,7 +4,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 
 @Service
-class ReservationChecker {
+class ReservationStatusChecker {
 
     boolean checkSuccess(Document document) {
 
