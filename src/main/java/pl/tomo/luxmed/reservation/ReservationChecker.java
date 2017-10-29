@@ -30,8 +30,6 @@ class ReservationChecker {
 
         Document document = fetchDocument();
 
-        System.out.println(document);
-
         boolean hasReservationOnService = hasReservationOnService(reservation, document);
 
         if (hasReservationOnService) {
