@@ -1,8 +1,8 @@
-package pl.tomo.luxmed.storage;
+package pl.tomo.luxmed.city;
 
 import pl.tomo.luxmed.extractor.FilterData;
 
-class City extends FilterData {
+public class City extends FilterData {
 
     City(String id, String name) {
         super(id, name);

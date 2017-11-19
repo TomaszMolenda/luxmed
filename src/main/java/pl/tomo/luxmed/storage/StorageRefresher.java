@@ -29,7 +29,6 @@ public class StorageRefresher {
 
         Document document = simpleDataFetcher.extract();
 
-        storage.setCities(simpleDataExtractor.extractCities(document));
         storage.setClinics(simpleDataExtractor.extractClinics(document));
         storage.setServices(simpleDataExtractor.extractServices(document));
     }

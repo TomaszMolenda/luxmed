@@ -16,7 +16,7 @@ public class PayerQueries extends AbstractQueries<Payer> {
     }
 
     @Override
-    List<Payer> fetchData() {
+    public List<Payer> fetchData() {
 
         return storage.getPayers();
     }

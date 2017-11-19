@@ -1,7 +1,9 @@
-package pl.tomo.luxmed.storage;
+package pl.tomo.luxmed.city;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.tomo.luxmed.storage.AbstractQueries;
+import pl.tomo.luxmed.storage.Storage;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class CityQueries extends AbstractQueries<City> {
     }
 
     @Override
-    List<City> fetchData() {
+    public List<City> fetchData() {
 
         return storage.getCities();
     }

@@ -4,7 +4,7 @@ import pl.tomo.luxmed.extractor.FilterData;
 
 import java.util.List;
 
-abstract class AbstractQueries<E extends FilterData> {
+public abstract class AbstractQueries<E extends FilterData> {
 
     public E fetch(String cityId) {
 
@@ -14,5 +14,5 @@ abstract class AbstractQueries<E extends FilterData> {
                 .orElse(null);
     }
 
-    abstract List<E> fetchData();
+    public abstract List<E> fetchData();
 }

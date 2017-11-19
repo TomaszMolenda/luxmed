@@ -1,0 +1,569 @@
+<!doctype html>
+<html>
+ <head> 
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"> 
+  <title>Portal Pacjenta LUX MED</title> 
+  <meta http-equiv="Pragma" content="no-cache"> 
+  <meta http-equiv="Expires" content="-1"> 
+  <!--begin new theme--> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link href="/PatientPortal/Content/css/theme/css?v=q6kGg-SWnfvCE7V37RryqFKQ1G56bwnhDEnRu0vD8wE1" rel="stylesheet"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/theme/jquery-ui-1.10.4.min.css"> 
+  <link href="/PatientPortal/Content/css/css?v=AvJ2Qb150B0vMTt25WQOKQT13dJISvNv7E-tjXzfWIg1" rel="stylesheet"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/daterangepicker.css"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/dateRangePickerCustom.css"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/bootstrap.css"> 
+  <!--[if IE 8]>
+    <link rel="stylesheet" href="/PatientPortal/Content/css/theme/ie8-and-down.css"/>
+  <![endif]--> 
+  <!-- end new theme--> 
+  <script src="/PatientPortal/bundles/jquery?v=VOvoseWI3KJom0zUA3-bmh67-fqY0w9yxbE2aNjnmKc1"></script> 
+  <script src="/PatientPortal/bundles/jqueryui?v=mm3v2PpGUkDUriE6bzJuTlqb_tVjmWEGj4i4gSJ7ipU1"></script> 
+  <script src="/PatientPortal/bundles/jqueryval?v=JdhQrW9chtoxI7Ch2CG_gRGCV0r6Sm-pGQ6JywlVQWs1"></script> 
+  <script src="/PatientPortal/bundles/moment?v=huwbLRU4oIWhyHs6F54suekiwaBQ7riZr2ynxjSDptI1"></script> 
+  <script src="/PatientPortal/bundles/lodash?v=o_9FZOfXTdMo8t7Gv2vw_KB6D9ZHLUbKT_c6bA42OlQ1"></script> 
+  <script src="/PatientPortal/bundles/daterangepicker?v=oINx0UmM0Hu_jvWB1elQD__FpqrFVWe1cmWx8En1D1M1"></script> 
+  <script src="/PatientPortal/bundles/interface?v=u5SZs1WgOwvsVM-uZf_WlW6DpaXdoXeCDHf-rFjR9ys1"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/MicrosoftAjax.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/MicrosoftMvcValidation.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/jquery.maxlength.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/jquery.bind-first-0.2.3.min.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/attrChange.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/Global.js"></script> 
+  <script src="/PatientPortal/bundles/chat/chat?v=ErNubpvGqINnpaYSBAaGWFwZ09v2zZTL0FQl9BdHpdQ1"></script> 
+  <script src="/PatientPortal/bundles/showPassword?v=9X74LR3EtdJaXR-pnKZSz8zj6B1BL20dcuGuUAJMwqo1"></script> 
+  <script type="text/javascript">
+
+      var baseUrl = "/PatientPortal";
+
+      if (window.name === "reloader") {
+          window.name = "no";
+          isMyLink = true;
+          window.location = '/PatientPortal/Account/LogOut';
+      }
+  </script> 
+  <script type="text/javascript">
+  var
+      _registerFillCityValidationText = "Wybierz najpierw miasto",
+        _registerFillClinicValidationText = "Wybierz najpierw plac&#243;wkę",
+        _registerFillServiceValidationText = "Wybierz najpierw usługę",
+        _realWidgetChosen4Text = "wybrane",
+        _realWidgetChosenDefaultText = "wybranych";
+
+</script> 
+  <link type="image/x-icon" href="/PatientPortal/Content/img/favicon.ico" rel="shortcut icon"> 
+  <script type="text/javascript">
+        jQuery(function ($) {
+            $.datepicker.regional['pl'] = {
+                closeText: 'Zamknij',
+                prevText: '&#x3c;Poprzedni',
+                nextText: 'Następny&#x3e;',
+                currentText: 'Dziś',
+                monthNames: [
+                    'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec',
+                    'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
+                ],
+                monthNamesShort: [
+                    'Sty', 'Lu', 'Mar', 'Kw', 'Maj', 'Cze',
+                    'Lip', 'Sie', 'Wrz', 'Pa', 'Lis', 'Gru'
+                ],
+                dayNames: ['Niedziela', 'Poniedzialek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+                dayNamesShort: ['Nie', 'Pn', 'Wt', 'Śr', 'Czw', 'Pt', 'So'],
+                dayNamesMin: ['N', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So'],
+                dateFormat: 'yy-mm-dd',
+                firstDay: 1,
+                isRTL: false
+            };
+
+            $.datepicker.setDefaults({
+                changeMonth: false,
+                changeYear: false
+            });
+
+            $.datepicker.setDefaults($.datepicker.regional['pl']);
+
+
+        });
+    </script> 
+  <script type="text/javascript">
+    $.dateRangePickerConfig = {
+        locals: {
+            format: "DD-MM-YYYY",
+            separator: "  |  ",
+            applyLabel: 'Zatwierdź',
+            cancelLabel: 'Anuluj',
+            fromLabel: 'Od',
+            toLabel: 'Do',
+            customRangeLabel: 'Inna data',
+            weekLabel: 'Tydzień',
+            daysOfWeek: [
+                'Nd',
+                'Pn',
+                'Wt',
+                'Śr',
+                'Cz',
+                'Pt',
+                'Sob'],
+            monthNames: [
+                'Styczeń',
+                'Luty',
+                'Marzec',
+                'Kwiecień',
+                'Maj',
+                'Czerwiec',
+                'Lipiec',
+                'Sierpień',
+                'Wrzesień',
+                'Październik',
+                'Listopad',
+                'Grudzień'
+            ],
+            firstDay: 1
+        },
+        rangesLocals: {
+            'Dziś': [
+                '19-11-2017',
+                '19-11-2017'
+            ],
+            'Wczoraj': [
+                '18-11-2017',
+                '18-11-2017'
+            ],
+            'Następne 30 dni': [
+                '19-11-2017',
+                '19-12-2017'
+            ],
+            'Ostatnie 30 dni': [
+                '20-10-2017',
+                '19-11-2017'
+            ],
+            'Następny rok': [
+                '19-11-2017',
+                '19-11-2018'
+            ],
+            'Ostatni rok': [
+                '19-11-2016',
+                '19-11-2017'
+            ]
+        }
+    };
+</script> 
+  <script src="/PatientPortal/bundles/_dateFilter?v=EVudEAGN70le9lOrxz0--J7Y5rPNlv--bhOIyHEwn8k1"></script> 
+  <!-- Google Tag Manager --> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WL728ZB');</script> 
+  <!-- End Google Tag Manager --> 
+ </head> 
+ <body onkeypress=" return preventBackRefresh(event); " onkeydown=" return preventBackRefresh(event); "> 
+  <!-- Google Tag Manager (noscript) --> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WL728ZB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> 
+  <!-- End Google Tag Manager (noscript) --> 
+  <script type="text/javascript">
+  HideL1Wrapper = function () {
+      $(".top-info.l1").hide();
+    var ulr = '/PatientPortal/Home/HideWrapperL1';
+      fixSpinner = true;
+      $.post(ulr, function() {
+        fixSpinner = false;
+      });
+  }
+</script> 
+  <script type="text/javascript">
+  HideCookieWrapper = function () {
+      $(".top-info.cookie").hide();
+    var ulr = '/PatientPortal/Home/HideCookieWrapper';
+      fixSpinner = true;
+      $.post(ulr, function() {
+        fixSpinner = false;
+      });
+  }
+</script> 
+  <div id="full"> 
+   <div id="total"> 
+    <div class="wrapper"> 
+     <div id="top"> 
+      <a class="logo" href="/PatientPortal/"> <span class="name">Portal Pacjenta</span> </a> 
+      <div class="actions _tablet _smartphone"> 
+       <a class="button tabletNavigation _toggleMobileNavigation">Menu</a> 
+       <a class="button tabletNewOrder _tablet" href="/PatientPortal/Reservations/Coordination">Nowa rezerwacja</a> 
+       <a class="button tabletNewOrder _smartphone" href="/PatientPortal/Reservations/Coordination">Zarezerwuj</a> 
+      </div> 
+      <div class="actions _desktop"> 
+       <ul class="menu"> 
+        <li><a href="https://emarket.luxmed.pl/eMarket" target="_blank">e-Market LUX MED</a></li> 
+       </ul> 
+       <div class="currentUser dropdown"> 
+        <span class="name">BORYS MOLENDA</span> 
+        <span class="email">borys.molenda</span> 
+        <div class="dropMenu"> 
+         <ul> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Profile">Twoje dane</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=ECard">Twoja e-Karta</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Settings">Ustawienia</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Settings">Zmiana języka</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Password">Zmiana hasła</a></li> 
+          <li><a onclick="checkChatStatus(this);">Wyloguj</a></li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <script type="text/javascript">
+  checkChatStatus = function(e) {
+    $.get(baseUrl + '/Account/LogOutWithChat', function (data) {
+      if (data.showConfirm === 1) {
+        $.get(baseUrl + '/Account/ConfirmLogout', function (dialogHtml) {
+          showPoupManually(dialogHtml);
+        });
+      } else {
+        window.location = '/PatientPortal/Account/LogOut';
+      }
+    });
+  };
+
+</script> 
+     <div id="mainNavigation"> 
+      <ul class="menu"> 
+       <li class="_tablet _smartphone"><a href="#" class="_toggleMobileNavigation">&lt;&lt; Schowaj to menu</a></li> 
+       <li class=""> <a href="/PatientPortal/" target="_parent">Start</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Visits" target="_parent">Wizyty</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/MedicalExaminations" target="_parent">Wyniki badań</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Referrals" target="_parent">Skierowania</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/PrescriptionsOrdering/History" target="_parent">Leki</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/EQuestions" target="_parent">Zapytaj lekarza</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Chat" target="_parent">Konsultacje online</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Doctors/Schedule" target="_parent">Grafiki lekarzy</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Clinics/Duty" target="_parent">Dyżury</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Clinics/List" target="_parent">Placówki</a> </li> 
+       <li class=""> <a href="/PatientPortal/Home/Documents" target="_parent">Dokumenty</a> </li> 
+      </ul> 
+     </div> 
+     <div id="content" style="min-height: 100px;"> 
+      <div class="header"> 
+       <h1>Zarezerwuj wizytę lub badanie</h1> 
+       <div class="buttons"> 
+        <a class="button disabled calendar" href="">Chcę umówić wizytę lub badanie</a> 
+       </div> 
+      </div> 
+      <script src="https://maps.google.com/maps/api/js?key=?sensor=false" type="text/javascript"></script> 
+      <script src="/PatientPortal/bundles/google.maps?v=jISvs3liPxl_rfjF9zNyLftu9sLz6WyyeDQ4q4Z8G5M1"></script> 
+      <script src="/PatientPortal/bundles/reservation?v=qJ89kZ9b0uEf1rOTEPTcz7qFko541kbdIpYCp0e952I1"></script> 
+      <div class="headerExtend"> 
+       <div class="pickLatestField"> 
+        <div class="selectAction"> 
+         <select id="currentFilter" class="select _fetchFormData" data-class="latestSearch selectLatest adjustWidth" data-form="advancedResevation" onchange="reservation.events.loadFilter()"> <option class="invisibleOnList">Wybierz z ostatnio szukanych</option> <option data-display="<strong>Konsultacja pediatry - w gabinecie dzieci chorych</strong> <p></p> Wrocław Dowolna placówka <br/> Dowolny lekarz">10975007</option> </select> 
+         <span>lub skorzystaj z wyszukiwarki</span> 
+        </div> 
+        <div class="backAction"> 
+         <a class="_clearFormData" data-form="advancedResevation" href="/PatientPortal/Reservations/Reservation/FirstFind">&lt; Wróć</a> 
+         <span>Twoje kryteria wyszukiwania zostały ustawione jak niżej:</span> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="filtersDiv" data-show-visits-not-found-popup="False" data-visits-not-found-popup-url="/PatientPortal/Reservations/Reservation/VisitsNotFoundPopup" data-load-url="/PatientPortal/Reservations/Reservation/LoadFilter"> 
+       <div id="validationsSummaryByMvc"> 
+       </div> 
+       <div id="validationsSummaryDynamicByJS" class="validation-summary-errors"> 
+        <ul></ul> 
+       </div> 
+       <div id="dynamicFilterContainer" style="display:none;" data-get-url="/PatientPortal/Reservations/Reservation/GetFilter"> 
+        <div class="_smartphone _tablet _advancedReservationTrigger">
+          Szukaj wizyt 
+        </div> 
+        <div class="advancedReservationBox"> 
+         <form id="advancedResevation" method="post" name="filterForm" action="Find"> 
+          <input id="ReferralId" name="ReferralId" type="hidden" value=""> 
+          <input id="DateOption" name="DateOption" type="hidden" value="SelectedDate"> 
+          <input id="PayersCount" type="hidden" value="0" name="PayersCount"> 
+          <div class="column column1"> 
+           <span class="groupName">Wybierz miasto i placówkę:</span> 
+           <div class="field required"> 
+            <select id="CityId" name="CityId" class="select" selectedname="Miasto" data-click-event="reservation.events.removeAllValidations" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <option class="invisibleOnList" value="">Wybierz miasto</option> <option data-favourite="False" value="70"> Białystok </option> <option data-favourite="False" value="12"> Bielsk Podlaski </option> <option data-favourite="False" value="83"> Brzesko </option> <option data-favourite="False" value="10"> Bydgoszcz </option> <option data-favourite="False" value="84"> Częstochowa </option> <option data-favourite="False" value="6"> Dębica </option> <option data-favourite="False" value="63"> Elbląg </option> <option data-favourite="False" value="60"> Gorzów Wielkopolski </option> <option data-favourite="False" value="17"> Katowice </option> <option data-favourite="False" value="3"> Kraków </option> <option data-favourite="False" value="49"> Lublin </option> <option data-favourite="False" value="89"> Łomża </option> <option data-favourite="False" value="4"> Łódź </option> <option data-favourite="False" value="80"> Mielec </option> <option data-favourite="False" value="20"> Olsztyn </option> <option data-favourite="False" value="21"> Opole </option> <option data-favourite="False" value="8"> Poznań </option> <option data-favourite="False" value="74"> Rzeszów </option> <option data-favourite="False" value="24"> Szczecin </option> <option data-favourite="False" value="73"> Toruń </option> <option data-favourite="False" value="45"> Trójmiasto </option> <option data-favourite="False" value="25"> Tychy </option> <option data-favourite="False" value="81"> Wałbrzych </option> <option data-favourite="False" value="1"> Warszawa </option> <option data-favourite="False" value="76"> Wołomin </option> <option data-favourite="False" value="5"> Wrocław </option> </select> 
+            <span class="tooltip" title="W ustawieniach konta możesz wybrać miasto, w którym najczęściej korzystasz z konsultacji lekarskich, by znajdowało się zawsze na początku listy."></span> 
+           </div> 
+           <div class="field"> 
+            <select id="ClinicId" name="ClinicId" class="select" multiple selectedname="Placówka" data-click-event="reservation.events.clinicClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <optgroup label="invisible" class="hideLabel" data-selection-limit="2"> <option class="invisibleOnList" value="">Dowolna placówka Grupy LUX MED</option> </optgroup> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz ustawić preferowane placówki, z których najczęściej korzystasz, by znajdowały się na początku listy."></span> 
+           </div> 
+           <div class="field withButton" id="ClinicLocalize" data-get-url="/PatientPortal/Reservations/Reservation/ClinicLocalizeAjax"> 
+            <a class="button localize" onclick="reservation.events.showClinicLocalize();">Pokaż na mapie</a> 
+           </div> 
+          </div> 
+          <div class="column column2"> 
+           <span class="groupName">Wybierz konsultację i lekarza:</span> 
+           <div class="field required"> 
+            <select id="ServiceId" name="ServiceId" class="select" multiple selectedname="Usługi" data-click-event="reservation.events.serviceClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <optgroup label="invisible" class="hideLabel" data-selection-limit="2"> <option class="invisibleOnList" value="">Wybierz usługę</option> </optgroup> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz wybrać usługi, z których często korzystasz, by znajdowały się na początku listy."></span> 
+           </div> 
+           <script type="text/javascript">
+  optionsGroupsArray = {
+
+
+  };
+</script> 
+           <div class="field"> 
+            <select name="DoctorMultiIdentyfier" id="MultiDoctorId" class="select" multiple selectedname="Lekarze" data-click-event="reservation.events.doctorClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <option value="" class="invisibleOnList">Dowolny lekarz</option> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz wybrać nazwiska lekarzy, do których najczęściej umawiasz wizyty, by znajdowały się na początku listy."></span> 
+           </div> 
+           <div class="field"> 
+            <select id="LanguageId" name="LanguageId" class="select" selectedname="Język" data-autocomplete-prompt="Szukaj..."> <option value="">Dowolny język</option> <option data-favourite="False" value="11"> Angielski </option> <option data-favourite="False" value="7"> Francuski </option> <option data-favourite="False" value="5"> Hiszpański </option> <option data-favourite="False" value="3"> Niemiecki </option> <option data-favourite="False" value="10"> Polski </option> <option data-favourite="False" value="4"> Rosyjski </option> <option data-favourite="False" value="6"> Włoski </option> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz ustawić język, w jakim ma posługiwać się lekarz podczas konsultacji. Domyślnie ustawiono język polski."></span> 
+           </div> 
+          </div> 
+          <div class="column column3"> 
+           <span class="groupName">Wybierz termin:</span> 
+           <div class="field"> 
+            <select class="select" id="SearchFirstFree" name="SearchFirstFree" selectedname="Termin"> <option value="true">Pierwsze wolne terminy</option> <option value="false" selected>Wybrany zakres dat</option> </select> 
+            <span id="dynamicDateRangeTooltip" data-tooltip-first-free="Wyszukiwane będą najbliższe wolne terminy w ciągu 90 nadchodzących dni." data-tooltip-range="Wyszukiwane będą terminy w przedziale maksymalnie 365 - dniowym." style="float: right;" class="tooltip" title=""></span> 
+           </div> 
+           <div class="field"> 
+            <div class="dateRange"> 
+             <div class="dateRangePicker"> 
+              <input id="rangePicker" type="text" class="form-group  " data-min-date="19-11-2017" data-max-date="19-11-2018" data-single-date="False" data-show-Dropdowns="False" data-days-limit="30" autocomplete="off" data-on-change-callback="reservation.events.onDateChange"> 
+              <input class="hide" id="FromDate" name="FromDate" type="text" value="19-11-2017"> 
+              <input class="hide" id="ToDate" name="ToDate" type="text" value="19-12-2017"> 
+             </div> 
+            </div> 
+           </div> 
+           <div class="field"> 
+            <select id="TimeOption" name="TimeOption" class="select" selectedname="Pora dnia"> <option class="" value="Any">Dowolna</option> <option class="" value="Morning">07.00 - 09.00 (rano)</option> <option class="" value="Afternoon">09.00 - 17.00 (w ciągu dnia)</option> <option class="" value="Evening">17.00 - 21.00 (późno po południu)</option> </select> 
+            <span class="tooltip" style="padding-top: 22px;" title="W Ustawieniach konta możesz ustawić preferowaną porę dnia, w jakiej chcesz szukać terminów. Będzie ona prezentowana na początku listy."></span> 
+           </div> 
+           <div class="field 
+                  required                   "> 
+            <select id="PayerId" name="PayerId" class="select" selectedname="Pakiet" data-click-event="reservation.events.payerClicked" data-autocomplete-prompt="Szukaj..."> <option class="invisibleOnList" value="">Wybierz pakiet</option> </select> 
+            <span class="tooltip" title="Pakiet oznacza kontrahenta, osobę indywidualną lub ubezpieczyciela za pośrednictwem którego wykupywana jest opieka medyczna. Wybierasz z którego pakietu chcesz zrealizować usługę. Wybór „Poza pakietem” oznacza umówienie wizyty odpłatnie, niezależnie od aktywnych pakietów."></span> 
+           </div> 
+           <div class="field blank"> 
+           </div> 
+           <div class="field withSubmit"> 
+            <input type="submit" class="button pretty" id="reservationSearchSubmitButton" value="Szukaj"> 
+           </div> 
+          </div> 
+          <input name="__RequestVerificationToken" type="hidden" value="qAeEjEvNkb-yTaORNjrGEu2GKCr_nDRhcuFPOuKbNUh3b_pdXzuBa33mh4pI4U3eXyfLl0tBQRKYokR2YUF650rOrsxx8H630C9p161x-Ed6xIyztm0E47bmF0LcHgyBSkfHsgkjBlQ-MImlr4rn_uQq0NVsz7G61atZDliK0rI1"> 
+          <input id="IsFFS" name="IsFFS" type="hidden" value="False"> 
+         </form> 
+        </div> 
+       </div> 
+       <input id="MaxSearchPeriodLength" name="MaxSearchPeriodLength" type="hidden" value="365"> 
+      </div> 
+      <div class="full" style="display: none;"> 
+      </div> 
+     </div> 
+     <div id="footer"> 
+      <nav> 
+       <ul class="menu"> 
+        <li class="_desktop"><a href="https://www.luxmed.pl/dla-pacjentow/kontakt/formularz-kontaktowy.html" target="_blank">Kontakt</a></li> 
+        <li class="_desktop"><a href="/PatientPortal/Home/FAQ">FAQ</a></li> 
+        <li><a href="http://www.luxmed.pl/dla-pacjentow/o-nas/polityka-prywatnosci-1/polityka-.html" target="_blank">Polityka prywatności</a></li> 
+        <li><a href="/PatientPortal/Home/TermsAll">Regulamin</a></li> 
+        <li class="_desktop"><a href="http://www.luxmed.pl/" target="_blank">Serwisy Grupy LUX MED</a></li> 
+        <li class="_desktop"><a href="/PatientPortal/Reservations/Clinics/Duty">Dyżury świadczone w LUX MED</a></li> 
+        <li class="_desktop"><a href="/PatientPortal/Home/AvaiableServices">Lista usług</a></li> 
+        <li><span class="copyrights">Infolinia: 22 33 22 888</span></li> 
+       </ul> 
+      </nav> 
+      <span class="copyrights"> Copyright LUX MED Sp. z o.o. </span> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="_mobileNavigation"> 
+    <ul class="menu"> 
+     <li class="_tablet _smartphone"><a href="#" class="_toggleMobileNavigation">&lt;&lt; Schowaj to menu</a></li> 
+     <li class=""> <a href="/PatientPortal/" target="_parent">Start</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Visits" target="_parent">Wizyty</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/MedicalExaminations" target="_parent">Wyniki badań</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Referrals" target="_parent">Skierowania</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/PrescriptionsOrdering/History" target="_parent">Leki</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/EQuestions" target="_parent">Zapytaj lekarza</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Doctors/Schedule" target="_parent">Grafiki lekarzy</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Clinics/Duty" target="_parent">Dyżury</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Clinics/List" target="_parent">Placówki</a> </li> 
+     <li class=""> <a href="/PatientPortal/Home/Documents" target="_parent">Wzory dokumentów</a> </li> 
+     <li class=""> <a href="/PatientPortal/Users/User/Details" target="_parent">Twoje konto</a> </li> 
+     <li class=""> <a href="/PatientPortal/Home/GoToContact" target="_parent">Kontakt</a> </li> 
+     <li class=""> <a href="/PatientPortal/Home/TryChangeLanguage" target="popup">English Version</a> </li> 
+     <li class=""> <a href="/PatientPortal/Account/LogOut" target="_parent">Wyloguj się</a> </li> 
+    </ul> 
+   </div> 
+   <div id="_mobileLoginForm"> 
+    <div class="nav"> 
+     <a class="button _toggleLoginForm">&lt; Wróć</a> 
+    </div> 
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#Password").focus(function () {
+            $(this).data("hasfocus", true);
+        });
+        $("#Password").blur(function () {
+            $(this).data("hasfocus", false);
+
+        });
+        $(document.body).keyup(function (ev) {
+            if (ev.which === 13 && $("#Password").data("hasfocus")) {
+                //document.loginForm.submit();
+                return true;
+            }
+        });
+
+        var i1 = $('#Login');
+        var i2 = $('#Password');
+        var t2 = $('#TempPassword');
+
+        var txtval = $(i1).val();
+        $(i1).focus(function () {
+            if ($(i1).val() == txtval) {
+                $(i1).val('');
+            }
+        });
+        $(i1).blur(function () {
+            if ($(i1).val() == "") {
+                $(i1).val(txtval);
+            }
+        });
+
+        $(t2).focus(function () {
+            t2.hide();
+            i2.show();
+            i2.focus();
+        });
+        $(i2).blur(function () {
+            if ($(i2).val() == "") {
+                t2.show();
+                i2.hide();
+            }
+        });
+        showPasswordModule.init("#mobileCheckBoxDisplayPassword", ".mobilePasswordInput");
+    });
+
+    submitLoginSmartphone = function () {
+        if ($('#Login').val() == 'Wpisz login (*)') {
+            $('#Login').val("");
+        }
+        $("#loginFormSmart").submit();
+    };
+</script> 
+    <form action="/PatientPortal/Account/LogIn" autocomplete="off" id="loginFormSmart" method="post" name="loginFormSmart">  
+     <div class="fields"> 
+      <h3>Masz konto? Zaloguj się</h3> 
+      <div class="field"> 
+       <input type="text" id="Login" name="Login"> 
+       <span title="<strong>Login</strong> - adres email lub dowolna nazwa stworzona przez Ciebie podczas rejestracji" data-tooltip-direction="left" class="tooltip"></span> 
+      </div> 
+      <div class="field"> 
+       <input type="password" name="Password" id="Password" class="mobilePasswordInput"> 
+       <span title="<strong>Hasło</strong> - składa się z co najmniej 8 znaków, w tym co najmniej: jednej cyfry oraz jednej małej i jednej wielkiej litery. Jeśli nie możesz go sobie przypomnieć - podaj swój login i ustaw je na nowo. Link resetujący hasło zostanie wysłany na podany przy rejestracji mail lub tymczasowe hasło przyjdzie na podany przy rejestracji numer telefonu" data-tooltip-direction="left" class="tooltip"></span> 
+      </div> 
+      <div id="smart-val-info"> 
+       <div class="wrapper"></div> 
+      </div> 
+      <div class="actions"> 
+       <div> 
+        <input id="mobileCheckBoxDisplayPassword" class="checkBoxDisplayPassword" type="checkbox"> 
+        <label for="mobileCheckBoxDisplayPassword" class="lblDisplayPasswd">Pokaż znaki</label> 
+       </div> 
+       <a href="/PatientPortal/Users/Account/LoginTroubles">Nie możesz się zalogować?</a> 
+      </div> 
+     </div> 
+     <div class="submitSection"> 
+      <button class="button large green" type="submit" onclick="submitLoginSmartphone();">ZALOGUJ SIĘ</button> 
+     </div> 
+    </form>  
+    <div class="security"> 
+     <img src="/PatientPortal/Content/images/template/geotrust_smartphone.jpg" alt=""> 
+    </div> 
+   </div> 
+   <div id="__popupOverlay"></div> 
+   <div id="__popup"> 
+    <div class="_wrapper" id="popUpWrapper"> 
+     <div class="_box"> 
+      <div class="_content" id="poupContent"> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="ui-widget-overlay ui-front" id="spinnerDiv"> 
+   <div> 
+    <div id="circularG"> 
+     <div id="circularG_1" class="circularG"> 
+     </div> 
+     <div id="circularG_2" class="circularG"> 
+     </div> 
+     <div id="circularG_3" class="circularG"> 
+     </div> 
+     <div id="circularG_4" class="circularG"> 
+     </div> 
+     <div id="circularG_5" class="circularG"> 
+     </div> 
+     <div id="circularG_6" class="circularG"> 
+     </div> 
+     <div id="circularG_7" class="circularG"> 
+     </div> 
+     <div id="circularG_8" class="circularG"> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script type="text/javascript">
+      var isMyLink = false;
+
+      window.onbeforeunload = function(evt) {
+          if (!isMyLink) {
+              return "Zamierzasz wyjść z Portalu Pacjenta. Po tej operacji niezbędne będzie ponowne zalogowanie do systemu.";
+          }
+      };
+
+      window.onunload = function onUnloadPage(e) {
+          var logOutUrl = '/PatientPortal/Account/LogOutAjax';
+
+          if (!isMyLink && !isAjaxRequestExecuting) {
+            redirectAjaxErrorToGlobalError = false;
+              window.name = "reloader";
+              isMyLink = true;
+             // window.location = '/PatientPortal/Account/LogOut';
+              $.ajax({
+                  url: logOutUrl,
+                  async: false,
+                  error: function(e) {
+                      isMyLink = true;
+                      window.location = '/PatientPortal/Account/LogOut';
+                  },
+                  success: function(data) {
+                      isMyLink = true;
+                      window.location = '/PatientPortal/Account/LogOut';
+                  }
+              });
+          }
+      };
+
+   
+      function captureLink() {
+          isMyLink = true;
+      }
+
+      $(document).ready(function () {
+        $('a').bindFirst('click', captureLink);
+    });
+
+  </script> 
+  <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-59149964-1', 'auto');
+    ga('send', 'pageview');
+
+</script> 
+  <input id="MaxPeriodLength" name="MaxPeriodLength" type="hidden" value="365">   
+ </body>
+</html>
