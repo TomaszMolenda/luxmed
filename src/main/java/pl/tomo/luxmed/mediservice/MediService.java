@@ -1,8 +1,8 @@
-package pl.tomo.luxmed.storage;
+package pl.tomo.luxmed.mediservice;
 
 import pl.tomo.luxmed.extractor.FilterData;
 
-class MediService extends FilterData {
+public class MediService extends FilterData {
 
     MediService(String id, String name) {
         super(id, name);

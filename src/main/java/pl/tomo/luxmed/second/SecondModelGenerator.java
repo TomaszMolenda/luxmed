@@ -4,8 +4,8 @@ import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.city.CityQueries;
+import pl.tomo.luxmed.mediservice.ServiceQueries;
 import pl.tomo.luxmed.storage.ClinicQueries;
-import pl.tomo.luxmed.storage.ServiceQueries;
 import pl.tomo.luxmed.storage.Storage;
 
 import java.util.HashMap;

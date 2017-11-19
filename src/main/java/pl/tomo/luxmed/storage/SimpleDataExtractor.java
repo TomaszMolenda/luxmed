@@ -10,22 +10,15 @@ import java.util.List;
 class SimpleDataExtractor {
 
     private final ClinicExtractor clinicExtractor;
-    private final ServiceExtractor serviceExtractor;
 
     @Autowired
-    SimpleDataExtractor(ClinicExtractor clinicExtractor, ServiceExtractor serviceExtractor) {
+    SimpleDataExtractor(ClinicExtractor clinicExtractor) {
 
         this.clinicExtractor = clinicExtractor;
-        this.serviceExtractor = serviceExtractor;
     }
 
     List<Clinic> extractClinics(Document document) {
 
         return clinicExtractor.extract(document);
-    }
-
-    List<MediService> extractServices(Document document) {
-
-        return serviceExtractor.extract(document);
     }
 }

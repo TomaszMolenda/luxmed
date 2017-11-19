@@ -29,7 +29,7 @@ public class AdvancedDataFetcher {
     public Document extract(FilterForm filterForm) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Home/GetFilter")
+                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/GetFilter")
                 .cookie(storage.getAuthorizationCookies())
                 .data(requestDataCreator.create(filterForm))
                 .httpMethod(HttpMethod.POST)

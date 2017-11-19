@@ -5,13 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<form action="#" th:action="@{/first}" th:object="${firstStepForm}" method="post">
+<form action="#" th:action="@{/services}" th:object="${serviceId}" method="post">
 
-    <select th:field="*{clinicId}">
-        <option selected="selected" value="">Any</option>
-        <option th:each="clinic : ${clinics}"
-                th:value="${clinic.id}"
-                th:text="${clinic.name}"></option>
+    <select name="serviceId">
+        <option selected="selected" value="">Choose</option>
+        <option th:each="service : ${services}"
+                th:value="${service.id}"
+                th:text="${service.name}"></option>
     </select>
 
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

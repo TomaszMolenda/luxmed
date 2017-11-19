@@ -15,9 +15,9 @@ class CityExtractorTest extends Specification {
         Document document = Jsoup.parse(inputStream, "UTF-8", "https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/Find?firstTry=true")
 
         when:
-        def reservations = cityExtractor.extract(document)
+        def cities = cityExtractor.extract(document)
 
         then:
-        reservations.size() == 26
+        cities.size() == 26
     }
 }

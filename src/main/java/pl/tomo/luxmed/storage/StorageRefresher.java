@@ -30,7 +30,6 @@ public class StorageRefresher {
         Document document = simpleDataFetcher.extract();
 
         storage.setClinics(simpleDataExtractor.extractClinics(document));
-        storage.setServices(simpleDataExtractor.extractServices(document));
     }
 
     public void refreshAdvancedData(SimpleData simpleData) {
@@ -43,6 +42,5 @@ public class StorageRefresher {
 
         storage.setDoctors(advancedDataExtractor.extractDoctors(document));
         storage.setPayers(advancedDataExtractor.extractPayers(document));
-        storage.setRequestVerificationToken(advancedDataExtractor.extractRequestVerificationToken(document));
     }
 }

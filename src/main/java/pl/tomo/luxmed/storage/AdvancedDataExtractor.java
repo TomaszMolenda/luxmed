@@ -11,14 +11,13 @@ class AdvancedDataExtractor {
 
     private final DoctorExtractor doctorExtractor;
     private final PayerExtractor payerExtractor;
-    private final RequestVerificationTokenExtractor requestVerificationTokenExtractor;
 
 
     @Autowired
-    AdvancedDataExtractor(DoctorExtractor doctorExtractor, PayerExtractor payerExtractor, RequestVerificationTokenExtractor requestVerificationTokenExtractor) {
+    AdvancedDataExtractor(DoctorExtractor doctorExtractor,
+                          PayerExtractor payerExtractor) {
         this.doctorExtractor = doctorExtractor;
         this.payerExtractor = payerExtractor;
-        this.requestVerificationTokenExtractor = requestVerificationTokenExtractor;
     }
 
 
@@ -31,10 +30,5 @@ class AdvancedDataExtractor {
     List<Payer> extractPayers(Document document) {
 
         return payerExtractor.extract(document);
-    }
-
-    String extractRequestVerificationToken(Document document) {
-
-        return requestVerificationTokenExtractor.extract(document);
     }
 }

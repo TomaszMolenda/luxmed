@@ -25,6 +25,21 @@ public class RequestDataCreator {
 
     public List<DataEntry> create(FilterForm filterForm) {
 
+//        return Lists.newArrayList(
+//
+//        create("", "ReferralId"),
+//        create("SelectedDate", "DateOption"),
+//        create("", "PayersCount"),
+//        create("5", "CityId"),
+//        create("", "LanguageId"),
+//        create("false", "SearchFirstFree"),
+//        create("19-11-2017", "FromDate"),
+//        create("19-12-2017", "ToDate"),
+//        create("Any", "TimeOption"),
+//        create("", "PayerId"),
+//        create(storage.getRequestVerificationToken(), "__RequestVerificationToken"),
+//        create("false", "IsFFS"));
+
         DataEntry isFromStartPage = create(filterForm.getIsFromStartPage(), "isFromStartPage");
         DataEntry post = create(filterForm.getPostId(), "postId");
         DataEntry payersCount = create(filterForm.getPayersCount(), "payersCount");

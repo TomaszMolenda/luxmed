@@ -1,0 +1,82 @@
+<html>
+ <head></head>
+ <body>
+  <div class="_smartphone _tablet _advancedReservationTrigger">
+    Szukaj wizyt 
+  </div> 
+  <div class="advancedReservationBox"> 
+   <form id="advancedResevation" method="post" name="filterForm" action="Find"> 
+    <input id="ReferralId" name="ReferralId" type="hidden" value=""> 
+    <input id="DateOption" name="DateOption" type="hidden" value="SelectedDate"> 
+    <input id="PayersCount" type="hidden" value="0" name="PayersCount"> 
+    <div class="column column1"> 
+     <span class="groupName">Wybierz miasto i placówkę:</span> 
+     <div class="field required"> 
+      <select id="CityId" name="CityId" class="select" selectedname="Miasto" data-click-event="reservation.events.reveAllValidations" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <option class="invisibleOnList" value="">Wybierz miasto</option> <option data-favourite="False" value="70"> Białystok </option> <option data-favourite="False" value="12"> Bielsk Podlaski </option> <option data-favourite="False" value="83"> Brzesko </option> <option data-favourite="False" value="10"> Bydgoszcz </option> <option data-favourite="False" value="84"> Częstochowa </option> <option data-favourite="False" value="6"> Dębica </option> <option data-favourite="False" value="63"> Elbląg </option> <option data-favourite="False" value="60"> Gorzów Wielkopolski </option> <option data-favourite="False" value="17"> Katowice </option> <option data-favourite="False" value="3"> Kraków </option> <option data-favourite="False" value="49"> Lublin </option> <option data-favourite="False" value="89"> Łomża </option> <option data-favourite="False" value="4"> Łódź </option> <option data-favourite="False" value="80"> Mielec </option> <option data-favourite="False" value="20"> Olsztyn </option> <option data-favourite="False" value="21"> Opole </option> <option data-favourite="False" value="8"> Poznań </option> <option data-favourite="False" value="74"> Rzeszów </option> <option data-favourite="False" value="24"> Szczecin </option> <option data-favourite="False" value="73"> Toruń </option> <option data-favourite="False" value="45"> Trójmiasto </option> <option data-favourite="False" value="25"> Tychy </option> <option data-favourite="False" value="81"> Wałbrzych </option> <option data-favourite="False" value="1"> Warszawa </option> <option data-favourite="False" value="76"> Wołomin </option> <option data-favourite="False" value="5" selected> Wrocław </option> </select>
+      <span class="tooltip" title="W ustawieniach konta możesz wybrać miasto, w którym najczęściej korzystasz z konsultacji lekarskich, by znajdowało się zawsze na początku listy."></span> 
+     </div> 
+     <div class="field"> 
+      <select id="ClinicId" name="ClinicId" class="select" multiple selectedname="Placówka" data-click-event="reservation.events.clinicClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <optgroup label="invisible" class="hideLabel" data-selection-limit="2"> <option class="invisibleOnList" value="">Dowolna placówka Grupy LUX MED</option> <option data-favourite="False" value="7"> LX Wrocław - Kwidzyńska 6 </option> <option data-favourite="False" value="41"> LX Wrocław - Legnicka 51/53 </option> <option data-favourite="False" value="1360"> LX Wrocław - Pediatria Plac Dominikański 3 </option> <option data-favourite="False" value="1831"> LX Wrocław - Piotra Skargi 3 </option> <option data-favourite="False" value="12"> LX Wrocław - Plac Dominikański 3 </option> <option data-favourite="False" value="1337"> LX Wrocław - Swobodna 3 </option> <option data-favourite="False" value="6"> LX Wrocław - Szewska 3A </option> <option data-favourite="False" value="1792"> LX Wrocław - Świdnicka 40 </option> <option data-favourite="False" value="42"> LX Wrocław - Wołowska 20 </option> <option data-favourite="False" value="1405"> LXD Wrocław - Legnicka 40 </option> <option data-favourite="False" value="1837"> LXD Wrocław - Piotra Skargi 3 </option> <option data-favourite="False" value="96"> MR Wrocław - Bora Komorowskiego 6 </option> <option data-favourite="False" value="97"> MR Wrocław - Oławska 27/29 </option> <option data-favourite="False" value="1338"> MR Wrocław - Swobodna 1 </option> <option data-favourite="False" value="1703"> PF Wrocław - Legnicka 51/53 </option> <option data-favourite="False" value="1672"> PF Wrocław - Oławska 27/29 </option> <option data-favourite="False" value="1575"> PF Wrocław - Plac Dominikański 3 </option> <option data-favourite="False" value="1576"> PF Wrocław - Swobodna 1 </option> <option data-favourite="False" value="1653"> PF Wrocław - Szewska 3A </option> <option data-favourite="False" value="1793"> PF Wrocław - Świdnicka 40 </option> <option data-favourite="False" value="1704"> PF Wrocław - Wołowska 20 </option> </optgroup> </select> 
+      <span class="tooltip" title="W Ustawieniach konta możesz ustawić preferowane placówki, z których najczęściej korzystasz, by znajdowały się na początku listy."></span> 
+     </div> 
+     <div class="field withButton" id="ClinicLocalize" data-get-url="/PatientPortal/Reservations/Reservation/ClinicLocalizeAjax"> 
+      <a class="button localize" onclick="reservation.events.showClinicLocalize();">Pokaż na mapie</a> 
+     </div> 
+    </div> 
+    <div class="column column2"> 
+     <span class="groupName">Wybierz konsultację i lekarza:</span> 
+     <div class="field required"> 
+      <select id="ServiceId" name="ServiceId" class="select" multiple selectedname="Usługi" data-click-event="reservation.events.serviceClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <optgroup label="invisible" class="hideLabel" data-selection-limit="2"> <option class="invisibleOnList" value="">Wybierz usługę</option> <option data-favourite="False" value="7409"> Konsultacja pediatry - w gabinecie dzieci chorych </option> </optgroup> </select> 
+      <span class="tooltip" title="W Ustawieniach konta możesz wybrać usługi, z których często korzystasz, by znajdowały się na początku listy."></span> 
+     </div> 
+     <script type="text/javascript">
+  optionsGroupsArray = {
+
+
+  };
+</script> 
+     <div class="field"> 
+      <select name="DoctorMultiIdentyfier" id="MultiDoctorId" class="select" multiple selectedname="Lekarze" data-click-event="reservation.events.doctorClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <option value="" class="invisibleOnList">Dowolny lekarz</option> </select> 
+      <span class="tooltip" title="W Ustawieniach konta możesz wybrać nazwiska lekarzy, do których najczęściej umawiasz wizyty, by znajdowały się na początku listy."></span> 
+     </div> 
+     <div class="field"> 
+      <select id="LanguageId" name="LanguageId" class="select" selectedname="Język" data-autocomplete-prompt="Szukaj..."> <option value="">Dowolny język</option> <option data-favourite="False" value="11"> Angielski </option> <option data-favourite="False" value="7"> Francuski </option> <option data-favourite="False" value="5"> Hiszpański </option> <option data-favourite="False" value="3"> Niemiecki </option> <option data-favourite="False" value="10"> Polski </option> <option data-favourite="False" value="4"> Rosyjski </option> <option data-favourite="False" value="6"> Włoski </option> </select> 
+      <span class="tooltip" title="W Ustawieniach konta możesz ustawić język, w jakim ma posługiwać się lekarz podczas konsultacji. Domyślnie ustawiono język polski."></span> 
+     </div> 
+    </div> 
+    <div class="column column3"> 
+     <span class="groupName">Wybierz termin:</span> 
+     <div class="field"> 
+      <select class="select" id="SearchFirstFree" name="SearchFirstFree" selectedname="Termin"> <option value="true">Pierwsze wolne terminy</option> <option value="false" selected>Wybrany zakres dat</option> </select> 
+      <span id="dynamicDateRangeTooltip" data-tooltip-first-free="Wyszukiwane będą najbliższe wolne terminy w ciągu 90 nadchodzących dni." data-tooltip-range="Wyszukiwane będą terminy w przedziale maksymalnie 365 - dniowym." style="float: right;" class="tooltip" title=""></span> 
+     </div> 
+     <div class="field"> 
+      <div class="dateRange"> 
+       <div class="dateRangePicker"> 
+        <input id="rangePicker" type="text" class="form-group  " data-min-date="19-11-2017" data-max-date="19-11-2018" data-single-date="False" data-show-Dropdowns="False" data-days-limit="30" autocomplete="off" data-on-change-callback="reservation.events.onDateChange"> 
+        <input class="hide" id="FromDate" name="FromDate" type="text" value="19-11-2017"> 
+        <input class="hide" id="ToDate" name="ToDate" type="text" value="19-12-2017"> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="field"> 
+      <select id="TimeOption" name="TimeOption" class="select" selectedname="Pora dnia"> <option class="" value="Any" selected>Dowolna</option> <option class="" value="Morning">07.00 - 09.00 (rano)</option> <option class="" value="Afternoon">09.00 - 17.00 (w ciągu dnia)</option> <option class="" value="Evening">17.00 - 21.00 (późno po południu)</option> </select> 
+      <span class="tooltip" style="padding-top: 22px;" title="W Ustawieniach konta możesz ustawić preferowaną porę dnia, w jakiej chcesz szukać terminów. Będzie ona prezentowana na początku listy."></span> 
+     </div> 
+     <div class="field 
+                  required                   "> 
+      <select id="PayerId" name="PayerId" class="select" selectedname="Pakiet" data-click-event="reservation.events.payerClicked" data-autocomplete-prompt="Szukaj..."> <option class="invisibleOnList" value="">Wybierz pakiet</option> <option data-favourite="False" value="0"> Poza pakietem </option> </select> 
+      <span class="tooltip" title="Pakiet oznacza kontrahenta, osobę indywidualną lub ubezpieczyciela za pośrednictwem którego wykupywana jest opieka medyczna. Wybierasz z którego pakietu chcesz zrealizować usługę. Wybór „Poza pakietem” oznacza umówienie wizyty odpłatnie, niezależnie od aktywnych pakietów."></span> 
+     </div> 
+     <div class="field blank"> 
+     </div> 
+     <div class="field withSubmit"> 
+      <input type="submit" class="button pretty" id="reservationSearchSubmitButton" value="Szukaj"> 
+     </div> 
+    </div> 
+    <input name="__RequestVerificationToken" type="hidden" value="Qo_oSfTkX379hNsPkqM4t05UtBpJWsFzpfD3gE6ZrXnfxUn1lbdnoWhsxP9OoREa9hXvM9J7tMdN-klUshQB-RwMLNzEC7MH7af_UZRPT92dSx9mJZzqTWAAyIelyq-iMKZmM2Wseioab13t0nwvJy8ZATGEeRZdSxEvcX-EFIA1"> 
+    <input id="IsFFS" name="IsFFS" type="hidden" value="False"> 
+   </form> 
+  </div>
+ </body>
+</html>

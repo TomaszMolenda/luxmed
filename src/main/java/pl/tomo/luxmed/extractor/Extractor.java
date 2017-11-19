@@ -6,6 +6,7 @@ import org.jsoup.nodes.Node;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class Extractor<T extends FilterData> {
 
@@ -14,9 +15,20 @@ public abstract class Extractor<T extends FilterData> {
         Element element = document.getElementById(elementId());
 
         return element.childNodes().stream()
-                .filter(this::hasAttribute)
+                .flatMap(this::obtainChild)
                 .map(this::create)
                 .collect(Collectors.toList());
+    }
+
+    private Stream<Node> obtainChild(Node node) {
+
+        if (hasAttribute(node)) {
+
+            return Stream.of(node);
+        }
+
+        return node.childNodes().stream()
+                .filter(this::hasAttribute);
     }
 
     private boolean hasAttribute(Node node) {
