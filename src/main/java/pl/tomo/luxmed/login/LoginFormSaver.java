@@ -14,7 +14,7 @@ class LoginFormSaver {
         this.storage = storage;
     }
 
-    public void save(LoginForm loginForm) {
+    void save(LoginForm loginForm) {
 
         storage.setUser(loginForm.getUser());
         storage.setPassword(loginForm.getPassword());

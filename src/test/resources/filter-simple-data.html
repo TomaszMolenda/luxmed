@@ -1,0 +1,569 @@
+<!doctype html>
+<html>
+ <head> 
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"> 
+  <title>Portal Pacjenta LUX MED</title> 
+  <meta http-equiv="Pragma" content="no-cache"> 
+  <meta http-equiv="Expires" content="-1"> 
+  <!--begin new theme--> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link href="/PatientPortal/Content/css/theme/css?v=q6kGg-SWnfvCE7V37RryqFKQ1G56bwnhDEnRu0vD8wE1" rel="stylesheet"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/theme/jquery-ui-1.10.4.min.css"> 
+  <link href="/PatientPortal/Content/css/css?v=AvJ2Qb150B0vMTt25WQOKQT13dJISvNv7E-tjXzfWIg1" rel="stylesheet"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/daterangepicker.css"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/dateRangePickerCustom.css"> 
+  <link rel="stylesheet" href="/PatientPortal/Content/css/bootstrap.css"> 
+  <!--[if IE 8]>
+    <link rel="stylesheet" href="/PatientPortal/Content/css/theme/ie8-and-down.css"/>
+  <![endif]--> 
+  <!-- end new theme--> 
+  <script src="/PatientPortal/bundles/jquery?v=VOvoseWI3KJom0zUA3-bmh67-fqY0w9yxbE2aNjnmKc1"></script> 
+  <script src="/PatientPortal/bundles/jqueryui?v=mm3v2PpGUkDUriE6bzJuTlqb_tVjmWEGj4i4gSJ7ipU1"></script> 
+  <script src="/PatientPortal/bundles/jqueryval?v=JdhQrW9chtoxI7Ch2CG_gRGCV0r6Sm-pGQ6JywlVQWs1"></script> 
+  <script src="/PatientPortal/bundles/moment?v=huwbLRU4oIWhyHs6F54suekiwaBQ7riZr2ynxjSDptI1"></script> 
+  <script src="/PatientPortal/bundles/lodash?v=o_9FZOfXTdMo8t7Gv2vw_KB6D9ZHLUbKT_c6bA42OlQ1"></script> 
+  <script src="/PatientPortal/bundles/daterangepicker?v=oINx0UmM0Hu_jvWB1elQD__FpqrFVWe1cmWx8En1D1M1"></script> 
+  <script src="/PatientPortal/bundles/interface?v=u5SZs1WgOwvsVM-uZf_WlW6DpaXdoXeCDHf-rFjR9ys1"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/MicrosoftAjax.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/MicrosoftMvcValidation.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/jquery.maxlength.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/jquery.bind-first-0.2.3.min.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/attrChange.js"></script> 
+  <script type="text/javascript" src="/PatientPortal/Scripts/Global.js"></script> 
+  <script src="/PatientPortal/bundles/chat/chat?v=ErNubpvGqINnpaYSBAaGWFwZ09v2zZTL0FQl9BdHpdQ1"></script> 
+  <script src="/PatientPortal/bundles/showPassword?v=9X74LR3EtdJaXR-pnKZSz8zj6B1BL20dcuGuUAJMwqo1"></script> 
+  <script type="text/javascript">
+
+      var baseUrl = "/PatientPortal";
+
+      if (window.name === "reloader") {
+          window.name = "no";
+          isMyLink = true;
+          window.location = '/PatientPortal/Account/LogOut';
+      }
+  </script> 
+  <script type="text/javascript">
+  var
+      _registerFillCityValidationText = "Wybierz najpierw miasto",
+        _registerFillClinicValidationText = "Wybierz najpierw plac&#243;wkę",
+        _registerFillServiceValidationText = "Wybierz najpierw usługę",
+        _realWidgetChosen4Text = "wybrane",
+        _realWidgetChosenDefaultText = "wybranych";
+
+</script> 
+  <link type="image/x-icon" href="/PatientPortal/Content/img/favicon.ico" rel="shortcut icon"> 
+  <script type="text/javascript">
+        jQuery(function ($) {
+            $.datepicker.regional['pl'] = {
+                closeText: 'Zamknij',
+                prevText: '&#x3c;Poprzedni',
+                nextText: 'Następny&#x3e;',
+                currentText: 'Dziś',
+                monthNames: [
+                    'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec',
+                    'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
+                ],
+                monthNamesShort: [
+                    'Sty', 'Lu', 'Mar', 'Kw', 'Maj', 'Cze',
+                    'Lip', 'Sie', 'Wrz', 'Pa', 'Lis', 'Gru'
+                ],
+                dayNames: ['Niedziela', 'Poniedzialek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+                dayNamesShort: ['Nie', 'Pn', 'Wt', 'Śr', 'Czw', 'Pt', 'So'],
+                dayNamesMin: ['N', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So'],
+                dateFormat: 'yy-mm-dd',
+                firstDay: 1,
+                isRTL: false
+            };
+
+            $.datepicker.setDefaults({
+                changeMonth: false,
+                changeYear: false
+            });
+
+            $.datepicker.setDefaults($.datepicker.regional['pl']);
+
+
+        });
+    </script> 
+  <script type="text/javascript">
+    $.dateRangePickerConfig = {
+        locals: {
+            format: "DD-MM-YYYY",
+            separator: "  |  ",
+            applyLabel: 'Zatwierdź',
+            cancelLabel: 'Anuluj',
+            fromLabel: 'Od',
+            toLabel: 'Do',
+            customRangeLabel: 'Inna data',
+            weekLabel: 'Tydzień',
+            daysOfWeek: [
+                'Nd',
+                'Pn',
+                'Wt',
+                'Śr',
+                'Cz',
+                'Pt',
+                'Sob'],
+            monthNames: [
+                'Styczeń',
+                'Luty',
+                'Marzec',
+                'Kwiecień',
+                'Maj',
+                'Czerwiec',
+                'Lipiec',
+                'Sierpień',
+                'Wrzesień',
+                'Październik',
+                'Listopad',
+                'Grudzień'
+            ],
+            firstDay: 1
+        },
+        rangesLocals: {
+            'Dziś': [
+                '29-10-2017',
+                '29-10-2017'
+            ],
+            'Wczoraj': [
+                '28-10-2017',
+                '28-10-2017'
+            ],
+            'Następne 30 dni': [
+                '29-10-2017',
+                '28-11-2017'
+            ],
+            'Ostatnie 30 dni': [
+                '29-09-2017',
+                '29-10-2017'
+            ],
+            'Następny rok': [
+                '29-10-2017',
+                '29-10-2018'
+            ],
+            'Ostatni rok': [
+                '29-10-2016',
+                '29-10-2017'
+            ]
+        }
+    };
+</script> 
+  <script src="/PatientPortal/bundles/_dateFilter?v=EVudEAGN70le9lOrxz0--J7Y5rPNlv--bhOIyHEwn8k1"></script> 
+  <!-- Google Tag Manager --> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WL728ZB');</script> 
+  <!-- End Google Tag Manager --> 
+ </head> 
+ <body onkeypress=" return preventBackRefresh(event); " onkeydown=" return preventBackRefresh(event); "> 
+  <!-- Google Tag Manager (noscript) --> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WL728ZB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> 
+  <!-- End Google Tag Manager (noscript) --> 
+  <script type="text/javascript">
+  HideL1Wrapper = function () {
+      $(".top-info.l1").hide();
+    var ulr = '/PatientPortal/Home/HideWrapperL1';
+      fixSpinner = true;
+      $.post(ulr, function() {
+        fixSpinner = false;
+      });
+  }
+</script> 
+  <script type="text/javascript">
+  HideCookieWrapper = function () {
+      $(".top-info.cookie").hide();
+    var ulr = '/PatientPortal/Home/HideCookieWrapper';
+      fixSpinner = true;
+      $.post(ulr, function() {
+        fixSpinner = false;
+      });
+  }
+</script> 
+  <div id="full"> 
+   <div id="total"> 
+    <div class="wrapper"> 
+     <div id="top"> 
+      <a class="logo" href="/PatientPortal/"> <span class="name">Portal Pacjenta</span> </a> 
+      <div class="actions _tablet _smartphone"> 
+       <a class="button tabletNavigation _toggleMobileNavigation">Menu</a> 
+       <a class="button tabletNewOrder _tablet" href="/PatientPortal/Reservations/Coordination">Nowa rezerwacja</a> 
+       <a class="button tabletNewOrder _smartphone" href="/PatientPortal/Reservations/Coordination">Zarezerwuj</a> 
+      </div> 
+      <div class="actions _desktop"> 
+       <ul class="menu"> 
+        <li><a href="https://emarket.luxmed.pl/eMarket" target="_blank">e-Market LUX MED</a></li> 
+       </ul> 
+       <div class="currentUser dropdown"> 
+        <span class="name">Tomasz Molenda</span> 
+        <span class="email">tomasz.molenda</span> 
+        <div class="dropMenu"> 
+         <ul> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Profile">Twoje dane</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=ECard">Twoja e-Karta</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Settings">Ustawienia</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Settings">Zmiana języka</a></li> 
+          <li><a href="/PatientPortal/Users/User/Details?tab=Password">Zmiana hasła</a></li> 
+          <li><a onclick="checkChatStatus(this);">Wyloguj</a></li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <script type="text/javascript">
+  checkChatStatus = function(e) {
+    $.get(baseUrl + '/Account/LogOutWithChat', function (data) {
+      if (data.showConfirm === 1) {
+        $.get(baseUrl + '/Account/ConfirmLogout', function (dialogHtml) {
+          showPoupManually(dialogHtml);
+        });
+      } else {
+        window.location = '/PatientPortal/Account/LogOut';
+      }
+    });
+  };
+
+</script> 
+     <div id="mainNavigation"> 
+      <ul class="menu"> 
+       <li class="_tablet _smartphone"><a href="#" class="_toggleMobileNavigation">&lt;&lt; Schowaj to menu</a></li> 
+       <li class=""> <a href="/PatientPortal/" target="_parent">Start</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Visits" target="_parent">Wizyty</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/MedicalExaminations" target="_parent">Wyniki badań</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Referrals" target="_parent">Skierowania</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/PrescriptionsOrdering/History" target="_parent">Leki</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/EQuestions" target="_parent">Zapytaj lekarza</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Chat" target="_parent">Konsultacje online</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Doctors/Schedule" target="_parent">Grafiki lekarzy</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Clinics/Duty" target="_parent">Dyżury</a> </li> 
+       <li class=""> <a href="/PatientPortal/Reservations/Clinics/List" target="_parent">Placówki</a> </li> 
+       <li class=""> <a href="/PatientPortal/Home/Documents" target="_parent">Dokumenty</a> </li> 
+      </ul> 
+     </div> 
+     <div id="content" style="min-height: 100px;"> 
+      <div class="header"> 
+       <h1>Zarezerwuj wizytę lub badanie</h1> 
+       <div class="buttons"> 
+        <a class="button disabled calendar" href="">Chcę umówić wizytę lub badanie</a> 
+       </div> 
+      </div> 
+      <script src="https://maps.google.com/maps/api/js?key=?sensor=false" type="text/javascript"></script> 
+      <script src="/PatientPortal/bundles/google.maps?v=jISvs3liPxl_rfjF9zNyLftu9sLz6WyyeDQ4q4Z8G5M1"></script> 
+      <script src="/PatientPortal/bundles/reservation?v=qJ89kZ9b0uEf1rOTEPTcz7qFko541kbdIpYCp0e952I1"></script> 
+      <div class="headerExtend"> 
+       <div class="pickLatestField"> 
+        <div class="selectAction"> 
+         <select id="currentFilter" class="select _fetchFormData" data-class="latestSearch selectLatest adjustWidth" data-form="advancedResevation" onchange="reservation.events.loadFilter()"> <option class="invisibleOnList">Wybierz z ostatnio szukanych</option> <option data-display="<strong>Konsultacja ortopedy</strong> <p></p> Wrocław Dowolna placówka <br/> Dowolny lekarz">10518806</option> <option data-display="<strong>Gastroskopia</strong> <p></p> Wrocław Dowolna placówka <br/> Dowolny lekarz">10602698</option> </select> 
+         <span>lub skorzystaj z wyszukiwarki</span> 
+        </div> 
+        <div class="backAction"> 
+         <a class="_clearFormData" data-form="advancedResevation" href="/PatientPortal/Reservations/Reservation/FirstFind">&lt; Wróć</a> 
+         <span>Twoje kryteria wyszukiwania zostały ustawione jak niżej:</span> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="filtersDiv" data-show-visits-not-found-popup="False" data-visits-not-found-popup-url="/PatientPortal/Reservations/Reservation/VisitsNotFoundPopup" data-load-url="/PatientPortal/Reservations/Reservation/LoadFilter"> 
+       <div id="validationsSummaryByMvc"> 
+       </div> 
+       <div id="validationsSummaryDynamicByJS" class="validation-summary-errors"> 
+        <ul></ul> 
+       </div> 
+       <div id="dynamicFilterContainer" style="display:none;" data-get-url="/PatientPortal/Reservations/Reservation/GetFilter"> 
+        <div class="_smartphone _tablet _advancedReservationTrigger">
+          Szukaj wizyt 
+        </div> 
+        <div class="advancedReservationBox"> 
+         <form id="advancedResevation" method="post" name="filterForm" action="Find"> 
+          <input id="ReferralId" name="ReferralId" type="hidden" value=""> 
+          <input id="DateOption" name="DateOption" type="hidden" value="SelectedDate"> 
+          <input id="PayersCount" type="hidden" value="0" name="PayersCount"> 
+          <div class="column column1"> 
+           <span class="groupName">Wybierz miasto i placówkę:</span> 
+           <div class="field required"> 
+            <select id="CityId" name="CityId" class="select" selectedname="Miasto" data-click-event="reservation.events.removeAllValidations" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <option class="invisibleOnList" value="">Wybierz miasto</option> <option data-favourite="False" value="70"> Białystok </option> <option data-favourite="False" value="83"> Brzesko </option> <option data-favourite="False" value="10"> Bydgoszcz </option> <option data-favourite="False" value="84"> Częstochowa </option> <option data-favourite="False" value="6"> Dębica </option> <option data-favourite="False" value="63"> Elbląg </option> <option data-favourite="False" value="60"> Gorzów Wielkopolski </option> <option data-favourite="False" value="17"> Katowice </option> <option data-favourite="False" value="3"> Kraków </option> <option data-favourite="False" value="49"> Lublin </option> <option data-favourite="False" value="4"> Łódź </option> <option data-favourite="False" value="80"> Mielec </option> <option data-favourite="False" value="20"> Olsztyn </option> <option data-favourite="False" value="21"> Opole </option> <option data-favourite="False" value="8"> Poznań </option> <option data-favourite="False" value="74"> Rzeszów </option> <option data-favourite="False" value="24"> Szczecin </option> <option data-favourite="False" value="73"> Toruń </option> <option data-favourite="False" value="45"> Trójmiasto </option> <option data-favourite="False" value="25"> Tychy </option> <option data-favourite="False" value="81"> Wałbrzych </option> <option data-favourite="False" value="1"> Warszawa </option> <option data-favourite="False" value="76"> Wołomin </option> <option data-favourite="True" value="5" selected> Wrocław </option> </select> 
+            <span class="tooltip" title="W ustawieniach konta możesz wybrać miasto, w którym najczęściej korzystasz z konsultacji lekarskich, by znajdowało się zawsze na początku listy."></span> 
+           </div> 
+           <div class="field"> 
+            <select id="ClinicId" name="ClinicId" class="select" multiple selectedname="Placówka" data-click-event="reservation.events.clinicClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <optgroup label="invisible" class="hideLabel" data-selection-limit="2"> <option class="invisibleOnList" value="">Dowolna placówka Grupy LUX MED</option> <option data-favourite="False" value="7"> LX Wrocław - Kwidzyńska 6 </option> <option data-favourite="False" value="41"> LX Wrocław - Legnicka 51/53 </option> <option data-favourite="False" value="1360"> LX Wrocław - Pediatria Plac Dominikański 3 </option> <option data-favourite="False" value="1831"> LX Wrocław - Piotra Skargi 3 </option> <option data-favourite="False" value="12"> LX Wrocław - Plac Dominikański 3 </option> <option data-favourite="False" value="1337"> LX Wrocław - Swobodna 3 </option> <option data-favourite="False" value="6"> LX Wrocław - Szewska 3A </option> <option data-favourite="False" value="1792"> LX Wrocław - Świdnicka 40 </option> <option data-favourite="False" value="42"> LX Wrocław - Wołowska 20 </option> <option data-favourite="False" value="1405"> LXD Wrocław - Legnicka 40 </option> <option data-favourite="False" value="1837"> LXD Wrocław - Piotra Skargi 3 </option> <option data-favourite="False" value="96"> MR Wrocław - Bora Komorowskiego 6 </option> <option data-favourite="False" value="97"> MR Wrocław - Oławska 27/29 </option> <option data-favourite="False" value="1338"> MR Wrocław - Swobodna 1 </option> <option data-favourite="False" value="1703"> PF Wrocław - Legnicka 51/53 </option> <option data-favourite="False" value="1672"> PF Wrocław - Oławska 27/29 </option> <option data-favourite="False" value="1575"> PF Wrocław - Plac Dominikański 3 </option> <option data-favourite="False" value="1576"> PF Wrocław - Swobodna 1 </option> <option data-favourite="False" value="1653"> PF Wrocław - Szewska 3A </option> <option data-favourite="False" value="1793"> PF Wrocław - Świdnicka 40 </option> <option data-favourite="False" value="1704"> PF Wrocław - Wołowska 20 </option> </optgroup> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz ustawić preferowane placówki, z których najczęściej korzystasz, by znajdowały się na początku listy."></span> 
+           </div> 
+           <div class="field withButton" id="ClinicLocalize" data-get-url="/PatientPortal/Reservations/Reservation/ClinicLocalizeAjax"> 
+            <a class="button localize" onclick="reservation.events.showClinicLocalize();">Pokaż na mapie</a> 
+           </div> 
+          </div> 
+          <div class="column column2"> 
+           <span class="groupName">Wybierz konsultację i lekarza:</span> 
+           <div class="field required"> 
+            <select id="ServiceId" name="ServiceId" class="select" multiple selectedname="Usługi" data-click-event="reservation.events.serviceClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <optgroup label="invisible" class="hideLabel" data-selection-limit="2"> <option class="invisibleOnList" value="">Wybierz usługę</option> <option data-favourite="False" value="5857"> Audiometr standardowy </option> <option data-favourite="False" value="7976"> Audiometr standardowy - audiometria nadprogowa </option> <option data-favourite="False" value="7975"> Audiometr standardowy - audiometria słowna </option> <option data-favourite="False" value="4786"> Audiometria impedancyjna - z tympanometrią i oceną odruchów z mięśnia strzemiączkowego (AI) </option> <option data-favourite="False" value="4695"> Badanie EKG - spoczynkowe </option> <option data-favourite="False" value="8937"> Badanie EKG - spoczynkowe - dziecka </option> <option data-favourite="False" value="4359"> Echokardiografia - USG serca </option> <option data-favourite="False" value="7955"> Echokardiografia - USG serca - dzieci </option> <option data-favourite="False" value="3808"> Gastroskopia </option> <option data-favourite="False" value="3816"> Kolonoskopia </option> <option data-favourite="False" value="4780"> Komputerowe pole widzenia </option> <option data-favourite="False" value="4387"> Konsultacja alergologa </option> <option data-favourite="False" value="5788"> Konsultacja alergologa - dzieci </option> <option data-favourite="False" value="8423"> Konsultacja angiologa </option> <option data-favourite="False" value="4394"> Konsultacja chirurga dzieci </option> <option data-favourite="False" value="4406"> Konsultacja chirurga naczyniowego </option> <option data-favourite="False" value="4412"> Konsultacja chirurga ogólnego </option> <option data-favourite="False" value="4418"> Konsultacja chirurga onkologa </option> <option data-favourite="False" value="4424"> Konsultacja chirurga plastyka </option> <option data-favourite="False" value="4448"> Konsultacja dermatologa </option> <option data-favourite="False" value="4453"> Konsultacja diabetologa </option> <option data-favourite="False" value="8277"> Konsultacja diabetologa - dzieci </option> <option data-favourite="False" value="5844"> Konsultacja dietetyka </option> <option data-favourite="False" value="8273"> Konsultacja dietetyka - dzieci </option> <option data-favourite="False" value="11881"> Konsultacja dietetyka - wizyta pierwszorazowa </option> <option data-favourite="False" value="7669"> Konsultacja endokrynologa - dzieci </option> <option data-favourite="False" value="6748"> Konsultacja flebologiczna </option> <option data-favourite="False" value="4468"> Konsultacja gastroenterologa </option> <option data-favourite="False" value="7675"> Konsultacja gastroenterologa - dzieci </option> <option data-favourite="False" value="7676"> Konsultacja ginekologa - dzieci </option> <option data-favourite="False" value="4473"> Konsultacja ginekologa - endokrynologa </option> <option data-favourite="False" value="4486"> Konsultacja hematologa </option> <option data-favourite="False" value="7223"> Konsultacja hematologa - dzieci </option> <option data-favourite="False" value="4491"> Konsultacja hepatologiczna </option> <option data-favourite="False" value="8006"> Konsultacja hipertensjologiczna </option> <option data-favourite="False" value="4510"> Konsultacja kardiologa </option> <option data-favourite="False" value="7318"> Konsultacja kardiologa - dzieci </option> <option data-favourite="False" value="4522"> Konsultacja laryngologa </option> <option data-favourite="False" value="8343"> Konsultacja lekarza dyżurnego - Pediatra </option> <option data-favourite="False" value="4528"> Konsultacja lekarza rodzinnego </option> <option data-favourite="False" value="4534"> Konsultacja nefrologa </option> <option data-favourite="False" value="8008"> Konsultacja nefrologa - dzieci </option> <option data-favourite="False" value="4540"> Konsultacja neurochirurga </option> <option data-favourite="False" value="8274"> Konsultacja neurochirurga - dzieci </option> <option data-favourite="False" value="4549"> Konsultacja neurologa </option> <option data-favourite="False" value="7056"> Konsultacja neurologa - dzieci </option> <option data-favourite="False" value="4565"> Konsultacja okulisty </option> <option data-favourite="False" value="7756"> Konsultacja okulisty - badanie dna oka </option> <option data-favourite="False" value="7681"> Konsultacja okulisty - dzieci </option> <option data-favourite="False" value="4572"> Konsultacja onkologa </option> <option data-favourite="False" value="8275"> Konsultacja onkologa - dzieci </option> <option data-favourite="False" value="4436"> Konsultacja ortopedy </option> <option data-favourite="False" value="7678"> Konsultacja ortopedy - dzieci </option> <option data-favourite="False" value="12832"> Konsultacja pediatryczna - Centrum Infekcyjne </option> <option data-favourite="False" value="4430"> Konsultacja proktologa </option> <option data-favourite="False" value="4598"> Konsultacja pulmonologa </option> <option data-favourite="False" value="7687"> Konsultacja pulmonologa - dzieci </option> <option data-favourite="False" value="4604"> Konsultacja reumatologa </option> <option data-favourite="False" value="7688"> Konsultacja reumatologa - dzieci </option> <option data-favourite="False" value="4614"> Konsultacja urologa </option> <option data-favourite="False" value="6611"> Konsultacja urologa - dzieci </option> <option data-favourite="False" value="6100"> Kwalifikacja - do szczepienia dorośli </option> <option data-favourite="False" value="7289"> Kwalifikacja - do szczepienia p/grypie </option> <option data-favourite="False" value="7392"> MR - Rezonans magnetyczny - niskopolowy kręgosłupa szyjnego </option> <option data-favourite="False" value="7679"> MR - Rezonans magnetyczny - wysokopolowy angio głowy </option> <option data-favourite="False" value="7668"> MR - Rezonans magnetyczny - wysokopolowy głowy </option> <option data-favourite="False" value="7680"> MR - Rezonans magnetyczny - wysokopolowy głowy+ angio </option> <option data-favourite="False" value="7396"> MR - Rezonans magnetyczny - wysokopolowy jamy brzusznej </option> <option data-favourite="False" value="7395"> MR - Rezonans magnetyczny - wysokopolowy klatki piersiowej </option> <option data-favourite="False" value="7674"> MR - Rezonans magnetyczny - wysokopolowy kręgosłupa lędźwiowego </option> <option data-favourite="False" value="7393"> MR - Rezonans magnetyczny - wysokopolowy kręgosłupa piersiowego </option> <option data-favourite="False" value="7672"> MR - Rezonans magnetyczny - wysokopolowy kręgosłupa szyjnego </option> <option data-favourite="False" value="7399"> MR - Rezonans magnetyczny - wysokopolowy miednicy mniejszej </option> <option data-favourite="False" value="7402"> MR - Rezonans magnetyczny - wysokopolowy nadgarstka </option> <option data-favourite="False" value="7398"> MR - Rezonans magnetyczny - wysokopolowy nadnerczy </option> <option data-favourite="False" value="7389"> MR - Rezonans magnetyczny - wysokopolowy oczodołów </option> <option data-favourite="False" value="7699"> MR - Rezonans magnetyczny - wysokopolowy podudzia </option> <option data-favourite="False" value="9432"> MR - Rezonans magnetyczny - wysokopolowy przedramienia </option> <option data-favourite="False" value="7671"> MR - Rezonans magnetyczny - wysokopolowy przysadki </option> <option data-favourite="False" value="7700"> MR - Rezonans magnetyczny - wysokopolowy ramienia </option> <option data-favourite="False" value="7701"> MR - Rezonans magnetyczny - wysokopolowy ręki </option> <option data-favourite="False" value="7697"> MR - Rezonans magnetyczny - wysokopolowy stawów krzyżowo- biodrowych </option> <option data-favourite="False" value="7400"> MR - Rezonans magnetyczny - wysokopolowy stawu barkowego </option> <option data-favourite="False" value="7403"> MR - Rezonans magnetyczny - wysokopolowy stawu biodrowego </option> <option data-favourite="False" value="7670"> MR - Rezonans magnetyczny - wysokopolowy stawu kolanowego </option> <option data-favourite="False" value="7401"> MR - Rezonans magnetyczny - wysokopolowy stawu łokciowego </option> <option data-favourite="False" value="7405"> MR - Rezonans magnetyczny - wysokopolowy stawu skokowego </option> <option data-favourite="False" value="7406"> MR - Rezonans magnetyczny - wysokopolowy stopy </option> <option data-favourite="False" value="7390"> MR - Rezonans magnetyczny - wysokopolowy twarzo - czaszki </option> <option data-favourite="False" value="7707"> MR - Rezonans magnetyczny - wysokopolowy uda </option> <option data-favourite="False" value="8320"> MR - Rezonans magnetyczny - wysokopolowy zatok </option> <option data-favourite="False" value="6273"> Próba wysiłkowa </option> <option data-favourite="False" value="6279"> Rektoskopia </option> <option data-favourite="False" value="8672"> Rtg barku (przez klatkę) </option> <option data-favourite="False" value="6117"> Rtg barku / ramienia - osiowe - lewego </option> <option data-favourite="False" value="6118"> Rtg barku / ramienia - osiowe - obu </option> <option data-favourite="False" value="4324"> Rtg barku / ramienia - osiowe - prawego </option> <option data-favourite="False" value="8876"> Rtg barku / ramienia AP - + bok lewego </option> <option data-favourite="False" value="8877"> Rtg barku / ramienia AP - + bok obu - zdjęcie porównawcze </option> <option data-favourite="False" value="8875"> Rtg barku / ramienia AP - + bok prawego </option> <option data-favourite="False" value="6114"> Rtg barku / ramienia AP - lewego </option> <option data-favourite="False" value="8874"> Rtg barku / ramienia AP - obu - zdjęcie porównawcze </option> <option data-favourite="False" value="4322"> Rtg barku / ramienia AP - prawego </option> <option data-favourite="False" value="8673"> Rtg barku AP + osiowe </option> <option data-favourite="False" value="8674"> Rtg celowane kręgu </option> <option data-favourite="False" value="8233"> Rtg czaszki - kanały nerwów czaszkowych </option> <option data-favourite="False" value="8235"> Rtg czaszki - oczodoły </option> <option data-favourite="False" value="4286"> Rtg czaszki - PA + bok </option> <option data-favourite="False" value="8229"> Rtg czaszki - PA+bok+podstawa </option> <option data-favourite="False" value="8231"> Rtg czaszki - podstawa </option> <option data-favourite="False" value="6127"> Rtg czaszki - półosiowe wg Orleya </option> <option data-favourite="False" value="8236"> Rtg czaszki - siodło tureckie </option> <option data-favourite="False" value="6128"> Rtg czaszki - styczne </option> <option data-favourite="False" value="4297"> Rtg czynnościowe kręgosłupa lędźwiowego </option> <option data-favourite="False" value="4292"> Rtg czynnościowe kręgosłupa szyjnego </option> <option data-favourite="False" value="4288"> Rtg czynnościowe stawów skroniowo żuchwowych </option> <option data-favourite="False" value="4321"> Rtg jamy brzusznej - na leżąco </option> <option data-favourite="False" value="6115"> Rtg jamy brzusznej - na stojąco </option> <option data-favourite="False" value="4311"> Rtg klatki piersiowej </option> <option data-favourite="False" value="6109"> Rtg klatki piersiowej - i bok </option> <option data-favourite="False" value="6112"> Rtg klatki piersiowej - tarczycy, tchawicy </option> <option data-favourite="False" value="4298"> Rtg kości krzyżowej i guzicznej </option> <option data-favourite="False" value="6124"> Rtg kości łódeczkowatej - lewej </option> <option data-favourite="False" value="3393"> Rtg kości łódeczkowatej - prawej </option> <option data-favourite="False" value="8300"> Rtg kości skroniowych - transorbitalne </option> <option data-favourite="False" value="8299"> Rtg kości skroniowych - wg Schullera/ Steversa </option> <option data-favourite="False" value="8677"> Rtg kości śródstopia </option> <option data-favourite="False" value="6134"> Rtg kości udowej AP + bok - lewej </option> <option data-favourite="False" value="4335"> Rtg kości udowej AP + bok - prawej </option> <option data-favourite="False" value="4295"> Rtg kręgosłupa AP na stojąco - (skolioza) </option> <option data-favourite="False" value="7228"> Rtg kręgosłupa AP na stojąco - + bok (skolioza) </option> <option data-favourite="False" value="8682"> Rtg kręgosłupa lędźwiowego - AP + bok </option> <option data-favourite="False" value="8686"> Rtg kręgosłupa lędźwiowego - AP + bok + skos </option> <option data-favourite="False" value="8689"> Rtg kręgosłupa lędźwiowego - bok </option> <option data-favourite="False" value="4296"> Rtg kręgosłupa lędźwiowo krzyżowego skosy </option> <option data-favourite="False" value="4294"> Rtg kręgosłupa lędźwiowo krzyżowego AP + Bok </option> <option data-favourite="False" value="4299"> Rtg kręgosłupa piersiowego </option> <option data-favourite="False" value="8722"> Rtg kręgosłupa piersiowego - AP + bok </option> <option data-favourite="False" value="8724"> Rtg kręgosłupa piersiowego - AP + bok + skos </option> <option data-favourite="False" value="8726"> Rtg kręgosłupa piersiowego - bok </option> <option data-favourite="False" value="8718"> Rtg kręgosłupa piersiowego - skosy </option> <option data-favourite="False" value="4290"> Rtg kręgosłupa szyjnego </option> <option data-favourite="False" value="9345"> Rtg kręgosłupa szyjnego - AP + bok </option> <option data-favourite="False" value="8670"> Rtg kręgosłupa szyjnego - bok </option> <option data-favourite="False" value="8671"> Rtg kręgosłupa szyjnego - bok + skosy (3 projekcje) </option> <option data-favourite="False" value="6014"> Rtg kręgosłupa szyjnego - skosy </option> <option data-favourite="False" value="6119"> Rtg łokcia / przedramienia - lewego AP + bok </option> <option data-favourite="False" value="6120"> Rtg łokcia / przedramienia - obu AP + bok </option> <option data-favourite="False" value="4326"> Rtg łokcia / przedramienia - prawego AP + bok </option> <option data-favourite="False" value="6111"> Rtg łopatki - lewej </option> <option data-favourite="False" value="4307"> Rtg łopatki - prawej </option> <option data-favourite="False" value="4332"> Rtg miednicy i stawów biodrowych </option> <option data-favourite="False" value="8730"> Rtg mostka AP </option> <option data-favourite="False" value="4305"> Rtg mostka/boczne klatki piersiowej </option> <option data-favourite="False" value="11607"> RTG nadgarstka - PA + bok obu </option> <option data-favourite="False" value="8736"> Rtg nadgarstka boczne - lewego </option> <option data-favourite="False" value="8740"> Rtg nadgarstka boczne - obu </option> <option data-favourite="False" value="8738"> Rtg nadgarstka boczne - prawego </option> <option data-favourite="False" value="4329"> Rtg nadgarstka/dłoni PA + bok/skos - lewego </option> <option data-favourite="False" value="6123"> Rtg nadgarstka/dłoni PA + bok/skos - obu </option> <option data-favourite="False" value="6122"> Rtg nadgarstka/dłoni PA + bok/skos - prawego </option> <option data-favourite="False" value="4285"> Rtg nosa boczne </option> <option data-favourite="False" value="4279"> Rtg noso - gardła </option> <option data-favourite="False" value="6110"> Rtg obojczyka - lewego </option> <option data-favourite="False" value="4306"> Rtg obojczyka - prawego </option> <option data-favourite="False" value="4330"> Rtg obu nadgarstków/dłoni PA + bok/skos </option> <option data-favourite="False" value="8804"> Rtg oczodołów - + boczne (2 projekcje) </option> <option data-favourite="False" value="6147"> Rtg palca/palców stopy AP + bok/skos - lewej </option> <option data-favourite="False" value="3396"> Rtg palca/palców stopy AP + bok/skos - prawej </option> <option data-favourite="False" value="6125"> Rtg palec/palce PA + bok / skos - lewej ręki </option> <option data-favourite="False" value="6126"> Rtg palec/palce PA + bok / skos - obu rąk </option> <option data-favourite="False" value="4331"> Rtg palec/palce PA + bok / skos - prawej ręki </option> <option data-favourite="False" value="11541"> Rtg pantomogram - zębów </option> <option data-favourite="False" value="8805"> Rtg pięty + osiowe </option> <option data-favourite="False" value="8807"> Rtg pięty boczne </option> <option data-favourite="False" value="6141"> Rtg podudzia (goleni) AP + bok - lewego </option> <option data-favourite="False" value="6142"> Rtg podudzia (goleni) AP + bok - obu </option> <option data-favourite="False" value="4341"> Rtg podudzia (goleni) AP + bok - prawego </option> <option data-favourite="False" value="7298"> Rtg przedramienia - lewego AP + bok </option> <option data-favourite="False" value="7299"> Rtg przedramienia - obu przedramion AP + bok </option> <option data-favourite="False" value="7297"> Rtg przedramienia - prawego AP + bok </option> <option data-favourite="False" value="4281"> Rtg punktowe zdjęcie zęba </option> <option data-favourite="False" value="8264"> Rtg ręki - bok- lewa </option> <option data-favourite="False" value="8265"> Rtg ręki - bok- prawa </option> <option data-favourite="False" value="11602"> Rtg ręki - PA + skos lewa </option> <option data-favourite="False" value="11603"> Rtg ręki - PA + skos prawa </option> <option data-favourite="False" value="8259"> Rtg ręki - PA lewa </option> <option data-favourite="False" value="6121"> Rtg ręki - PA obu </option> <option data-favourite="False" value="8262"> Rtg ręki - PA prawa </option> <option data-favourite="False" value="4327"> Rtg ręki - wiek kostny </option> <option data-favourite="False" value="6137"> Rtg rzepki osiowe - lewej </option> <option data-favourite="False" value="6138"> Rtg rzepki osiowe - obu </option> <option data-favourite="False" value="6139"> Rtg rzepki osiowe - obu w 2 ustawieniach </option> <option data-favourite="False" value="6140"> Rtg rzepki osiowe - obu w 3 ustawieniach </option> <option data-favourite="False" value="4339"> Rtg rzepki osiowe - prawej </option> <option data-favourite="False" value="8813"> Rtg stawów krzyżowo - biodrowych - PA </option> <option data-favourite="False" value="8810"> Rtg stawów krzyżowo - biodrowych - skosy </option> <option data-favourite="False" value="6132"> Rtg stawu biodrowego AP - lewego </option> <option data-favourite="False" value="8660"> Rtg stawu biodrowego AP - obu </option> <option data-favourite="False" value="4333"> Rtg stawu biodrowego AP - prawego </option> <option data-favourite="False" value="6133"> Rtg stawu biodrowego osiowe - lewego </option> <option data-favourite="False" value="4334"> Rtg stawu biodrowego osiowe - prawego </option> <option data-favourite="False" value="6135"> Rtg stawu kolanowego AP + bok - lewego </option> <option data-favourite="False" value="6136"> Rtg stawu kolanowego AP + bok - obu </option> <option data-favourite="False" value="4337"> Rtg stawu kolanowego AP + bok - prawego </option> <option data-favourite="False" value="8815"> Rtg stawu kolanowego boczne </option> <option data-favourite="False" value="11284"> RTG stawu łokciowego </option> <option data-favourite="False" value="6143"> Rtg stawu skokowo - goleniowego AP + bok - lewego </option> <option data-favourite="False" value="6144"> Rtg stawu skokowo - goleniowego AP + bok - obu </option> <option data-favourite="False" value="4345"> Rtg stawu skokowo - goleniowego AP + bok - prawego </option> <option data-favourite="False" value="6145"> Rtg stopy AP + bok/skos - lewej </option> <option data-favourite="False" value="6146"> Rtg stopy AP + bok/skos - obu </option> <option data-favourite="False" value="4343"> Rtg stopy AP + bok/skos - prawej </option> <option data-favourite="False" value="8818"> Rtg stóp AP (porównawczo) </option> <option data-favourite="False" value="8285"> Rtg szyi - bok </option> <option data-favourite="False" value="4282"> Rtg teleradiogram - cefalometria cyfrowa </option> <option data-favourite="False" value="8819"> Rtg twarzoczaszki </option> <option data-favourite="False" value="8821"> Rtg uda + podudzia </option> <option data-favourite="False" value="4284"> Rtg zatok przynosowych </option> <option data-favourite="False" value="8822"> Rtg ząb obrotnika </option> <option data-favourite="False" value="4304"> Rtg żeber (1 strona) w 2 skosach </option> <option data-favourite="False" value="8287"> Rtg żuchwy </option> <option data-favourite="False" value="4700"> Spirometria </option> <option data-favourite="False" value="4699"> Spirometria - próba rozkurczowa </option> <option data-favourite="False" value="7716"> TK- Tomografia komputerowa - Angio aorty brzusznej </option> <option data-favourite="False" value="7717"> TK- Tomografia komputerowa - Angio aorty piersiowej </option> <option data-favourite="False" value="7718"> TK- Tomografia komputerowa - Angio głowy - tętnice </option> <option data-favourite="False" value="10114"> TK- Tomografia komputerowa - Angio jamy brzusznej i miednicy mniejszej </option> <option data-favourite="False" value="7713"> TK- Tomografia komputerowa - Angio klatki piersiowej </option> <option data-favourite="False" value="7712"> TK- Tomografia komputerowa - Angio kończyn dolnych </option> <option data-favourite="False" value="9840"> TK- Tomografia komputerowa - Angio kończyny górnej </option> <option data-favourite="False" value="10115"> TK- Tomografia komputerowa - Angio tętnic miednicy mniejszej </option> <option data-favourite="False" value="7715"> TK- Tomografia komputerowa - Angio tętnic szyjnych </option> <option data-favourite="False" value="7722"> TK- Tomografia komputerowa - głowy </option> <option data-favourite="False" value="7723"> TK- Tomografia komputerowa - jamy brzusznej </option> <option data-favourite="False" value="8135"> TK- Tomografia komputerowa - jamy brzusznej i miednicy mniejszej </option> <option data-favourite="False" value="7724"> TK- Tomografia komputerowa - jamy brzusznej Trójfazowa </option> <option data-favourite="False" value="7725"> TK- Tomografia komputerowa - klatki piersiowej </option> <option data-favourite="False" value="7726"> TK- Tomografia komputerowa - klatki piersiowej i jamy brzusznej </option> <option data-favourite="False" value="7727"> TK- Tomografia komputerowa - klatki piersiowej, jamy brzusznej, miednicy mniejszej </option> <option data-favourite="False" value="7730"> TK- Tomografia komputerowa - kości skroniowych </option> <option data-favourite="False" value="7739"> TK- Tomografia komputerowa - kręgosłupa lędźwiowego </option> <option data-favourite="False" value="9264"> TK- Tomografia komputerowa - kręgosłupa lędźwiowego + krzyżowego </option> <option data-favourite="False" value="7740"> TK- Tomografia komputerowa - kręgosłupa piersiowego </option> <option data-favourite="False" value="8133"> TK- Tomografia komputerowa - kręgosłupa piersiowego + lędźwiowego </option> <option data-favourite="False" value="7738"> TK- Tomografia komputerowa - kręgosłupa szyjnego </option> <option data-favourite="False" value="8132"> TK- Tomografia komputerowa - kręgosłupa szyjnego + lędźwiowego </option> <option data-favourite="False" value="8131"> TK- Tomografia komputerowa - kręgosłupa szyjnego + piersiowego </option> <option data-favourite="False" value="8129"> TK- Tomografia komputerowa - kręgosłupa szyjnego + piersiowego + lędźwiowego </option> <option data-favourite="False" value="7731"> TK- Tomografia komputerowa - krtani </option> <option data-favourite="False" value="7733"> TK- Tomografia komputerowa - miednicy mniejszej </option> <option data-favourite="False" value="7735"> TK- Tomografia komputerowa - nadgarstka </option> <option data-favourite="False" value="8136"> TK- Tomografia komputerowa - oczodołów </option> <option data-favourite="False" value="7736"> TK- Tomografia komputerowa - podudzia </option> <option data-favourite="False" value="9429"> TK- Tomografia komputerowa - przedramienia </option> <option data-favourite="False" value="8139"> TK- Tomografia komputerowa - przysadki mózgowej </option> <option data-favourite="False" value="9428"> TK- Tomografia komputerowa - ramienia </option> <option data-favourite="False" value="9430"> TK- Tomografia komputerowa - ręki </option> <option data-favourite="False" value="7719"> TK- Tomografia komputerowa - stawu barkowego </option> <option data-favourite="False" value="7720"> TK- Tomografia komputerowa - stawu biodrowego </option> <option data-favourite="False" value="7728"> TK- Tomografia komputerowa - stawu kolanowego </option> <option data-favourite="False" value="7732"> TK- Tomografia komputerowa - stawu łokciowego </option> <option data-favourite="False" value="7737"> TK- Tomografia komputerowa - stawu skokowego </option> <option data-favourite="False" value="7741"> TK- Tomografia komputerowa - stopy </option> <option data-favourite="False" value="7743"> TK- Tomografia komputerowa - szyi </option> <option data-favourite="False" value="7744"> TK- Tomografia komputerowa - twarzoczaszki </option> <option data-favourite="False" value="9431"> TK- Tomografia komputerowa - uda </option> <option data-favourite="False" value="7745"> TK- Tomografia komputerowa - zatok </option> <option data-favourite="False" value="9756"> Umówienie wizyty na scaling (usuwanie złogów) </option> <option data-favourite="False" value="8904"> Umówienie wizyty u chirurga stomatologa </option> <option data-favourite="False" value="6621"> Umówienie wizyty u stomatologa </option> <option data-favourite="False" value="8914"> Umówienie wizyty u stomatologa dziecięcego </option> <option data-favourite="False" value="7296"> USG / doppler - aorty brzusznej i tętnic biodrowych </option> <option data-favourite="False" value="6181"> USG / doppler - naczyń wątroby (ocena krążenia wrotnego) </option> <option data-favourite="False" value="6180"> USG / doppler - tętnic nerkowych </option> <option data-favourite="False" value="6179"> USG / doppler - tętnic szyjnych i kręgowych </option> <option data-favourite="False" value="7962"> USG / doppler - tętnic wewnątrzczaszkowych </option> <option data-favourite="False" value="9787"> USG / doppler tętnic - kończyn dolnych </option> <option data-favourite="False" value="9788"> USG / doppler tętnic - kończyn górnych </option> <option data-favourite="False" value="9785"> USG / doppler żył - kończyn dolnych </option> <option data-favourite="False" value="9786"> USG / doppler żył - kończyn górnych </option> <option data-favourite="False" value="7633"> USG ciąży </option> <option data-favourite="False" value="13083"> USG ciąży - 11-13 tydzień (+ 6 dni ) </option> <option data-favourite="False" value="13084"> USG ciąży - 18-22 tydzień </option> <option data-favourite="False" value="13170"> USG ciąży - 28-32 tydzień </option> <option data-favourite="False" value="13169"> USG ciąży - przed 10 tygodniem </option> <option data-favourite="False" value="6274"> USG ciąży - rozszerzone badanie (4 D) </option> <option data-favourite="False" value="9210"> USG ciąży - transvaginalne </option> <option data-favourite="False" value="4781"> USG gałek ocznych i oczodołów </option> <option data-favourite="False" value="6687"> USG ginekologiczne - przez powłoki brzuszne </option> <option data-favourite="False" value="4376"> USG ginekologiczne - transvaginalne </option> <option data-favourite="False" value="4367"> USG jamy brzusznej </option> <option data-favourite="False" value="7969"> USG krtani </option> <option data-favourite="False" value="11019"> USG krwiaka pourazowego mięśni </option> <option data-favourite="False" value="7965"> USG nadgarstka </option> <option data-favourite="False" value="4363"> USG narządów moszny (jąder) </option> <option data-favourite="False" value="4361"> USG piersi </option> <option data-favourite="False" value="7964"> USG prostaty przez powłoki brzuszne </option> <option data-favourite="False" value="6184"> USG przezciemiączkowe </option> <option data-favourite="False" value="4353"> USG stawów biodrowych </option> <option data-favourite="False" value="7966"> USG stawów śródręcza i palców </option> <option data-favourite="False" value="4350"> USG stawu barkowego </option> <option data-favourite="False" value="4354"> USG stawu kolanowego </option> <option data-favourite="False" value="4351"> USG stawu łokciowego </option> <option data-favourite="False" value="4355"> USG stawu skokowego </option> <option data-favourite="False" value="7968"> USG ścięgna Achillesa </option> <option data-favourite="False" value="4364"> USG ślinianek </option> <option data-favourite="False" value="4360"> USG tarczycy </option> <option data-favourite="False" value="4357"> USG tkanki podskórnej (tłuszczaki, włókniaki, przepuklina brzuszna etc.) </option> <option data-favourite="False" value="6185"> USG transrektalne - prostaty </option> <option data-favourite="False" value="4368"> USG układu moczowego </option> <option data-favourite="False" value="6182"> USG układu moczowego - i TRUS (transrektalne) </option> <option data-favourite="False" value="9369"> USG węzłów chłonnych </option> <option data-favourite="False" value="4356"> USG więzadeł, mięśni, drobnych stawów </option> <option data-favourite="False" value="4655"> Założenie Holtera EKG - w gabinecie </option> <option data-favourite="False" value="6303"> Założenie Holtera EVENT </option> <option data-favourite="False" value="4656"> Założenie Holtera RR - w gabinecie </option> </optgroup> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz wybrać usługi, z których często korzystasz, by znajdowały się na początku listy."></span> 
+           </div> 
+           <script type="text/javascript">
+  optionsGroupsArray = {
+
+
+  };
+</script> 
+           <div class="field"> 
+            <select name="DoctorMultiIdentyfier" id="MultiDoctorId" class="select" multiple selectedname="Lekarze" data-click-event="reservation.events.doctorClicked" data-autocomplete="true" data-autocomplete-prompt="Szukaj..."> <option value="" class="invisibleOnList">Dowolny lekarz</option> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz wybrać nazwiska lekarzy, do których najczęściej umawiasz wizyty, by znajdowały się na początku listy."></span> 
+           </div> 
+           <div class="field"> 
+            <select id="LanguageId" name="LanguageId" class="select" selectedname="Język" data-autocomplete-prompt="Szukaj..."> <option value="">Dowolny język</option> <option data-favourite="False" value="11"> Angielski </option> <option data-favourite="False" value="7"> Francuski </option> <option data-favourite="False" value="5"> Hiszpański </option> <option data-favourite="False" value="3"> Niemiecki </option> <option data-favourite="False" value="10"> Polski </option> <option data-favourite="False" value="4"> Rosyjski </option> <option data-favourite="False" value="6"> Włoski </option> </select> 
+            <span class="tooltip" title="W Ustawieniach konta możesz ustawić język, w jakim ma posługiwać się lekarz podczas konsultacji. Domyślnie ustawiono język polski."></span> 
+           </div> 
+          </div> 
+          <div class="column column3"> 
+           <span class="groupName">Wybierz termin:</span> 
+           <div class="field"> 
+            <select class="select" id="SearchFirstFree" name="SearchFirstFree" selectedname="Termin"> <option value="true">Pierwsze wolne terminy</option> <option value="false" selected>Wybrany zakres dat</option> </select> 
+            <span id="dynamicDateRangeTooltip" data-tooltip-first-free="Wyszukiwane będą najbliższe wolne terminy w ciągu 90 nadchodzących dni." data-tooltip-range="Wyszukiwane będą terminy w przedziale maksymalnie 365 - dniowym." style="float: right;" class="tooltip" title=""></span> 
+           </div> 
+           <div class="field"> 
+            <div class="dateRange"> 
+             <div class="dateRangePicker"> 
+              <input id="rangePicker" type="text" class="form-group  " data-min-date="29-10-2017" data-max-date="29-10-2018" data-single-date="False" data-show-Dropdowns="False" data-days-limit="30" autocomplete="off" data-on-change-callback="reservation.events.onDateChange"> 
+              <input class="hide" id="FromDate" name="FromDate" type="text" value="29-10-2017"> 
+              <input class="hide" id="ToDate" name="ToDate" type="text" value="28-11-2017"> 
+             </div> 
+            </div> 
+           </div> 
+           <div class="field"> 
+            <select id="TimeOption" name="TimeOption" class="select" selectedname="Pora dnia"> <option class="" value="Any">Dowolna</option> <option class="" value="Morning">07.00 - 09.00 (rano)</option> <option class="" value="Afternoon">09.00 - 17.00 (w ciągu dnia)</option> <option class="" value="Evening">17.00 - 21.00 (późno po południu)</option> </select> 
+            <span class="tooltip" style="padding-top: 22px;" title="W Ustawieniach konta możesz ustawić preferowaną porę dnia, w jakiej chcesz szukać terminów. Będzie ona prezentowana na początku listy."></span> 
+           </div> 
+           <div class="field 
+                  required                   "> 
+            <select id="PayerId" name="PayerId" class="select" selectedname="Pakiet" data-click-event="reservation.events.payerClicked" data-autocomplete-prompt="Szukaj..."> <option class="invisibleOnList" value="">Wybierz pakiet</option> </select> 
+            <span class="tooltip" title="Pakiet oznacza kontrahenta, osobę indywidualną lub ubezpieczyciela za pośrednictwem którego wykupywana jest opieka medyczna. Wybierasz z którego pakietu chcesz zrealizować usługę. Wybór „Poza pakietem” oznacza umówienie wizyty odpłatnie, niezależnie od aktywnych pakietów."></span> 
+           </div> 
+           <div class="field blank"> 
+           </div> 
+           <div class="field withSubmit"> 
+            <input type="submit" class="button pretty" id="reservationSearchSubmitButton" value="Szukaj"> 
+           </div> 
+          </div> 
+          <input name="__RequestVerificationToken" type="hidden" value="2weE-NDwqxHpPYB2SvHyfirHw54pPgbEmrJM6UP8b6pNuXot_cisUj7wl6tNBpVF3QlUtjNOHXmp5m-ghFR1rMw5dOicACvSXfm3Z_0lARR3z1WnQiHdy4TsdMFFI73SUeUvWM9PLUx2CgRGn5__j-wVAclS3CjOhv_PmoY4BfM1"> 
+          <input id="IsFFS" name="IsFFS" type="hidden" value="False"> 
+         </form> 
+        </div> 
+       </div> 
+       <input id="MaxSearchPeriodLength" name="MaxSearchPeriodLength" type="hidden" value="365"> 
+      </div> 
+      <div class="full" style="display: none;"> 
+      </div> 
+     </div> 
+     <div id="footer"> 
+      <nav> 
+       <ul class="menu"> 
+        <li class="_desktop"><a href="https://www.luxmed.pl/dla-pacjentow/kontakt/formularz-kontaktowy.html" target="_blank">Kontakt</a></li> 
+        <li class="_desktop"><a href="/PatientPortal/Home/FAQ">FAQ</a></li> 
+        <li><a href="http://www.luxmed.pl/dla-pacjentow/o-nas/polityka-prywatnosci-1/polityka-.html" target="_blank">Polityka prywatności</a></li> 
+        <li><a href="/PatientPortal/Home/TermsAll">Regulamin</a></li> 
+        <li class="_desktop"><a href="http://www.luxmed.pl/" target="_blank">Serwisy Grupy LUX MED</a></li> 
+        <li class="_desktop"><a href="/PatientPortal/Reservations/Clinics/Duty">Dyżury świadczone w LUX MED</a></li> 
+        <li class="_desktop"><a href="/PatientPortal/Home/AvaiableServices">Lista usług</a></li> 
+        <li><span class="copyrights">Infolinia: 22 33 22 888</span></li> 
+       </ul> 
+      </nav> 
+      <span class="copyrights"> Copyright LUX MED Sp. z o.o. </span> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="_mobileNavigation"> 
+    <ul class="menu"> 
+     <li class="_tablet _smartphone"><a href="#" class="_toggleMobileNavigation">&lt;&lt; Schowaj to menu</a></li> 
+     <li class=""> <a href="/PatientPortal/" target="_parent">Start</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Visits" target="_parent">Wizyty</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/MedicalExaminations" target="_parent">Wyniki badań</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Referrals" target="_parent">Skierowania</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/PrescriptionsOrdering/History" target="_parent">Leki</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/EQuestions" target="_parent">Zapytaj lekarza</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Doctors/Schedule" target="_parent">Grafiki lekarzy</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Clinics/Duty" target="_parent">Dyżury</a> </li> 
+     <li class=""> <a href="/PatientPortal/Reservations/Clinics/List" target="_parent">Placówki</a> </li> 
+     <li class=""> <a href="/PatientPortal/Home/Documents" target="_parent">Wzory dokumentów</a> </li> 
+     <li class=""> <a href="/PatientPortal/Users/User/Details" target="_parent">Twoje konto</a> </li> 
+     <li class=""> <a href="/PatientPortal/Home/GoToContact" target="_parent">Kontakt</a> </li> 
+     <li class=""> <a href="/PatientPortal/Home/TryChangeLanguage" target="popup">English Version</a> </li> 
+     <li class=""> <a href="/PatientPortal/Account/LogOut" target="_parent">Wyloguj się</a> </li> 
+    </ul> 
+   </div> 
+   <div id="_mobileLoginForm"> 
+    <div class="nav"> 
+     <a class="button _toggleLoginForm">&lt; Wróć</a> 
+    </div> 
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#Password").focus(function () {
+            $(this).data("hasfocus", true);
+        });
+        $("#Password").blur(function () {
+            $(this).data("hasfocus", false);
+
+        });
+        $(document.body).keyup(function (ev) {
+            if (ev.which === 13 && $("#Password").data("hasfocus")) {
+                //document.loginForm.submit();
+                return true;
+            }
+        });
+
+        var i1 = $('#Login');
+        var i2 = $('#Password');
+        var t2 = $('#TempPassword');
+
+        var txtval = $(i1).val();
+        $(i1).focus(function () {
+            if ($(i1).val() == txtval) {
+                $(i1).val('');
+            }
+        });
+        $(i1).blur(function () {
+            if ($(i1).val() == "") {
+                $(i1).val(txtval);
+            }
+        });
+
+        $(t2).focus(function () {
+            t2.hide();
+            i2.show();
+            i2.focus();
+        });
+        $(i2).blur(function () {
+            if ($(i2).val() == "") {
+                t2.show();
+                i2.hide();
+            }
+        });
+        showPasswordModule.init("#mobileCheckBoxDisplayPassword", ".mobilePasswordInput");
+    });
+
+    submitLoginSmartphone = function () {
+        if ($('#Login').val() == 'Wpisz login (*)') {
+            $('#Login').val("");
+        }
+        $("#loginFormSmart").submit();
+    };
+</script> 
+    <form action="/PatientPortal/Account/LogIn" autocomplete="off" id="loginFormSmart" method="post" name="loginFormSmart">  
+     <div class="fields"> 
+      <h3>Masz konto? Zaloguj się</h3> 
+      <div class="field"> 
+       <input type="text" id="Login" name="Login"> 
+       <span title="<strong>Login</strong> - adres email lub dowolna nazwa stworzona przez Ciebie podczas rejestracji" data-tooltip-direction="left" class="tooltip"></span> 
+      </div> 
+      <div class="field"> 
+       <input type="password" name="Password" id="Password" class="mobilePasswordInput"> 
+       <span title="<strong>Hasło</strong> - składa się z co najmniej 8 znaków, w tym co najmniej: jednej cyfry oraz jednej małej i jednej wielkiej litery. Jeśli nie możesz go sobie przypomnieć - podaj swój login i ustaw je na nowo. Link resetujący hasło zostanie wysłany na podany przy rejestracji mail lub tymczasowe hasło przyjdzie na podany przy rejestracji numer telefonu" data-tooltip-direction="left" class="tooltip"></span> 
+      </div> 
+      <div id="smart-val-info"> 
+       <div class="wrapper"></div> 
+      </div> 
+      <div class="actions"> 
+       <div> 
+        <input id="mobileCheckBoxDisplayPassword" class="checkBoxDisplayPassword" type="checkbox"> 
+        <label for="mobileCheckBoxDisplayPassword" class="lblDisplayPasswd">Pokaż znaki</label> 
+       </div> 
+       <a href="/PatientPortal/Users/Account/LoginTroubles">Nie możesz się zalogować?</a> 
+      </div> 
+     </div> 
+     <div class="submitSection"> 
+      <button class="button large green" type="submit" onclick="submitLoginSmartphone();">ZALOGUJ SIĘ</button> 
+     </div> 
+    </form>  
+    <div class="security"> 
+     <img src="/PatientPortal/Content/images/template/geotrust_smartphone.jpg" alt=""> 
+    </div> 
+   </div> 
+   <div id="__popupOverlay"></div> 
+   <div id="__popup"> 
+    <div class="_wrapper" id="popUpWrapper"> 
+     <div class="_box"> 
+      <div class="_content" id="poupContent"> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="ui-widget-overlay ui-front" id="spinnerDiv"> 
+   <div> 
+    <div id="circularG"> 
+     <div id="circularG_1" class="circularG"> 
+     </div> 
+     <div id="circularG_2" class="circularG"> 
+     </div> 
+     <div id="circularG_3" class="circularG"> 
+     </div> 
+     <div id="circularG_4" class="circularG"> 
+     </div> 
+     <div id="circularG_5" class="circularG"> 
+     </div> 
+     <div id="circularG_6" class="circularG"> 
+     </div> 
+     <div id="circularG_7" class="circularG"> 
+     </div> 
+     <div id="circularG_8" class="circularG"> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script type="text/javascript">
+      var isMyLink = false;
+
+      window.onbeforeunload = function(evt) {
+          if (!isMyLink) {
+              return "Zamierzasz wyjść z Portalu Pacjenta. Po tej operacji niezbędne będzie ponowne zalogowanie do systemu.";
+          }
+      };
+
+      window.onunload = function onUnloadPage(e) {
+          var logOutUrl = '/PatientPortal/Account/LogOutAjax';
+
+          if (!isMyLink && !isAjaxRequestExecuting) {
+            redirectAjaxErrorToGlobalError = false;
+              window.name = "reloader";
+              isMyLink = true;
+             // window.location = '/PatientPortal/Account/LogOut';
+              $.ajax({
+                  url: logOutUrl,
+                  async: false,
+                  error: function(e) {
+                      isMyLink = true;
+                      window.location = '/PatientPortal/Account/LogOut';
+                  },
+                  success: function(data) {
+                      isMyLink = true;
+                      window.location = '/PatientPortal/Account/LogOut';
+                  }
+              });
+          }
+      };
+
+   
+      function captureLink() {
+          isMyLink = true;
+      }
+
+      $(document).ready(function () {
+        $('a').bindFirst('click', captureLink);
+    });
+
+  </script> 
+  <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-59149964-1', 'auto');
+    ga('send', 'pageview');
+
+</script> 
+  <input id="MaxPeriodLength" name="MaxPeriodLength" type="hidden" value="365">   
+ </body>
+</html>

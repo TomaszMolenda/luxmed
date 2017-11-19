@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.login;
+package pl.tomo.luxmed.coordination;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/login")
-class LoginController {
+@RequestMapping("coordination")
+class CoordinationController {
 
-    private final UserInformationSaver userInformationSaver;
+    private final CoordinationFetcher coordinationFetcher;
 
     @Autowired
-    LoginController(UserInformationSaver userInformationSaver) {
-        this.userInformationSaver = userInformationSaver;
+    CoordinationController(CoordinationFetcher coordinationFetcher) {
+        this.coordinationFetcher = coordinationFetcher;
     }
 
     @GetMapping
     private String get(Model model) {
 
-        model.addAttribute("loginForm", new LoginForm());
+        model.addAttribute("activities", coordinationFetcher.fetchActivities());
 
-        return "login";
+        return "coordination";
     }
 
     @PostMapping
-    private String post(@ModelAttribute LoginForm loginForm) {
+    private String post(@ModelAttribute("url") String url) {
 
-        userInformationSaver.save(loginForm);
 
-        return "redirect:/coordination";
+
+        return "redirect:/test";
     }
 }

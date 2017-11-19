@@ -31,7 +31,7 @@ public class SimpleDataFetcher {
                 .cookie(storage.getAuthorizationCookies())
                 .build();
 
-        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest).get().getToLocation();
+        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest).get();
 
         return goToLocation(htmlResponse);
     }
