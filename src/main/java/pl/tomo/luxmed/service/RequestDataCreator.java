@@ -25,39 +25,24 @@ public class RequestDataCreator {
 
     public List<DataEntry> create(FilterForm filterForm) {
 
-//        return Lists.newArrayList(
-//
-//        create("", "ReferralId"),
-//        create("SelectedDate", "DateOption"),
-//        create("", "PayersCount"),
-//        create("5", "CityId"),
-//        create("", "LanguageId"),
-//        create("false", "SearchFirstFree"),
-//        create("19-11-2017", "FromDate"),
-//        create("19-12-2017", "ToDate"),
-//        create("Any", "TimeOption"),
-//        create("", "PayerId"),
-//        create(storage.getRequestVerificationToken(), "__RequestVerificationToken"),
-//        create("false", "IsFFS"));
+        return Lists.newArrayList(
 
-        DataEntry isFromStartPage = create(filterForm.getIsFromStartPage(), "isFromStartPage");
-        DataEntry post = create(filterForm.getPostId(), "postId");
-        DataEntry payersCount = create(filterForm.getPayersCount(), "payersCount");
-        DataEntry searchFirstFree = create(filterForm.getSearchFirstFree(), "searchFirstFree");
-        DataEntry requestVerificationToken = create(storage.getRequestVerificationToken(), "__RequestVerificationToken");
-        DataEntry timeOption = create(filterForm.getTimeOption(), "TimeOption");
-        DataEntry city = create(filterForm.getCityId(), "CityId");
-        DataEntry clinic = create(filterForm.getClinicId(), "ClinicId");
-        DataEntry service = create(filterForm.getServiceId(), "ServiceId");
-        DataEntry doctor = create(filterForm.getDoctorId(), "DoctorId");
-        DataEntry fromDate = create(filterForm.getDateFrom(), "FromDate");
-        DataEntry toDate = create(filterForm.getToDate(), "ToDate");
-        DataEntry payer = create(filterForm.getPayerId(), "PayerId");
-        DataEntry dateFrom = create(filterForm.getDateFrom(), "dateFrom");
+        create(filterForm.getIsFromStartPage(), "isFromStartPage"),
+        create(filterForm.getPostId(), "postId"),
+        create(filterForm.getPayersCount(), "payersCount"),
+        create(filterForm.getSearchFirstFree(), "searchFirstFree"),
+        create(storage.getRequestVerificationToken(), "__RequestVerificationToken"),
+        create(filterForm.getTimeOption(), "TimeOption"),
+        create(filterForm.getCityId(), "CityId"),
+        create(filterForm.getClinicId(), "ClinicId"),
+        create(filterForm.getServiceId(), "ServiceId"),
+        create(filterForm.getDoctorId(), "DoctorId"),
+        create(filterForm.getDateFrom(), "FromDate"),
+        create(filterForm.getToDate(), "ToDate"),
+        create(filterForm.getPayerId(), "PayerId"),
+        create(filterForm.getDateFrom(), "dateFrom")
 
-        return Lists.newArrayList(isFromStartPage, payersCount, searchFirstFree,
-                requestVerificationToken, timeOption, city, clinic, service, doctor,
-                fromDate, toDate, payer, post, dateFrom);
+        );
     }
 
     private DataEntry create(LocalDate dateFrom, String fieldName) {
