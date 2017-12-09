@@ -37,7 +37,7 @@ class PayerController {
         storage.setPayerId(payerId);
 
         return Redirect.builder()
-                .path("/payers")
+                .path("/summary")
                 .build();
 
 

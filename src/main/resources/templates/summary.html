@@ -5,10 +5,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-    <span th:text="${clinic}"></span>
-    <span th:text="${service}"></span>
-    <span th:text="${city}"></span>
-    <span th:text="${doctor}"></span>
-    <span th:text="${payer}"></span>
+    <span th:text="${clinicId}"></span>
+    <span th:text="${serviceId}"></span>
+    <span th:text="${cityId}"></span>
+    <span th:text="${doctorId}"></span>
+    <span th:text="${payerId}"></span>
+
+    <form action="#" th:action="@{/summary}" th:object="${summaryForm}" method="post">
+
+        <input readonly="readonly" th:value="${serviceId}" id="serviceId" name="serviceId"/>
+        <input readonly="readonly" th:value="${cityId}" id="cityId" name="cityId" />
+        <input readonly="readonly" th:value="${payerId}" id="payerId" name="payerId" />
+
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+
+    </form>
+
 </body>
 </html>
