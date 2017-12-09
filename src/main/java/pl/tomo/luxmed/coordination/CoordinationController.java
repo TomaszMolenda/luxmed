@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.tomo.luxmed.city.CitySaver;
-import pl.tomo.luxmed.login.RequestVerificationTokenSaver;
 
 @Controller
 @RequestMapping("coordination")

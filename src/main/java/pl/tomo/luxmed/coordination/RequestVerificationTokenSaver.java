@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.login;
+package pl.tomo.luxmed.coordination;
 
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.storage.Storage;
 
 @Service
-public class RequestVerificationTokenSaver {
+class RequestVerificationTokenSaver {
 
     private final Storage storage;
 
@@ -15,7 +15,7 @@ public class RequestVerificationTokenSaver {
         this.storage = storage;
     }
 
-    public void save(Document document) {
+    void save(Document document) {
 
         storage.setRequestVerificationToken(
                 document
