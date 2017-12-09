@@ -10,25 +10,16 @@ import java.util.List;
 class AdvancedDataExtractor {
 
     private final DoctorExtractor doctorExtractor;
-    private final PayerExtractor payerExtractor;
 
 
     @Autowired
-    AdvancedDataExtractor(DoctorExtractor doctorExtractor,
-                          PayerExtractor payerExtractor) {
+    AdvancedDataExtractor(DoctorExtractor doctorExtractor) {
         this.doctorExtractor = doctorExtractor;
-        this.payerExtractor = payerExtractor;
     }
 
 
     List<Doctor> extractDoctors(Document document) {
 
         return doctorExtractor.extract(document);
-    }
-
-
-    List<Payer> extractPayers(Document document) {
-
-        return payerExtractor.extract(document);
     }
 }

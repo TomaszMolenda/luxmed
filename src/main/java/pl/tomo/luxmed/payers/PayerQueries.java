@@ -1,7 +1,9 @@
-package pl.tomo.luxmed.storage;
+package pl.tomo.luxmed.payers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.tomo.luxmed.storage.AbstractQueries;
+import pl.tomo.luxmed.storage.Storage;
 
 import java.util.List;
 
