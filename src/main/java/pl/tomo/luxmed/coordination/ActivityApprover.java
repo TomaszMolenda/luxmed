@@ -10,6 +10,8 @@ import pl.tomo.luxmed.connection.ConnectionService;
 import pl.tomo.luxmed.connection.HtmlResponse;
 import pl.tomo.luxmed.storage.Storage;
 
+import java.util.Optional;
+
 @Service
 class ActivityApprover {
 
@@ -26,14 +28,29 @@ class ActivityApprover {
     Document approve(String url) {
 
         final ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Coordination/Activity?actionId=81")
+                .url("https://portalpacjenta.luxmed.pl" + url)
                 .httpMethod(HttpMethod.GET)
                 .cookie(storage.getAuthorizationCookies())
                 .build();
 
         final HtmlResponse response = connectionService.getForHtml(connectionRequest).get();
 
+        final Optional<String> urlInSubPage = checkSubPage(response.getDocument());
+
+        if (urlInSubPage.isPresent()) {
+
+            return approve(urlInSubPage.get());
+        }
+
         return goToLocation(response);
+    }
+
+    private Optional<String> checkSubPage(Document document) {
+
+        return document.getElementsByClass("activity_button btn btn-default").stream()
+                .filter(element -> element.text().equalsIgnoreCase("Wizyta w placówce"))
+                .map(element -> element.attr("href"))
+                .findAny();
     }
 
     @SneakyThrows
