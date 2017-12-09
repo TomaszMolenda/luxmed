@@ -43,7 +43,7 @@ class SummaryController {
 
         reservationStarter.start(create(summaryForm));
 
-        return "summary";
+        return "redirect:/";
     }
 
     private FilterFormWithAllData create(SummaryForm summaryForm) {
