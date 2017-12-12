@@ -8,8 +8,8 @@
 
 <form action="#" th:action="@{/filter}" th:object="${filterForm}" method="post">
 
-    <input type="date" th:value="*{minimumReservationDate}" th:field="*{minimumReservationDate}"/>
-    <input type="time" th:value="*{minimumReservationTime}" th:field="*{minimumReservationTime}"/>
+    <input type="date" th:value="${filterDto.minimumReservationDate}" id="minimumReservationDate" name="minimumReservationDate"/>
+    <input type="time" th:value="${filterDto.minimumReservationTime}" id="minimumReservationTime" name="minimumReservationTime"/>
 
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 

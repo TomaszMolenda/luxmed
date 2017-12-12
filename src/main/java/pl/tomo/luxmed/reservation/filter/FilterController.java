@@ -10,38 +10,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.tomo.luxmed.Redirect;
 import pl.tomo.luxmed.storage.Storage;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 @Controller
 @RequestMapping("filter")
 class FilterController {
 
     private final Storage storage;
     private final FilterFactory filterFactory;
+    private final FilterDtoFactory filterDtoFactory;
 
     @Autowired
-    FilterController(Storage storage, FilterFactory filterFactory) {
+    FilterController(Storage storage, FilterFactory filterFactory, FilterDtoFactory filterDtoFactory) {
         this.storage = storage;
         this.filterFactory = filterFactory;
+        this.filterDtoFactory = filterDtoFactory;
     }
 
     @GetMapping
     private String get(Model model) {
 
-        final Filter filter = storage.getFilter();
+        model.addAttribute(new FilterForm());
+        model.addAttribute(filterDtoFactory.create());
 
-        if (filter == null) {
-
-            model.addAttribute(new FilterForm());
-
-        } else {
-
-            final LocalDate minimumDate = filter.getMinimumDate();
-            final LocalTime minimumTime = filter.getMinimumTime();
-
-            model.addAttribute(new FilterForm(minimumDate, minimumTime));
-        }
         return "filter";
     }
 
