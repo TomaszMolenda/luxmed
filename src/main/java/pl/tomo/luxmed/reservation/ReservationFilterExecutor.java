@@ -1,16 +1,24 @@
 package pl.tomo.luxmed.reservation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
+import pl.tomo.luxmed.reservation.filter.Filter;
+import pl.tomo.luxmed.storage.Storage;
 
 @Service
 class ReservationFilterExecutor {
 
+    private final Storage storage;
+
+    @Autowired
+    ReservationFilterExecutor(Storage storage) {
+        this.storage = storage;
+    }
+
     boolean apply(Reservation reservation) {
 
-        return reservation.getHour().isAfter(LocalTime.of(14,55)) &&
-                reservation.getDate().isEqual(LocalDate.now().plusDays(1));
+        final Filter filter = storage.getFilter();
+
+        return reservation.applyFilter(filter);
     }
 }

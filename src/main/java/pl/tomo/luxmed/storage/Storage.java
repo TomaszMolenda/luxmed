@@ -6,6 +6,7 @@ import pl.tomo.luxmed.city.City;
 import pl.tomo.luxmed.connection.Cookie;
 import pl.tomo.luxmed.mediservice.MediService;
 import pl.tomo.luxmed.payers.Payer;
+import pl.tomo.luxmed.reservation.filter.Filter;
 
 import java.util.List;
 
@@ -24,4 +25,5 @@ public class Storage {
     private String payerId;
     private String requestVerificationToken;
     private boolean isReserved;
+    private Filter filter;
 }
