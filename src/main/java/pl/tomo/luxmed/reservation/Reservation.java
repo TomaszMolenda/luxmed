@@ -4,6 +4,7 @@ import lombok.Data;
 import pl.tomo.luxmed.reservation.filter.Filter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -18,10 +19,8 @@ class Reservation {
 
     boolean applyFilter(Filter filter) {
 
-        LocalTime minTime = filter.getMinimumTime();
-        LocalDate minDate = filter.getMinimumDate();
+        final LocalDateTime minimumReservationTime = filter.getMinimumReservationTime();
 
-        return getHour().isAfter(minTime) &&
-                getDate().isEqual(minDate);
+        return LocalDateTime.of(getDate(), getHour()).isAfter(minimumReservationTime);
     }
 }

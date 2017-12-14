@@ -51,7 +51,7 @@ public class ReservationStarter {
 
         reservations.stream()
                 .filter(reservationFilterExecutor::apply)
-                .findAny()
+                .min(Comparator.comparing(Reservation::getDate))
                 .ifPresent(this::reserve);
     }
 
