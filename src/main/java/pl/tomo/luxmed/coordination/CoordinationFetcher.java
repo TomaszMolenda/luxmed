@@ -28,10 +28,14 @@ class CoordinationFetcher {
 
     List<CoordinationActivity> fetchActivities() {
 
-        return obtainHtml().getElementsByClass("activity_button")
+        final List<CoordinationActivity> coordinationActivities = obtainHtml().getElementsByClass("activity_button")
                 .stream()
                 .map(coordinationActivityFactory::create)
                 .collect(Collectors.toList());
+
+        storage.setCoordinationActivities(coordinationActivities);
+
+        return coordinationActivities;
     }
 
     @SneakyThrows

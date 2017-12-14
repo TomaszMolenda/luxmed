@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.storage.Storage;
 
+import static pl.tomo.luxmed.storage.Log.log;
+
 @Service
 class UserInformationSaver {
 
@@ -22,5 +24,6 @@ class UserInformationSaver {
 
         loginFormSaver.save(loginForm);
         storage.setAuthorizationCookies(authorizationCookieFetcher.fetch(loginForm));
+        storage.addLog(log("Success login: " + loginForm.getUser()));
     }
 }

@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
 import pl.tomo.luxmed.connection.HtmlResponse;
+import pl.tomo.luxmed.storage.Log;
 import pl.tomo.luxmed.storage.Storage;
 
 import java.util.Optional;
+
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Service
 class ActivityApprover {
@@ -26,6 +29,8 @@ class ActivityApprover {
 
     @SneakyThrows
     Document approve(String url) {
+
+        storage.addLog(Log.log(getCoordinationActivity(url)));
 
         final ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl" + url)
@@ -43,6 +48,14 @@ class ActivityApprover {
         }
 
         return goToLocation(response);
+    }
+
+    private String getCoordinationActivity(String url) {
+        return storage.getCoordinationActivities().stream()
+                .filter(coordinationActivity -> coordinationActivity.getUrl().equalsIgnoreCase(url))
+                .map(CoordinationActivity::getName)
+                .findAny()
+                .orElse(EMPTY);
     }
 
     private Optional<String> checkSubPage(Document document) {

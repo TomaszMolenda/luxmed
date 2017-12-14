@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.tomo.luxmed.storage.Storage;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static pl.tomo.luxmed.storage.Log.log;
+
 @Controller
 @RequestMapping("cities")
 class CitiesController {
@@ -34,8 +37,18 @@ class CitiesController {
     private String post(@ModelAttribute("cityId") String cityId) {
 
         storage.setCityId(cityId);
+        storage.addLog(log("Choose city, id:" + cityId + ", name: " + getCity(cityId)));
 
         return "redirect:/services";
+    }
+
+    private String getCity(String cityId) {
+
+        return storage.getCities().stream()
+                .filter(city -> city.getId().equalsIgnoreCase(cityId))
+                .findAny()
+                .map(City::getName)
+                .orElse(EMPTY);
     }
 
 
