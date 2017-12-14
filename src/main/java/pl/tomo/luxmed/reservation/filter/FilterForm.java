@@ -9,9 +9,9 @@ import java.time.LocalTime;
 @Data
 public class FilterForm {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate minimumReservationDate;
-    @DateTimeFormat(pattern = "HH:mm")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime minimumReservationTime;
 
     FilterForm() {
