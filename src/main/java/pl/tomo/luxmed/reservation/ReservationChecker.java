@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
+import pl.tomo.luxmed.storage.Log;
 import pl.tomo.luxmed.storage.Storage;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -33,6 +34,8 @@ class ReservationChecker {
         boolean hasReservationOnService = hasReservationOnService(reservation, document);
 
         if (hasReservationOnService) {
+
+            storage.addLog(Log.log("Reservation exist on this service"));
 
             String onClick = allReservations(document).getElementsByClass("button reject")
                     .first()

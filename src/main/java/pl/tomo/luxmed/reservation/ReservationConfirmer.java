@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
+import pl.tomo.luxmed.storage.Log;
 import pl.tomo.luxmed.storage.Storage;
 
 @Service
@@ -27,6 +28,8 @@ class ReservationConfirmer {
     Document confirm(Reservation reservation) {
 
         String key = reservationKeyRetriever.retrieve(reservation);
+
+        storage.addLog(Log.log("Try confirm reservation: " + reservation));
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReserveTerm?key=" + key + "&variant=1")

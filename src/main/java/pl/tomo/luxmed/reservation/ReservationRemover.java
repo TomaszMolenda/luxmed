@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
+import pl.tomo.luxmed.storage.Log;
 import pl.tomo.luxmed.storage.Storage;
 
 @Service
@@ -22,6 +23,8 @@ class ReservationRemover {
 
     @SneakyThrows
     void remove(ReservationStatus reservationStatus) {
+
+        storage.addLog(Log.log("Try delete previously reservation: " + reservationStatus));
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Agreed/CancelTerm?ReservationId=" + reservationStatus.getId())

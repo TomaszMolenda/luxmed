@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.service.FilterForm;
+import pl.tomo.luxmed.storage.Log;
 import pl.tomo.luxmed.storage.Storage;
 
 import java.time.LocalDate;
@@ -46,8 +47,8 @@ public class ReservationStarter {
         String  minDate = findMinDate(reservations);
         String  maxDate = findMaxDate(reservations);
 
-        log.info(LocalDateTime.now() + ": fetch " + reservations.size() + " visits. " +
-        "min date: " + minDate + ", max date: " + maxDate);
+        storage.addLog(Log.log("Found " + reservations.size() + " visits. " +
+                "min date: " + minDate + ", max date: " + maxDate));
 
         reservations.stream()
                 .filter(reservationFilterExecutor::apply)
@@ -75,8 +76,7 @@ public class ReservationStarter {
 
     private void reserve(Reservation reservation) {
 
-        log.info(LocalDateTime.now() + ": try reserve " + reservation.getDate() +
-        ", " + reservation.getHour());
+        storage.addLog(Log.log("Try reserve: " + reservation));
 
         reservationExecutor.reserve(reservation);
     }

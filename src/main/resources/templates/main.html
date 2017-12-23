@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,6 +8,17 @@
 
 <a href="/login">Login</a>
 <a href="/filter">Filter</a>
+<a href="/filter">Filter</a>
+
+<div>
+    <table>
+        <tr th:each="log : ${logs}">
+            <td th:text="${log.time}"></td>
+            <td th:text="${log.value}"></td>
+        </tr>
+    </table>
+
+</div>
 
 
 

@@ -10,17 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.tomo.luxmed.Redirect;
 import pl.tomo.luxmed.storage.Storage;
 
+import static pl.tomo.luxmed.storage.Log.log;
+
 @Controller
 @RequestMapping("services")
 class MediServiceController {
 
     private final MediServiceFetcher mediServiceFetcher;
     private final Storage storage;
+    private final ServiceQueries serviceQueries;
 
     @Autowired
-    MediServiceController(MediServiceFetcher mediServiceFetcher, Storage storage) {
+    MediServiceController(MediServiceFetcher mediServiceFetcher, Storage storage, ServiceQueries serviceQueries) {
         this.mediServiceFetcher = mediServiceFetcher;
         this.storage = storage;
+        this.serviceQueries = serviceQueries;
     }
 
     @GetMapping
@@ -33,6 +37,8 @@ class MediServiceController {
 
     @PostMapping
     private String post(@ModelAttribute("serviceId") String serviceId) {
+
+        storage.addLog(log("Choose service, id:" + serviceId + ", name: " + serviceQueries.getData(serviceId)));
 
         storage.setServiceId(serviceId);
 

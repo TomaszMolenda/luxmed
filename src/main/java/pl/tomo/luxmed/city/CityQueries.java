@@ -7,6 +7,8 @@ import pl.tomo.luxmed.storage.Storage;
 
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 @Service
 public class CityQueries extends AbstractQueries<City> {
 
@@ -22,5 +24,4 @@ public class CityQueries extends AbstractQueries<City> {
 
         return storage.getCities();
     }
-
 }

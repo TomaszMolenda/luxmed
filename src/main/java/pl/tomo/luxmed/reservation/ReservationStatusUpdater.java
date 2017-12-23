@@ -3,6 +3,7 @@ package pl.tomo.luxmed.reservation;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.tomo.luxmed.storage.Log;
 import pl.tomo.luxmed.storage.Storage;
 
 @Service
@@ -16,6 +17,8 @@ class ReservationStatusUpdater {
     }
 
     void update(Document document) {
+
+        storage.addLog(Log.log("Reservation ok"));
 
         storage.setReserved(checkStatus(document));
     }
