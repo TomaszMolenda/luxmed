@@ -15,4 +15,11 @@ public class FilterDto {
     private final LocalDate minimumReservationDate;
     @DateTimeFormat(pattern = "HH:mm")
     private final LocalTime minimumReservationTime;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private final LocalDate maximumReservationDate;
+    @DateTimeFormat(pattern = "HH:mm")
+    private final LocalTime maximumReservationTime;
 }
+
+

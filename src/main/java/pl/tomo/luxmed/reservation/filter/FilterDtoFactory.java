@@ -20,11 +20,12 @@ class FilterDtoFactory {
 
         if (filter == null) {
 
-            return new FilterDto(null, null);
+            return new FilterDto(null, null, null, null);
 
         } else {
 
-            return new FilterDto(filter.getMinimumDate(), filter.getMinimumTime());
+            return new FilterDto(filter.getMinimumDate(), filter.getMinimumTime(),
+                    filter.getMaximumDate(), filter.getMaximumTime());
         }
     }
 }

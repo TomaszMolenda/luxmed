@@ -16,6 +16,11 @@ class FilterFactory {
 
         final LocalDateTime minimumReservationDateTime = LocalDateTime.of(minimumReservationDate, minimumReservationTime);
 
-        return new Filter(minimumReservationDateTime);
+        final LocalDate maximumReservationDate = filterForm.getMaximumReservationDate();
+        final LocalTime maximumReservationTime = filterForm.getMaximumReservationTime();
+
+        final LocalDateTime maximumReservationDateTime = LocalDateTime.of(maximumReservationDate, maximumReservationTime);
+
+        return new Filter(minimumReservationDateTime, maximumReservationDateTime);
     }
 }

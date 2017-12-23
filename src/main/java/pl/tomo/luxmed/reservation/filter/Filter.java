@@ -12,9 +12,11 @@ import java.time.LocalTime;
 public class Filter {
 
     private final LocalDateTime minimumReservationTime;
+    private final LocalDateTime maximumReservationTime;
 
-    public Filter(LocalDateTime minimumReservationTime) {
+    public Filter(LocalDateTime minimumReservationTime, LocalDateTime maximumReservationTime) {
         this.minimumReservationTime = minimumReservationTime;
+        this.maximumReservationTime = maximumReservationTime;
     }
 
     public LocalTime getMinimumTime() {
@@ -25,5 +27,15 @@ public class Filter {
     public LocalDate getMinimumDate() {
 
         return minimumReservationTime.toLocalDate();
+    }
+
+    public LocalTime getMaximumTime() {
+
+        return maximumReservationTime.toLocalTime();
+    }
+
+    public LocalDate getMaximumDate() {
+
+        return maximumReservationTime.toLocalDate();
     }
 }

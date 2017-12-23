@@ -8,12 +8,24 @@
 
 <form action="#" th:action="@{/filter}" th:object="${filterForm}" method="post">
 
-    <input type="date" th:value="${filterDto.minimumReservationDate}" id="minimumReservationDate" name="minimumReservationDate"/>
-    <input type="time" th:value="${filterDto.minimumReservationTime}" id="minimumReservationTime" name="minimumReservationTime"/>
+    <div>
+        <span>Minimalny czas rezerwacji</span>
+        <input type="date" th:value="${filterDto.minimumReservationDate}" id="minimumReservationDate" name="minimumReservationDate"/>
+        <input type="time" th:value="${filterDto.minimumReservationTime}" id="minimumReservationTime" name="minimumReservationTime"/>
+    </div>
+
+    <div>
+        <span>Maksymalny czas rezerwacji</span>
+        <input type="date" th:value="${filterDto.maximumReservationDate}" id="maximumReservationDate" name="maximumReservationDate"/>
+        <input type="time" th:value="${filterDto.maximumReservationTime}" id="maximumReservationTime" name="maximumReservationTime"/>
+    </div>
 
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 
 </form>
+
+Jak najszybciej, bez znaczenia miejsce i lekarz
+W określonym czasie, bez znaczenia miejsce i lekarz
 
 </body>
 </html>

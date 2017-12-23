@@ -14,11 +14,8 @@ public class FilterForm {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime minimumReservationTime;
 
-    FilterForm() {
-    }
-
-    FilterForm(LocalDate minimumReservationDate, LocalTime minimumReservationTime) {
-        this.minimumReservationDate = minimumReservationDate;
-        this.minimumReservationTime = minimumReservationTime;
-    }
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate maximumReservationDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime maximumReservationTime;
 }

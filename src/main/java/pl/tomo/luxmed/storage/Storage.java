@@ -29,7 +29,7 @@ public class Storage {
     private String payerId;
     private String requestVerificationToken;
     private boolean isReserved;
-    private Filter filter = new Filter(LocalDateTime.now());
+    private Filter filter = new Filter(LocalDateTime.now(), LocalDateTime.now().plusDays(14));
     private List<Log> logs = Lists.newArrayList();
 
     public void addLog(Log log) {
