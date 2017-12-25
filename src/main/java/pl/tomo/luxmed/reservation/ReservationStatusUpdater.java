@@ -10,17 +10,29 @@ import pl.tomo.luxmed.storage.Storage;
 class ReservationStatusUpdater {
 
     private final Storage storage;
+    private final ReservationErrorStorage reservationErrorStorage;
 
     @Autowired
-    ReservationStatusUpdater(Storage storage) {
+    ReservationStatusUpdater(Storage storage, ReservationErrorStorage reservationErrorStorage) {
         this.storage = storage;
+        this.reservationErrorStorage = reservationErrorStorage;
     }
 
-    void update(Document document) {
+    void update(Reservation reservation, Document document) {
+
+        if (hasError(document)) {
+
+            reservationErrorStorage.addErrorReservation(reservation);
+        }
 
         storage.addLog(Log.log("Reservation ok"));
 
         storage.setReserved(checkStatus(document));
+    }
+
+    private boolean hasError(Document document) {
+
+        return document.getElementsByClass("error-page").toString().contains("LUX MED jest obecnie niedostępny");
     }
 
     private boolean checkStatus(Document document) {

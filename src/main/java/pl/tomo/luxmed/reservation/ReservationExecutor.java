@@ -31,6 +31,6 @@ class ReservationExecutor {
 
         Document document = reservationConfirmer.confirm(reservation);
 
-        reservationStatusUpdater.update(document);
+        reservationStatusUpdater.update(reservation, document);
     }
 }

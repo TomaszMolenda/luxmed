@@ -9,6 +9,7 @@ class ReservationDate {
     private final LocalTime time;
 
     private ReservationDate(LocalDate date, LocalTime time) {
+
         this.date = date;
         this.time = time;
     }
@@ -23,5 +24,15 @@ class ReservationDate {
 
     LocalTime getTime() {
         return time;
+    }
+
+    boolean hasOnlyTime() {
+
+        return date == null && time != null;
+    }
+
+    boolean hasDateAndTime() {
+
+        return date != null && time != null;
     }
 }

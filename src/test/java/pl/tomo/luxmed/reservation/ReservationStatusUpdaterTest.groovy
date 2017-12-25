@@ -13,13 +13,13 @@ class ReservationStatusUpdaterTest extends Specification {
 
 
         given:
-        ReservationStatusUpdater reservationChecker = new ReservationStatusUpdater(storage)
+        ReservationStatusUpdater reservationChecker = new ReservationStatusUpdater(storage, reservationErrorStorage)
 
         InputStream inputStream = ReservationKeyExtractor.class.getClassLoader().getResourceAsStream("reservation-success.html")
         Document document = Jsoup.parse(inputStream, "UTF-8", "https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReservationConfirmation")
 
         when:
-        reservationChecker.update(document)
+        reservationChecker.update(reservation, document)
 
         then:
         success

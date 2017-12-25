@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @ToString
@@ -20,11 +19,6 @@ public class Filter {
         final ReservationDate maxReservationDate = ReservationDate.reservationDate(LocalDate.now().plusDays(14), LocalTime.now());
 
         return new Filter(minReservationDate, maxReservationDate);
-    }
-
-    public LocalDateTime getMinDateTime() {
-
-        return LocalDateTime.of(getMinDate(), getMinTime());
     }
 
     public LocalTime getMinTime() {
@@ -45,5 +39,38 @@ public class Filter {
     public LocalDate getMaxDate() {
 
         return maxDate.getDate();
+    }
+
+    public boolean isInvalid() {
+
+        if (minDate == null || maxDate == null) {
+
+            return true;
+        }
+
+        if (minDate.hasOnlyTime() && maxDate.hasDateAndTime()) {
+
+            return true;
+        }
+
+        if (maxDate.hasOnlyTime() && minDate.hasDateAndTime()) {
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public boolean hasOnlyTime() {
+
+        return minDate.hasOnlyTime() && maxDate.hasOnlyTime();
+    }
+
+    public boolean hasDateAndTime() {
+
+        return minDate.hasDateAndTime() && maxDate.hasDateAndTime();
+
+
     }
 }
