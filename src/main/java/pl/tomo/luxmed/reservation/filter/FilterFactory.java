@@ -3,24 +3,25 @@ package pl.tomo.luxmed.reservation.filter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import static pl.tomo.luxmed.reservation.filter.ReservationDate.reservationDate;
 
 @Component
 class FilterFactory {
 
     Filter create(FilterForm filterForm) {
 
-        final LocalDate minimumReservationDate = filterForm.getMinimumReservationDate();
-        final LocalTime minimumReservationTime = filterForm.getMinimumReservationTime();
+        final LocalDate minDate = filterForm.getMinDate();
+        final LocalTime minTime = filterForm.getMinTime();
 
-        final LocalDateTime minimumReservationDateTime = LocalDateTime.of(minimumReservationDate, minimumReservationTime);
+        ReservationDate minReservationDate = reservationDate(minDate, minTime);
 
-        final LocalDate maximumReservationDate = filterForm.getMaximumReservationDate();
-        final LocalTime maximumReservationTime = filterForm.getMaximumReservationTime();
+        final LocalDate maxDate = filterForm.getMaxDate();
+        final LocalTime maxTime = filterForm.getMaxTime();
 
-        final LocalDateTime maximumReservationDateTime = LocalDateTime.of(maximumReservationDate, maximumReservationTime);
+        ReservationDate maxReservationDate = reservationDate(maxDate, maxTime);
 
-        return new Filter(minimumReservationDateTime, maximumReservationDateTime);
+        return new Filter(minReservationDate, maxReservationDate);
     }
 }

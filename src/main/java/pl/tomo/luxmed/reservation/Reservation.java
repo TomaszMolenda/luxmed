@@ -19,7 +19,7 @@ class Reservation {
 
     boolean applyFilter(Filter filter) {
 
-        final LocalDateTime minimumReservationTime = filter.getMinimumReservationTime();
+        final LocalDateTime minimumReservationTime = filter.getMinDateTime();
 
         return LocalDateTime.of(getDate(), getHour()).isAfter(minimumReservationTime);
     }

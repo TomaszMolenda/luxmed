@@ -12,14 +12,14 @@ import java.time.LocalTime;
 public class FilterDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private final LocalDate minimumReservationDate;
+    private final LocalDate minDate;
     @DateTimeFormat(pattern = "HH:mm")
-    private final LocalTime minimumReservationTime;
+    private final LocalTime minTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private final LocalDate maximumReservationDate;
+    private final LocalDate maxDate;
     @DateTimeFormat(pattern = "HH:mm")
-    private final LocalTime maximumReservationTime;
+    private final LocalTime maxTime;
 }
 
 

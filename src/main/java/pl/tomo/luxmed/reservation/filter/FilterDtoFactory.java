@@ -24,8 +24,8 @@ class FilterDtoFactory {
 
         } else {
 
-            return new FilterDto(filter.getMinimumDate(), filter.getMinimumTime(),
-                    filter.getMaximumDate(), filter.getMaximumTime());
+            return new FilterDto(filter.getMinDate(), filter.getMinTime(),
+                    filter.getMaxDate(), filter.getMaxTime());
         }
     }
 }

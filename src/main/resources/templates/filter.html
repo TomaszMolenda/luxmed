@@ -10,14 +10,14 @@
 
     <div>
         <span>Minimalny czas rezerwacji</span>
-        <input type="date" th:value="${filterDto.minimumReservationDate}" id="minimumReservationDate" name="minimumReservationDate"/>
-        <input type="time" th:value="${filterDto.minimumReservationTime}" id="minimumReservationTime" name="minimumReservationTime"/>
+        <input type="date" th:value="${filterDto.minDate}" id="minDate" name="minDate"/>
+        <input type="time" th:value="${filterDto.minTime}" id="minTime" name="minTime"/>
     </div>
 
     <div>
         <span>Maksymalny czas rezerwacji</span>
-        <input type="date" th:value="${filterDto.maximumReservationDate}" id="maximumReservationDate" name="maximumReservationDate"/>
-        <input type="time" th:value="${filterDto.maximumReservationTime}" id="maximumReservationTime" name="maximumReservationTime"/>
+        <input type="date" th:value="${filterDto.maxDate}" id="maxDate" name="maxDate"/>
+        <input type="time" th:value="${filterDto.maxTime}" id="maxTime" name="maxTime"/>
     </div>
 
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

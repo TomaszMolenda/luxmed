@@ -1,41 +1,49 @@
 package pl.tomo.luxmed.reservation.filter;
 
-import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@Getter
 @ToString
+@RequiredArgsConstructor
 public class Filter {
 
-    private final LocalDateTime minimumReservationTime;
-    private final LocalDateTime maximumReservationTime;
+    private final ReservationDate minDate;
+    private final ReservationDate maxDate;
 
-    public Filter(LocalDateTime minimumReservationTime, LocalDateTime maximumReservationTime) {
-        this.minimumReservationTime = minimumReservationTime;
-        this.maximumReservationTime = maximumReservationTime;
+    public static Filter empty() {
+
+        final ReservationDate minReservationDate = ReservationDate.reservationDate(LocalDate.now(), LocalTime.now());
+        final ReservationDate maxReservationDate = ReservationDate.reservationDate(LocalDate.now().plusDays(14), LocalTime.now());
+
+        return new Filter(minReservationDate, maxReservationDate);
     }
 
-    public LocalTime getMinimumTime() {
+    public LocalDateTime getMinDateTime() {
 
-        return minimumReservationTime.toLocalTime();
+        return LocalDateTime.of(getMinDate(), getMinTime());
     }
 
-    public LocalDate getMinimumDate() {
+    public LocalTime getMinTime() {
 
-        return minimumReservationTime.toLocalDate();
+        return minDate.getTime();
     }
 
-    public LocalTime getMaximumTime() {
+    public LocalDate getMinDate() {
 
-        return maximumReservationTime.toLocalTime();
+        return minDate.getDate();
     }
 
-    public LocalDate getMaximumDate() {
+    public LocalTime getMaxTime() {
 
-        return maximumReservationTime.toLocalDate();
+        return maxDate.getTime();
+    }
+
+    public LocalDate getMaxDate() {
+
+        return maxDate.getDate();
     }
 }

@@ -10,12 +10,12 @@ import java.time.LocalTime;
 public class FilterForm {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate minimumReservationDate;
+    private LocalDate minDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime minimumReservationTime;
+    private LocalTime minTime;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate maximumReservationDate;
+    private LocalDate maxDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime maximumReservationTime;
+    private LocalTime maxTime;
 }

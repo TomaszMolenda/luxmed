@@ -10,7 +10,6 @@ import pl.tomo.luxmed.mediservice.MediService;
 import pl.tomo.luxmed.payers.Payer;
 import pl.tomo.luxmed.reservation.filter.Filter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -29,7 +28,7 @@ public class Storage {
     private String payerId;
     private String requestVerificationToken;
     private boolean isReserved;
-    private Filter filter = new Filter(LocalDateTime.now(), LocalDateTime.now().plusDays(14));
+    private Filter filter = Filter.empty();
     private List<Log> logs = Lists.newArrayList();
 
     public void addLog(Log log) {
