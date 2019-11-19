@@ -27,21 +27,25 @@ public class RequestDataCreator {
 
         return Lists.newArrayList(
 
-        create(filterForm.getIsFromStartPage(), "isFromStartPage"),
-        create(filterForm.getPostId(), "postId"),
-        create(filterForm.getPayersCount(), "payersCount"),
-        create(filterForm.getSearchFirstFree(), "searchFirstFree"),
-        create(storage.getRequestVerificationToken(), "__RequestVerificationToken"),
-        create(filterForm.getTimeOption(), "TimeOption"),
+        create(filterForm.getDateOption(), "DateOption"),
+        create(filterForm.getFilterType(), "FilterType"),
+        create(filterForm.getCoordinationActivityId(), "CoordinationActivityId"),
+        create(filterForm.getIsFFS(), "IsFFS"),
+        create(filterForm.getMaxPeriodLength(), "MaxPeriodLength"),
+        create(filterForm.getIsDisabled(), "IsDisabled"),
+        create(filterForm.getPayersCount(), "PayersCount"),
+        create(filterForm.getFromDate(), "FromDate"),
+        create(filterForm.getToDate(), "ToDate"),
+        create(filterForm.getDefaultSearchPeriod(), "DefaultSearchPeriod"),
+        create(filterForm.getCustomRangeSelected(), "CustomRangeSelected"),
+        create(filterForm.getSelectedSearchPeriod(), "SelectedSearchPeriod"),
         create(filterForm.getCityId(), "CityId"),
         create(filterForm.getClinicId(), "ClinicId"),
+        create(filterForm.getDateRangePickerButtonDefaultLabel(), "DateRangePickerButtonDefaultLabel"),
         create(filterForm.getServiceId(), "ServiceId"),
-        create(filterForm.getDoctorId(), "DoctorId"),
-        create(filterForm.getDateFrom(), "FromDate"),
-        create(filterForm.getToDate(), "ToDate"),
+        create(filterForm.getTimeOption(), "TimeOption"),
         create(filterForm.getPayerId(), "PayerId"),
-        create(filterForm.getDateFrom(), "dateFrom")
-
+        create(filterForm.getLanguageId(), "LanguageId")
         );
     }
 

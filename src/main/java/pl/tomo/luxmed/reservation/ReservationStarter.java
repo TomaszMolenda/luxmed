@@ -78,7 +78,7 @@ public class ReservationStarter {
 
         storage.addLog(Log.log("Try reserve: " + reservation));
 
-        reservationExecutor.reserve(reservation);
+//        reservationExecutor.reserve(reservation);
     }
 
     private boolean isNotReserved() {

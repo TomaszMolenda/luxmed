@@ -51,17 +51,9 @@ class SummaryController {
         FilterFormWithAllData filterFormWithAllData = new FilterFormWithAllData();
 
         filterFormWithAllData.setCityId(summaryForm.getCityId());
-        filterFormWithAllData.setClinicId(summaryForm.getClinicId());
-        filterFormWithAllData.setDateFrom(LocalDate.now());
-        filterFormWithAllData.setFromDate(LocalDate.now());
-        filterFormWithAllData.setToDate(LocalDate.now());
-        filterFormWithAllData.setTimeOption("Any");
-        filterFormWithAllData.setDoctorId(summaryForm.getDoctorId());
-        filterFormWithAllData.setIsFromStartPage("True");
-        filterFormWithAllData.setPayerId(summaryForm.getPayerId());
-        filterFormWithAllData.setPayersCount("0");
-        filterFormWithAllData.setSearchFirstFree("True");
         filterFormWithAllData.setServiceId(summaryForm.getServiceId());
+        filterFormWithAllData.setPayerId(summaryForm.getPayerId());
+        filterFormWithAllData.setPayerId(summaryForm.getPayerId());
 
         return filterFormWithAllData;
     }

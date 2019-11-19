@@ -37,6 +37,7 @@ class ReservationExtractor {
                 .getElementsByTag("tr")
                 .stream()
                 .map(this::obtainReservationInfo)
+                .filter(e -> ! e.text().trim().equalsIgnoreCase("Termin"))
                 .map(e -> create(e, date));
     }
 

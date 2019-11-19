@@ -61,7 +61,7 @@ class ActivityApprover {
     private Optional<String> checkSubPage(Document document) {
 
         return document.getElementsByClass("activity_button btn btn-default").stream()
-                .filter(element -> element.text().equalsIgnoreCase("Wizyta w placówce"))
+                .filter(element -> element.text().equalsIgnoreCase("Wizyta w placówce - dzieci zdrowe"))
                 .map(element -> element.attr("href"))
                 .findAny();
     }
@@ -77,6 +77,12 @@ class ActivityApprover {
                 .cookie(storage.getAuthorizationCookies())
                 .build();
 
-        return connectionService.getForHtml(connectionRequest).get().getDocument();
+        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest).get();
+
+        if (htmlResponse.obtainLocation() == null) {
+            return htmlResponse.getDocument();
+        } else {
+            return goToLocation(htmlResponse);
+        }
     }
 }

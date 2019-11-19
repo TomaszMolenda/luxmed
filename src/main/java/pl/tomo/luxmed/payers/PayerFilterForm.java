@@ -21,7 +21,7 @@ class PayerFilterForm implements FilterForm {
     }
 
     @Override
-    public String getPostId() {
+    public String getClinicId() {
         return null;
     }
 
@@ -31,47 +31,7 @@ class PayerFilterForm implements FilterForm {
     }
 
     @Override
-    public LocalDate getDateFrom() {
-        return null;
-    }
-
-    @Override
-    public LocalDate getToDate() {
-        return null;
-    }
-
-    @Override
-    public String getDoctorId() {
-        return null;
-    }
-
-    @Override
     public String getPayerId() {
-        return null;
-    }
-
-    @Override
-    public String getPayersCount() {
-        return null;
-    }
-
-    @Override
-    public String getIsFromStartPage() {
-        return null;
-    }
-
-    @Override
-    public String getSearchFirstFree() {
-        return null;
-    }
-
-    @Override
-    public String getTimeOption() {
-        return null;
-    }
-
-    @Override
-    public String getClinicId() {
         return null;
     }
 }

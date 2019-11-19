@@ -33,7 +33,7 @@ class ReservationFetcher {
     List<Reservation> fetch(FilterForm filterForm) {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/Find")
+                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/PartialSearch")
                 .httpMethod(HttpMethod.POST)
                 .cookie(storage.getAuthorizationCookies())
                 .data(requestDataCreator.create(filterForm))
