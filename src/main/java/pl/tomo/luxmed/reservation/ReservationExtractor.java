@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,6 +16,13 @@ import java.util.stream.Stream;
 
 @Service
 class ReservationExtractor {
+
+    private final DateExtractor dateExtractor;
+
+    @Autowired
+    ReservationExtractor(DateExtractor dateExtractor) {
+        this.dateExtractor = dateExtractor;
+    }
 
     List<Reservation> extract(Document document) {
 
@@ -38,6 +46,7 @@ class ReservationExtractor {
                 .stream()
                 .map(this::obtainReservationInfo)
                 .filter(e -> ! e.text().trim().equalsIgnoreCase("Termin"))
+                .filter(e -> ! e.text().trim().equalsIgnoreCase("Zobacz"))
                 .map(e -> create(e, date));
     }
 
@@ -57,7 +66,7 @@ class ReservationExtractor {
         final String service = otherReservationInformation.get(1).text();
         final String clinic = otherReservationInformation.get(2).text();
 
-        return new Reservation(convertDate(date), convertHour(hour), termId, doctor, service, clinic);
+        return new Reservation(dateExtractor.extract(date), convertHour(hour), termId, doctor, service, clinic);
     }
 
     private Elements obtainElementsWithOtherReservationInformation(Element element) {
@@ -68,11 +77,5 @@ class ReservationExtractor {
     private LocalTime convertHour(String hour) {
 
         return LocalTime.parse(hour, DateTimeFormatter.ofPattern("H:mm"));
-    }
-
-    private LocalDate convertDate(String date) {
-
-        return LocalDate.parse(StringUtils.substringAfter(date, ", "),
-                DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 }

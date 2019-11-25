@@ -9,7 +9,7 @@ class ReservationExtractorTest extends Specification {
     def "Extract"() {
 
         given:
-        ReservationExtractor reservationExtractor = new ReservationExtractor()
+        ReservationExtractor reservationExtractor = new ReservationExtractor(dateExtractor)
 
         InputStream inputStream = ReservationExtractorTest.class.getClassLoader().getResourceAsStream("reservation.html")
         Document document = Jsoup.parse(inputStream, "UTF-8", "https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/Find")
