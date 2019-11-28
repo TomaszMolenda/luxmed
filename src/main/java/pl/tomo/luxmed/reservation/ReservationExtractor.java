@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,14 +47,16 @@ class ReservationExtractor {
                 .getElementsByTag("tr")
                 .stream()
                 .map(this::obtainReservationInfo)
-                .filter(e -> ! e.text().trim().equalsIgnoreCase("Termin"))
-                .filter(e -> ! e.text().trim().equalsIgnoreCase("Zobacz"))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .map(e -> create(e, date));
     }
 
-    private Element obtainReservationInfo(Element element) {
+    private Optional<Element> obtainReservationInfo(Element element) {
 
-        return element.getElementsByTag("td").first();
+        return Optional.ofNullable(element.getElementsByAttribute("term-id"))
+                .map(Elements::first)
+                .map(Element::parent);
     }
 
     private Reservation create(Element element, String date) {
