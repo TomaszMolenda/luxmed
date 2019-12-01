@@ -1,7 +1,8 @@
 package pl.tomo.luxmed.coordination;
 
 import lombok.SneakyThrows;
-import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,8 @@ import pl.tomo.luxmed.connection.HtmlResponse;
 import pl.tomo.luxmed.storage.Log;
 import pl.tomo.luxmed.storage.Storage;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -28,26 +30,51 @@ class ActivityApprover {
     }
 
     @SneakyThrows
-    Document approve(String url) {
+    List<CoordinationActivity> approve(String url) {
 
         storage.addLog(Log.log(getCoordinationActivity(url)));
 
         final ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl" + url)
                 .httpMethod(HttpMethod.GET)
-                .cookie(storage.getAuthorizationCookies())
                 .build();
 
-        final HtmlResponse response = connectionService.getForHtml(connectionRequest).get();
+        final HtmlResponse response = connectionService.getForHtml(connectionRequest);
 
-        final Optional<String> urlInSubPage = checkSubPage(response.getDocument());
+        List<CoordinationActivity> coordinationActivities = response.getDocument()
+                .getElementsByClass("activity_button btn btn-default")
+                .stream()
+                .map(this::createCoordinationActivity)
+                .collect(Collectors.toList());
 
-        if (urlInSubPage.isPresent()) {
+        storage.setCoordinationActivities(coordinationActivities);
 
-            return approve(urlInSubPage.get());
-        }
+        return coordinationActivities;
+    }
 
-        return goToLocation(response);
+    private CoordinationActivity createCoordinationActivity(Element element) {
+
+        String url = element.attr("href");
+        String name = element.text();
+
+        String headerText = element.parents()
+                .stream()
+                .filter(element1 -> element1.className().equalsIgnoreCase("row path_container"))
+                .findAny()
+                .map(Element::previousElementSibling)
+                .map(element1 -> element1.getElementsByClass("pathHeader"))
+                .map(this::getFirst)
+                .map(Element::text)
+                .orElse("");
+
+        return new CoordinationActivity(headerText + name, url);
+    }
+
+    private Element getFirst(Elements elements) {
+
+        return elements.stream()
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private String getCoordinationActivity(String url) {
@@ -56,33 +83,5 @@ class ActivityApprover {
                 .map(CoordinationActivity::getName)
                 .findAny()
                 .orElse(EMPTY);
-    }
-
-    private Optional<String> checkSubPage(Document document) {
-
-        return document.getElementsByClass("activity_button btn btn-default").stream()
-                .filter(element -> element.text().equalsIgnoreCase("Wizyta w placówce - dzieci zdrowe"))
-                .map(element -> element.attr("href"))
-                .findAny();
-    }
-
-    @SneakyThrows
-    private Document goToLocation(HtmlResponse response) {
-
-        final String location = response.getHttpResponse().getHeaders().getLocation();
-
-        final ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl" + location)
-                .httpMethod(HttpMethod.GET)
-                .cookie(storage.getAuthorizationCookies())
-                .build();
-
-        HtmlResponse htmlResponse = connectionService.getForHtml(connectionRequest).get();
-
-        if (htmlResponse.obtainLocation() == null) {
-            return htmlResponse.getDocument();
-        } else {
-            return goToLocation(htmlResponse);
-        }
     }
 }

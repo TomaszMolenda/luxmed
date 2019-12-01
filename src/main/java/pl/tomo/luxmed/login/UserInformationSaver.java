@@ -10,20 +10,20 @@ import static pl.tomo.luxmed.storage.Log.log;
 class UserInformationSaver {
 
     private final LoginFormSaver loginFormSaver;
-    private final AuthorizationCookieFetcher authorizationCookieFetcher;
+    private final AuthorizationMaker authorizationMaker;
     private final Storage storage;
 
     @Autowired
-    UserInformationSaver(LoginFormSaver loginFormSaver, AuthorizationCookieFetcher authorizationCookieFetcher, Storage storage) {
+    UserInformationSaver(LoginFormSaver loginFormSaver, AuthorizationMaker authorizationMaker, Storage storage) {
         this.loginFormSaver = loginFormSaver;
-        this.authorizationCookieFetcher = authorizationCookieFetcher;
+        this.authorizationMaker = authorizationMaker;
         this.storage = storage;
     }
 
     void save(LoginForm loginForm) {
 
         loginFormSaver.save(loginForm);
-        storage.setAuthorizationCookies(authorizationCookieFetcher.fetch(loginForm));
+        authorizationMaker.logIn(loginForm);
         storage.addLog(log("Success login: " + loginForm.getUser()));
     }
 }

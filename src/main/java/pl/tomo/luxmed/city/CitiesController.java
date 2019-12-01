@@ -17,15 +17,19 @@ class CitiesController {
 
     private final CityQueries cityQueries;
     private final Storage storage;
+    private final CitySaver citySaver;
 
     @Autowired
-    CitiesController(CityQueries cityQueries, Storage storage) {
+    CitiesController(CityQueries cityQueries, Storage storage, CitySaver citySaver) {
         this.cityQueries = cityQueries;
         this.storage = storage;
+        this.citySaver = citySaver;
     }
 
     @GetMapping
-    private String get(Model model) {
+    private String get(@ModelAttribute("activityId") String activityId, Model model) {
+
+        citySaver.save(activityId);
 
         model.addAttribute("cities", cityQueries.fetchData());
 

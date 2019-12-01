@@ -19,14 +19,12 @@ class ReservationFetcher {
     private final ConnectionService connectionService;
     private final RequestDataCreator requestDataCreator;
     private final ReservationExtractor reservationExtractor;
-    private final Storage storage;
 
     @Autowired
-    ReservationFetcher(ConnectionService connectionService, RequestDataCreator requestDataCreator, ReservationExtractor reservationExtractor, Storage storage) {
+    ReservationFetcher(ConnectionService connectionService, RequestDataCreator requestDataCreator, ReservationExtractor reservationExtractor) {
         this.connectionService = connectionService;
         this.requestDataCreator = requestDataCreator;
         this.reservationExtractor = reservationExtractor;
-        this.storage = storage;
     }
 
     @SneakyThrows
@@ -35,12 +33,10 @@ class ReservationFetcher {
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/PartialSearch")
                 .httpMethod(HttpMethod.POST)
-                .cookie(storage.getAuthorizationCookies())
                 .data(requestDataCreator.create(filterForm))
                 .build();
 
         Document document = connectionService.postForHtml(connectionRequest)
-                .get()
                 .getDocument();
 
         return reservationExtractor.extract(document);

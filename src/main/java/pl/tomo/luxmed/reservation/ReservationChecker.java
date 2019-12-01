@@ -70,11 +70,9 @@ class ReservationChecker {
         final ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Visits")
                 .httpMethod(HttpMethod.GET)
-                .cookie(storage.getAuthorizationCookies())
                 .build();
 
         return connectionService.getForHtml(connectionRequest)
-                .get()
                 .getDocument();
     }
 }

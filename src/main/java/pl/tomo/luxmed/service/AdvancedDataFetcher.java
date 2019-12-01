@@ -14,15 +14,12 @@ public class AdvancedDataFetcher {
 
     private final ConnectionService connectionService;
     private final RequestDataCreator requestDataCreator;
-    private final Storage storage;
 
     @Autowired
     AdvancedDataFetcher(ConnectionService connectionService,
-                        RequestDataCreator requestDataCreator,
-                        Storage storage) {
+                        RequestDataCreator requestDataCreator) {
         this.connectionService = connectionService;
         this.requestDataCreator = requestDataCreator;
-        this.storage = storage;
     }
 
     @SneakyThrows
@@ -30,11 +27,10 @@ public class AdvancedDataFetcher {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/GetFilter")
-                .cookie(storage.getAuthorizationCookies())
                 .data(requestDataCreator.create(filterForm))
                 .httpMethod(HttpMethod.POST)
                 .build();
 
-        return connectionService.postForHtml(connectionRequest).get().getDocument();
+        return connectionService.postForHtml(connectionRequest).getDocument();
     }
 }

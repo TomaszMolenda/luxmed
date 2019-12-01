@@ -15,13 +15,11 @@ class ReservationKeyRetriever {
 
     private final ConnectionService connectionService;
     private final ReservationKeyExtractor reservationKeyExtractor;
-    private final Storage storage;
 
     @Autowired
-    ReservationKeyRetriever(ConnectionService connectionService, ReservationKeyExtractor reservationKeyExtractor, Storage storage) {
+    ReservationKeyRetriever(ConnectionService connectionService, ReservationKeyExtractor reservationKeyExtractor) {
         this.connectionService = connectionService;
         this.reservationKeyExtractor = reservationKeyExtractor;
-        this.storage = storage;
     }
 
     @SneakyThrows
@@ -29,13 +27,11 @@ class ReservationKeyRetriever {
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReservationConfirmation")
-                .cookie(storage.getAuthorizationCookies())
                 .data(new DataEntry("termId", reservation.getTermId()))
                 .httpMethod(HttpMethod.POST)
                 .build();
 
         Document document = connectionService.postForHtml(connectionRequest)
-                .get()
                 .getDocument();
 
         return reservationKeyExtractor.extract(document);

@@ -1,4 +1,4 @@
-package pl.tomo.luxmed.reservation;
+package pl.tomo.luxmed.login;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,28 +6,25 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import pl.tomo.luxmed.connection.ConnectionRequest;
 import pl.tomo.luxmed.connection.ConnectionService;
-import pl.tomo.luxmed.storage.Log;
-import pl.tomo.luxmed.storage.Storage;
 
 @Service
-class ReservationRemover {
+class AuthorizationMaker {
 
     private final ConnectionService connectionService;
-    private final Storage storage;
 
     @Autowired
-    ReservationRemover(ConnectionService connectionService, Storage storage) {
+    AuthorizationMaker(ConnectionService connectionService) {
         this.connectionService = connectionService;
-        this.storage = storage;
     }
 
     @SneakyThrows
-    void remove(ReservationStatus reservationStatus) {
+    void logIn(LoginForm loginForm) {
 
-        storage.addLog(Log.log("Try delete previously reservation: " + reservationStatus));
+        final String url = "https://portalpacjenta.luxmed.pl/PatientPortal/Account/LogIn?Login=" +
+                loginForm.getUser() + "&Password=" + loginForm.getPassword();
 
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Agreed/CancelTerm?ReservationId=" + reservationStatus.getId())
+                .url(url)
                 .httpMethod(HttpMethod.GET)
                 .build();
 

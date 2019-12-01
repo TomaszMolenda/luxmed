@@ -4,7 +4,7 @@ import java.util.concurrent.CompletableFuture;
 
 public interface ConnectionService {
 
-    CompletableFuture<HtmlResponse> postForHtml(ConnectionRequest request);
+    HtmlResponse postForHtml(ConnectionRequest request);
 
-    CompletableFuture<HtmlResponse> getForHtml(ConnectionRequest request);
+    HtmlResponse getForHtml(ConnectionRequest request);
 }

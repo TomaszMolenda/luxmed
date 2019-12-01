@@ -32,6 +32,6 @@ class LoginController {
 
         userInformationSaver.save(loginForm);
 
-        return "redirect:/coordination";
+        return "redirect:/coordination/init";
     }
 }

@@ -12,6 +12,8 @@ public class Cookie {
 
     @NonFinal
     String key;
+
     @NonFinal
+    @EqualsAndHashCode.Exclude
     String value;
 }

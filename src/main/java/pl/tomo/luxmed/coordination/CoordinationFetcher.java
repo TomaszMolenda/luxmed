@@ -12,6 +12,8 @@ import pl.tomo.luxmed.storage.Storage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static pl.tomo.luxmed.LuxmedApplication.URL;
+
 @Service
 class CoordinationFetcher {
 
@@ -26,7 +28,7 @@ class CoordinationFetcher {
         this.coordinationActivityFactory = coordinationActivityFactory;
     }
 
-    List<CoordinationActivity> fetchActivities() {
+    void fetchActivities() {
 
         final List<CoordinationActivity> coordinationActivities = obtainHtml().getElementsByClass("activity_button")
                 .stream()
@@ -34,19 +36,16 @@ class CoordinationFetcher {
                 .collect(Collectors.toList());
 
         storage.setCoordinationActivities(coordinationActivities);
-
-        return coordinationActivities;
     }
 
     @SneakyThrows
     private Document obtainHtml() {
 
         final ConnectionRequest connectionRequest = ConnectionRequest.builder()
-                .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Coordination")
+                .url(URL + "/PatientPortal/Reservations/Coordination")
                 .httpMethod(HttpMethod.GET)
-                .cookie(storage.getAuthorizationCookies())
                 .build();
 
-        return connectionService.getForHtml(connectionRequest).get().getDocument();
+        return connectionService.getForHtml(connectionRequest).getDocument();
     }
 }

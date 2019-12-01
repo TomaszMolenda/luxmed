@@ -34,11 +34,9 @@ class ReservationConfirmer {
         ConnectionRequest connectionRequest = ConnectionRequest.builder()
                 .url("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/ReserveTerm?key=" + key + "&variant=1")
                 .httpMethod(HttpMethod.POST)
-                .cookie(storage.getAuthorizationCookies())
                 .build();
 
         return connectionService.postForHtml(connectionRequest)
-                .get()
                 .getDocument();
     }
 }
