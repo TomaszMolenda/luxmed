@@ -34,6 +34,8 @@ public class ReservationStarter {
     @Async
     public void start(FilterForm filterForm) {
 
+        storage.addLog(Log.log("start reservation service"));
+
         do {
             reserve(filterForm);
 
@@ -41,6 +43,8 @@ public class ReservationStarter {
     }
 
     private void reserve(FilterForm filterForm) {
+
+        storage.addLog(Log.log("start reservation process"));
 
         List<Reservation> reservations = reservationFetcher.fetch(filterForm);
 
@@ -54,6 +58,8 @@ public class ReservationStarter {
                 .filter(reservationFilterExecutor::apply)
                 .min(Comparator.comparing(Reservation::getDate))
                 .ifPresent(this::reserve);
+
+        storage.addLog(Log.log("end reservation process"));
     }
 
     private String findMinDate(List<Reservation> reservations) {

@@ -19,6 +19,7 @@ public class Storage {
     private String user;
     private String password;
     private List<CoordinationActivity> coordinationActivities;
+    private String coordinationActivityId;
     private List<City> cities;
     private String cityId;
     private List<MediService> services;

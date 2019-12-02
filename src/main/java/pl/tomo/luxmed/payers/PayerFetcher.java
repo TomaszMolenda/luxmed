@@ -24,7 +24,7 @@ class PayerFetcher {
 
     List<Payer> fetch() {
 
-        final PayerFilterForm form = new PayerFilterForm(storage.getCityId(), storage.getServiceId());
+        final PayerFilterForm form = new PayerFilterForm(storage.getCityId(), storage.getServiceId(), storage.getCoordinationActivityId());
         final Document document = advancedDataFetcher.extract(form);
         final List<Payer> payers = payerExtractor.extract(document);
 

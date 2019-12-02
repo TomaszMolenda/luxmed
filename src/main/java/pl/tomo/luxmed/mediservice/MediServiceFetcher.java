@@ -24,7 +24,9 @@ class MediServiceFetcher {
 
     List<MediService> fetch() {
 
-        final MediServiceFilterForm form = new MediServiceFilterForm(storage.getCityId());
+        String coordinationActivityId = storage.getCoordinationActivityId();
+
+        final MediServiceFilterForm form = new MediServiceFilterForm(storage.getCityId(), coordinationActivityId);
         final Document document = advancedDataFetcher.extract(form);
         final List<MediService> services = serviceExtractor.extract(document);
 

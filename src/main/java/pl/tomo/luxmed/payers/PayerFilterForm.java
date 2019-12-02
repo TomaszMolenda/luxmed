@@ -8,11 +8,13 @@ class PayerFilterForm implements FilterForm {
 
     private final String cityId;
     private final String serviceId;
+    private final String coordinationActivityId;
 
-    PayerFilterForm(String cityId, String serviceId) {
+    PayerFilterForm(String cityId, String serviceId, String coordinationActivityId) {
 
         this.cityId = cityId;
         this.serviceId = serviceId;
+        this.coordinationActivityId = coordinationActivityId;
     }
 
     @Override
@@ -33,5 +35,10 @@ class PayerFilterForm implements FilterForm {
     @Override
     public String getPayerId() {
         return null;
+    }
+
+    @Override
+    public String getCoordinationActivityId() {
+        return coordinationActivityId;
     }
 }

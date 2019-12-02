@@ -12,4 +12,5 @@ class FilterFormWithAllData implements FilterForm {
     private String clinicId;
     private String serviceId;
     private String payerId;
+    private String coordinationActivityId;
 }

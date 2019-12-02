@@ -7,10 +7,12 @@ import java.time.LocalDate;
 class MediServiceFilterForm implements FilterForm {
 
     private final String cityId;
+    private final String coordinationActivityId;
 
-    MediServiceFilterForm(String cityId) {
+    MediServiceFilterForm(String cityId, String coordinationActivityId) {
 
         this.cityId = cityId;
+        this.coordinationActivityId = coordinationActivityId;
     }
 
     @Override
@@ -31,5 +33,10 @@ class MediServiceFilterForm implements FilterForm {
     @Override
     public String getPayerId() {
         return null;
+    }
+
+    @Override
+    public String getCoordinationActivityId() {
+        return coordinationActivityId;
     }
 }

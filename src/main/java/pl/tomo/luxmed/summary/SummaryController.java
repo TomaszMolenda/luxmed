@@ -53,7 +53,7 @@ class SummaryController {
         filterFormWithAllData.setCityId(summaryForm.getCityId());
         filterFormWithAllData.setServiceId(summaryForm.getServiceId());
         filterFormWithAllData.setPayerId(summaryForm.getPayerId());
-        filterFormWithAllData.setPayerId(summaryForm.getPayerId());
+        filterFormWithAllData.setCoordinationActivityId(storage.getCoordinationActivityId());
 
         return filterFormWithAllData;
     }

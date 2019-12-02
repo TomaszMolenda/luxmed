@@ -29,6 +29,8 @@ class CitiesController {
     @GetMapping
     private String get(@ModelAttribute("activityId") String activityId, Model model) {
 
+        storage.setCoordinationActivityId(activityId);
+
         citySaver.save(activityId);
 
         model.addAttribute("cities", cityQueries.fetchData());
