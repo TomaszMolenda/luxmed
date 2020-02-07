@@ -15,10 +15,6 @@ public interface FilterForm {
         return "Coordination";
     }
 
-    default String getCoordinationActivityId() {
-        return "96";
-    }
-
     default String getIsFFS() {
         return "False";
     }
