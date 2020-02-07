@@ -26,6 +26,11 @@ class Reservation {
             return false;
         }
 
+        if (filter.hasOnlyDate()) {
+
+            return applyOnlyDate(filter);
+        }
+
         if (filter.hasOnlyTime()) {
 
             return applyOnlyTime(filter);
@@ -37,6 +42,21 @@ class Reservation {
         }
 
         return false;
+    }
+
+    private boolean applyOnlyDate(Filter filter) {
+
+        final LocalDate minReservationDate = filter.getMinDate();
+        final LocalDate maxReservationDate = filter.getMaxDate();
+
+        final LocalDate reservationDate = getDate();
+
+        if (reservationDate.isEqual(minReservationDate) || reservationDate.isEqual(maxReservationDate)) {
+            return true;
+        }
+
+        return reservationDate.isAfter(minReservationDate) &&
+                reservationDate.isBefore(maxReservationDate);
     }
 
     private boolean applyOnlyTime(Filter filter) {

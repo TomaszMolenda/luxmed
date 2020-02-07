@@ -30,6 +30,7 @@ public class Storage {
     private boolean isReserved;
     private Filter filter = Filter.empty();
     private List<Log> logs = Lists.newArrayList();
+    private String coordinationActivityId;
 
     public void addLog(Log log) {
 

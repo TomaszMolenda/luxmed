@@ -28,6 +28,12 @@ configurations {
 	providedRuntime
 }
 
+test {
+	useJUnit()
+
+	maxHeapSize = '1G'
+}
+
 dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.1.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.2.1.RELEASE'

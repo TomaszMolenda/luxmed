@@ -3,7 +3,7 @@ package pl.tomo.luxmed.reservation.filter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-class ReservationDate {
+public class ReservationDate {
 
     private final LocalDate date;
     private final LocalTime time;
@@ -14,7 +14,7 @@ class ReservationDate {
         this.time = time;
     }
 
-    static ReservationDate reservationDate(LocalDate date, LocalTime time) {
+    public static ReservationDate reservationDate(LocalDate date, LocalTime time) {
         return new ReservationDate(date, time);
     }
 
@@ -29,6 +29,11 @@ class ReservationDate {
     boolean hasOnlyTime() {
 
         return date == null && time != null;
+    }
+
+    boolean hasOnlyDate() {
+
+        return date != null && time == null;
     }
 
     boolean hasDateAndTime() {

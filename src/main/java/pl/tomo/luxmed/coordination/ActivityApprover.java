@@ -1,6 +1,7 @@
 package pl.tomo.luxmed.coordination;
 
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -47,6 +48,9 @@ class ActivityApprover {
             return approve(urlInSubPage.get());
         }
 
+        String actionId = StringUtils.substringAfterLast(url, "actionId=");
+        storage.setCoordinationActivityId(actionId);
+
         return goToLocation(response);
     }
 
@@ -61,7 +65,7 @@ class ActivityApprover {
     private Optional<String> checkSubPage(Document document) {
 
         return document.getElementsByClass("activity_button btn btn-default").stream()
-                .filter(element -> element.text().equalsIgnoreCase("Wizyta w placówce - dzieci zdrowe"))
+                .filter(element -> element.text().equalsIgnoreCase("Wizyta w placówce"))
                 .map(element -> element.attr("href"))
                 .findAny();
     }

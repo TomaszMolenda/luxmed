@@ -29,7 +29,7 @@ public class RequestDataCreator {
 
         create(filterForm.getDateOption(), "DateOption"),
         create(filterForm.getFilterType(), "FilterType"),
-        create(filterForm.getCoordinationActivityId(), "CoordinationActivityId"),
+        create(storage.getCoordinationActivityId(), "CoordinationActivityId"),
         create(filterForm.getIsFFS(), "IsFFS"),
         create(filterForm.getMaxPeriodLength(), "MaxPeriodLength"),
         create(filterForm.getIsDisabled(), "IsDisabled"),

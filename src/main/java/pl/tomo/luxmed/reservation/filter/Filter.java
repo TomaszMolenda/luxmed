@@ -70,7 +70,10 @@ public class Filter {
     public boolean hasDateAndTime() {
 
         return minDate.hasDateAndTime() && maxDate.hasDateAndTime();
+    }
 
+    public boolean hasOnlyDate() {
 
+        return minDate.hasOnlyDate() && maxDate.hasOnlyDate();
     }
 }
